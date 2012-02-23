@@ -232,11 +232,11 @@ var RecaptchaOptions = {
 	theme : 'clean'
 };
 
-function($) { // jquery code follows
+(function($) { // jquery code follows
   $(function(){ // onload
     init();
   });
-}(jQuery);
+})(jQuery);
 
 {% endraw %}{% if config.google_analytics %}{% raw %}
 
