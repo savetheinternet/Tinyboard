@@ -224,8 +224,6 @@ function init() {
 	
 	if(window.location.hash.indexOf('q') != 1 && window.location.hash.substring(1))
 		highlightReply(window.location.hash.substring(1));
-	
-	{% endraw %}{% if config.inline_expanding %}{% raw %}init_expanding();{% endraw %}{% endif %}{% raw %}
 }
 
 var RecaptchaOptions = {
@@ -233,8 +231,22 @@ var RecaptchaOptions = {
 };
 
 (function($) { // jquery code follows
+  expand_thread = function(thread_url, post_id) {
+    $.ajax({
+      url: thread_url,
+      dataType: "html",
+      success: function(data) {
+	html = $(data);
+	
+	$("#thread_"+post_id).html ($("#thread_"+post_id, html).html());
+      }
+    });
+    return false;
+  }
+
   $(function(){ // onload
     init();
+    {% endraw %}{% if config.inline_expanding %}{% raw %}init_expanding();{% endraw %}{% endif %}{% raw %}
   });
 })(jQuery);
 

@@ -1,9 +1,7 @@
 {% filter remove_whitespace %}
 {# tabs and new lines will be ignored #}
 
-{% if index %}
-	<div id="thread_{{ post.id }}">
-{% endif %}
+<div id="thread_{{ post.id }}">
 
 {% if post.embed %}
 	{{ post.embed }}
@@ -100,6 +98,9 @@
 		<img class="icon" title="Bumplocked" src="{{ config.image_bumplocked }}" alt="Bumplocked" />
 	{% endif %}
 	{% if index %}
+		{% if config.thread_expanding %}
+			<a href="#" onclick="return expand_thread('{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}', {{ post.id }})">[{% trans %}Expand{% endtrans %}]</a>
+		{% endif %}
 		<a href="{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}">[{% trans %}Reply{% endtrans %}]</a>
 	{% endif %}
 	{{ post.postControls }}

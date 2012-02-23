@@ -455,6 +455,9 @@
 	
 	// Inline expanding of images with Javascript
 	$config['inline_expanding'] = true;
+
+	// Thread expanding with Javascript
+	$config['thread_expanding'] = true;
  	
  	// The format string passed to strftime() for post times
 	// http://www.php.net/manual/en/function.strftime.php
