@@ -236,12 +236,33 @@ var RecaptchaOptions = {
       url: thread_url,
       dataType: "html",
       success: function(data) {
+        /* when we get the thread from server... */
 	html = $(data);
 	
-	$("#thread_"+post_id).html ($("#thread_"+post_id, html).html());
+	$("#thread_"+post_id)
+
+          .html ($("#thread_"+post_id, html).html())
+                /* replace the thread with the thread on the recvd page */
+
+          .mouseover (function() { expand_thread(thread_url, post_id); })
+          .mouseout (function() { expand_thread(thread_url, post_id); });
+		/* when mouse gets over or out a thread
+		 * (that means a thread has been scrolled over or out)
+                 * the thread expands - this should enhance user experience */
+
+	$("#thread_"+post_id+" .shown_when_thread_expanded").show();
+             /* then let's show the [Reply] button and maybe some other fields
+              * hidden from the thread page in a regular view */
       }
     });
-    return false;
+    return false;ead_url, post_id); })
+          .mouseout (function() { expand_thread(thread_url, post_id); });
+                /* when mouse gets over or out a thread
+                 * (that means a thread has been scrolled over or out)
+                 * the thread expands - this should enhance user experience */
+
+        $("#thread_"+post_id+" .shown_when_thread_expanded").show();
+             /* then let's show the [Reply] button and maybe something else */
   }
 
   $(function(){ // onload
