@@ -255,14 +255,7 @@ var RecaptchaOptions = {
               * hidden from the thread page in a regular view */
       }
     });
-    return false;ead_url, post_id); })
-          .mouseout (function() { expand_thread(thread_url, post_id); });
-                /* when mouse gets over or out a thread
-                 * (that means a thread has been scrolled over or out)
-                 * the thread expands - this should enhance user experience */
-
-        $("#thread_"+post_id+" .shown_when_thread_expanded").show();
-             /* then let's show the [Reply] button and maybe something else */
+    return false;
   }
 
   $(function(){ // onload
