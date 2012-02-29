@@ -104,6 +104,7 @@
 	{% endif %}
 	{% if config.thread_expanding %}
 		{% if not index %}<span class="shown_when_thread_expanded" style="display: none">{% endif %}
+			{% if not index %}<a href="#" onclick="return expand_thread('{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}', {{ post.id }})">[{% trans %}Refresh{% endtrans %}]</a>{% endif %}
 			<a href="{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}">[{% trans %}Reply{% endtrans %}]</a>
 		{% if not index %}</span>{% endif %}
 	{% endif %}
