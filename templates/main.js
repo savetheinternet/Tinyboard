@@ -244,6 +244,7 @@ var RecaptchaOptions = {
           .html ($("#thread_"+post_id, html).html())
                 /* replace the thread with the thread on the recvd page */
 
+          /* not ready for the prime time
           .mouseover (function() { expand_thread(thread_url, post_id); })
           .mouseout (function() { expand_thread(thread_url, post_id); });
 		/* when mouse gets over or out a thread
