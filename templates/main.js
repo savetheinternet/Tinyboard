@@ -136,38 +136,6 @@ function rememberStuff() {
 	}
 }
 
-function init_expanding() {
-	link = document.getElementsByTagName('a');
-	for ( i in link ) {
-		if(typeof link[i] == "object" && link[i].childNodes[0].src && link[i].className != 'file') {
-			link[i].onclick = function(e) {
-				if(e.which == 2) {
-					return true;
-				}
-				if(!this.tag) {
-					this.tag = this.childNodes[0].src;
-					this.childNodes[0].src = this.href;
-					this.childNodes[0].style.width = 'auto';
-					this.childNodes[0].style.height = 'auto';
-					this.childNodes[0].style.opacity = '0.4';
-					this.childNodes[0].style.filter = 'alpha(opacity=40)';
-					this.childNodes[0].onload = function() {
-						this.style.opacity = '1';
-						this.style.filter = '';
-					}
-				} else {
-					this.childNodes[0].src = this.tag;
-					this.childNodes[0].style.width = 'auto';
-					this.childNodes[0].style.height = 'auto';
-					this.tag = '';
-				}
-				return false;
-			}
-			
-		}
-	}
-}
-
 {% endraw %}
 {% if config.javascript_local_time %}
 {% raw %}
@@ -237,12 +205,37 @@ var RecaptchaOptions = {
       dataType: "html",
       success: function(data) {
         /* when we get the thread from server... */
-	html = $(data);
+	var html = $(data);
 	
-	$("#thread_"+post_id)
+	var oldheight = $("#thread_"+post_id).css({"height": "auto"}).height();
+	var oldposts = $("#thread_"+post_id+" .post.reply").map (function() { return "#"+$(this).attr("id"); });
 
-          .html ($("#thread_"+post_id, html).html())
+	$("#thread_"+post_id)
+          .html ($("#thread_"+post_id, html).html());
                 /* replace the thread with the thread on the recvd page */
+
+	var newposts = $("#thread_"+post_id+" .post.reply").map (function() { return "#"+$(this).attr("id"); });
+	var newheight = $("#thread_"+post_id).css({"height": "auto"}).height();
+
+	var changes = [];
+	for (var key = 0; key < newposts.length; key++) {
+	  if ($.inArray(newposts[key], oldposts) < 0) {
+	    changes.push(newposts[key]);
+	  }
+	}
+	changes = changes.join(", ");
+
+	$(changes).hide().delay(50).slideDown(1200);
+
+  	$("#thread_"+post_id)
+	  .css({"height": oldheight, "overflow": "hidden"})
+	  .animate({"height": newheight}, {
+	    "duration": 1400,
+            "complete": function() {
+	      $(this).css({"height": "auto", "overflow": "inherit"});
+	    }
+	  });
+
 
           /* not ready for the prime time
           .mouseover (function() { expand_thread(thread_url, post_id); })
@@ -254,14 +247,86 @@ var RecaptchaOptions = {
 	$("#thread_"+post_id+" .shown_when_thread_expanded").show();
              /* then let's show the [Reply] button and maybe some other fields
               * hidden from the thread page in a regular view */
+
+	if (typeof inline_exp[post_id] != "undefined") {
+	  for (key in inline_exp[post_id]) {
+ 	    if (inline_exp[post_id][key]) {
+	      toggle_inline_expansion(key, true);
+            } /* we're doing inline expansion for all images */
+          }   /* already expanded in this session */
+	}
       }
     });
     return false;
+  };
+
+  inline_exp = {};
+
+  var get_threadid_and_postid = function(elem){
+    var threadid = $(elem).parents('[id^="thread_"]').attr("id").split(/_/)[1];
+
+    var postid = $(elem).parents('[id^="reply_"]');
+    postid = (postid.size() <= 0) ? threadid : postid.attr("id").split(/_/)[1];
+
+    return {"threadid": threadid, "postid": postid};
+  };
+
+  var toggle_inline_expansion = function(elem, fast){
+    var fast = (typeof fast == 'undefined'); /* fast => without animation */
+
+    if (typeof elem == 'number' || typeof elem == 'string') { /* searching by postid */
+      elem = $("div#reply_"+elem+" a:has(img[src]:not(.file)), "
+              +"div#thread_"+elem+" a:has(img[src]:not(.file))").first();
+    }
+    var dat = get_threadid_and_postid(elem);
+
+    if (typeof inline_exp[dat.threadid] == "undefined") {
+      inline_exp[dat.threadid] = {};
+    }
+    inline_exp[dat.threadid][dat.postid] = !$(elem).hasClass("image_expanded");
+
+    if(!$(elem).hasClass("image_expanded")) {
+      $(elem).data("miniature_url", $(elem).find("img").attr("src"));
+
+      $(elem).find("img")
+	.attr("src", $(elem).attr("href"))
+        .css({"width": "auto", "height": "auto"});
+      
+      if (!fast) {
+        $(elem).find("img")
+	  .css({"opacity": 0.4})
+          .load(function(){
+            $(elem).find("img").css({"opacity": 1.0});
+          });
+      }
+    }
+    else {
+      $(elem).find("img")
+        .attr("src", $(elem).data("miniature_url"))
+        .css({"width": "auto", "height": "auto"});
+    }
+    $(elem).toggleClass("image_expanded");    
   }
+
+  var init_inline_expanding = function(){
+    $('div[id^="thread_"] div.post, div[id^="thread_"]')
+      .on("click", "a:has(img[src]:not(.file))", function(e) {
+        if(e.which == 2) {
+          return true;
+        }
+	toggle_inline_expansion(this);
+
+	return false;
+      });
+  };
+
+
 
   $(function(){ // onload
     init();
-    {% endraw %}{% if config.inline_expanding %}{% raw %}init_expanding();{% endraw %}{% endif %}{% raw %}
+    {% endraw %}{% if config.inline_expanding %}{% raw %}
+    init_inline_expanding();
+    {% endraw %}{% endif %}{% raw %}
   });
 })(jQuery);
 
