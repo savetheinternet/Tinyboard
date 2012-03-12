@@ -1,9 +1,7 @@
 {% filter remove_whitespace %}
 {# tabs and new lines will be ignored #}
 
-{% if index %}
-	<div id="thread_{{ post.id }}">
-{% endif %}
+<div id="thread_{{ post.id }}">
 
 {% if post.embed %}
 	{{ post.embed }}
@@ -100,7 +98,15 @@
 		<img class="icon" title="Bumplocked" src="{{ config.image_bumplocked }}" alt="Bumplocked" />
 	{% endif %}
 	{% if index %}
-		<a href="{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}">[{% trans %}Reply{% endtrans %}]</a>
+		{% if config.thread_expanding %}
+			<a href="#" onclick="return expand_thread('{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}', {{ post.id }})">[{% trans %}Expand{% endtrans %}]</a>
+		{% endif %}
+	{% endif %}
+	{% if config.thread_expanding %}
+		{% if not index %}<span class="shown_when_thread_expanded" style="display: none">{% endif %}
+			{% if not index %}<a href="#" onclick="return expand_thread('{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}', {{ post.id }})">[{% trans %}Refresh{% endtrans %}]</a>{% endif %}
+			<a href="{{ post.root }}{{ board.dir }}{{ config.dir.res }}{{ config.file_page|sprintf(post.id) }}">[{% trans %}Reply{% endtrans %}]</a>
+		{% if not index %}</span>{% endif %}
 	{% endif %}
 	{{ post.postControls }}
 	</p>
@@ -135,7 +141,6 @@
 {% for post in post.posts %}
 	{% include 'post_reply.html' %}
 {% endfor %}
+
 <br class="clear"/>{% if hr %}<hr/>{% endif %}
-{% if index %}
 	</div>
-{% endif %}

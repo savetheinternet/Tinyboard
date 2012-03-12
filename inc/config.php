@@ -450,6 +450,9 @@
 	
 	// Inline expanding of images with Javascript
 	$config['inline_expanding'] = true;
+
+	// Thread expanding with Javascript
+	$config['thread_expanding'] = true;
  	
  	// The format string passed to strftime() for post times
 	// http://www.php.net/manual/en/function.strftime.php
@@ -639,6 +642,7 @@
 	$config['file_mod']	= 'mod.php';
 	$config['file_post']	= 'post.php';
 	$config['file_script']	= 'main.js';
+	$config['file_jquery']  = 'inc/contrib/jquery/jquery-1.7.1.min.js';
 	
 	// Board directory, followed by a forward-slash (/). (%s is board abbreviation)
 	$config['board_path']	= '%s/';
@@ -677,6 +681,7 @@
 	// This can be good for load balancing across multiple servers or hostnames.
 	// $config['url_stylesheet'] = 'http://static.example.org/style.css'; // main/base stylesheet
 	// $config['url_javascript'] = 'http://static.example.org/main.js';
+	// $config['url_jquery'] = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
 	// $config['url_favicon'] = '/favicon.gif';
 	
 /*

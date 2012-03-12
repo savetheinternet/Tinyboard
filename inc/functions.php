@@ -96,7 +96,9 @@
 		if(!isset($config['url_stylesheet']))
 			$config['url_stylesheet'] = $config['uri_stylesheets'] . 'style.css';
 		if(!isset($config['url_javascript']))
-			$config['url_javascript'] = $config['root'] . 'main.js';
+			$config['url_javascript'] = $config['root'] . $config['file_script'];
+		if(!isset($config['url_jquery']))
+			$config['url_jquery'] = $config['root'] . $config['file_jquery'];
 		
 		if($config['root_file']) {
 			chdir($config['root_file']);
