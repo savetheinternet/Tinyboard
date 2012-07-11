@@ -458,6 +458,10 @@
 	// WARNING: Currently strips animated GIFs too
 	$config['redraw_image'] = false;
 	
+	// Number of posts in a "View Last X Posts" page
+	$config['noko50_count'] = 50;
+	// Number of posts a thread needs before it gets a "View Last X Posts" page
+	$config['noko50_min'] = 100;
 /*
  * ====================
  *  Board settings
@@ -707,6 +711,7 @@
 	
 	$config['file_index'] = 'index.html';
 	$config['file_page'] = '%d.html';
+	$config['file_page50'] = '%d+50.html';
 	$config['file_mod'] = 'mod.php';
 	$config['file_post'] = 'post.php';
 	$config['file_script'] = 'main.js';

@@ -63,6 +63,7 @@ if(!$mod) {
 	$regex = array(
 		'board' => str_replace('%s', '(\w{1,8})', preg_quote($config['board_path'], '/')),
 		'page' => str_replace('%d', '(\d+)', preg_quote($config['file_page'], '/')),
+		'page50' => str_replace('%d', '(\d+)', preg_quote($config['file_page50'], '/')),
 		'img' => preg_quote($config['dir']['img'], '/'),
 		'thumb' => preg_quote($config['dir']['thumb'], '/'),
 		'res' => preg_quote($config['dir']['res'], '/'),
@@ -2219,6 +2220,18 @@ if(!$mod) {
 			error($config['error']['noboard']);
 		
 		$page = buildThread($thread, true, $mod);
+		
+		echo $page;
+	} elseif(preg_match('/^\/' . $regex['board'] . $regex['res'] . $regex['page50'] . '$/', $query, $matches)) {
+		// View last 50 posts in thread
+		
+		$boardName = &$matches[1];
+		$thread = &$matches[2];
+		// Open board
+		if(!openBoard($boardName))
+			error($config['error']['noboard']);
+		
+		$page = buildThread50($thread, true, $mod);
 		
 		echo $page;
 	} elseif(preg_match('/^\/' . $regex['board'] . 'edit\/(\d+)$/', $query, $matches)) {
