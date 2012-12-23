@@ -227,6 +227,8 @@
 		'embed',
 		'recaptcha_challenge_field',
 		'recaptcha_response_field',
+		'imgcaptcha_hash',
+		'imgcaptcha_verify',
 		'spoiler',
 		'quick-reply'
 	);
@@ -262,6 +264,19 @@
 	$config['recaptcha_public'] = '6LcXTcUSAAAAAKBxyFWIt2SO8jwx4W7wcSMRoN3f';
 	$config['recaptcha_private'] = '6LcXTcUSAAAAAOGVbVdhmEM1_SyRF4xTKe8jbzf_';
 	
+	$config['imgcaptcha'] = false;
+	$config['imgcaptcha_key'] = "cos losowego"; // max 32 znaki
+	$config['imgcaptcha_list'] = "/sciezka/do/pliku.txt";
+	$config['imgcaptcha_images'] = "/sciezka/do/obrazkow"; // without a slash at the end
+	$config['imgcaptcha_question'] = "Was ist das?";
+	$config['imgcaptcha_time_limit'] = 90; // Kapcza wazna przez 90 sekund po wejsciu
+	$config['imgcaptcha_filler'] = "/plik/kliknijmie.png";
+	$config['imgcaptcha_width'] = 128;
+	$config['imgcaptcha_height'] = 96;
+
+	// JESLI DODAJESZ IMGKAPCZE, NIE ZAPOMNIJ O TYM
+	// Wymagane tez jQuery - o tam, nizej.
+	//$config['additional_javascript'][] = 'js/imgcaptcha.js';
 /*
  * ====================
  *  Post settings
@@ -452,6 +467,9 @@
 	$config['show_ratio'] = false;
 	// Display the file's original filename
 	$config['show_filename']= true;
+
+	// Image identification buttons using regex.info/exif, tineye and google images
+	$config['image_identification'] = false;
 	
 	// Redraw the image using GD functions to strip any excess data (commonly ZIP archives)
 	// WARNING: Currently strips animated GIFs too
@@ -700,6 +718,11 @@
 		$config['root']	 = (str_replace('\\', '/', dirname($_SERVER['REQUEST_URI'])) == '/' ? '/' : str_replace('\\', '/', dirname($_SERVER['REQUEST_URI'])) . '/');
 	else
 		$config['root'] = '/'; // CLI mode
+
+	// The scheme and domain. This is needed to get absolute URL of some page (for instance image
+	// identification buttons). If you use the CLI tools, it would be wise to override this setting.
+	$config['domain']  = (isset ($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https://" : "http://";
+	$config['domain'] .=  isset ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
 	
 	// If for some reason the folders and static HTML index files aren't in the current working direcotry,
 	// enter the directory path here. Otherwise, keep it false.
