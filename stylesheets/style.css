@@ -400,3 +400,7 @@ table.mod.config-editor td {
 table.mod.config-editor input[type="text"] {
 	width: 98%;
 }
+textarea#body {
+width:100%;
+}
+
