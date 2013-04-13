@@ -66,7 +66,7 @@
 			<td>
 				<ul style="list-style:none;padding:2px 5px">
 					<li>
-						<input type="radio" name="board" value="*" id="ban-allboards" checked> 
+						<input type="checkbox" name="board[]" value="*" id="ban-allboards" checked> 
 						<label style="display:inline" for="ban-allboards">
 							<em>{% trans 'all boards' %}</em>
 						</label>
@@ -74,7 +74,7 @@
 					
 					{% for board in boards %}
 						<li>
-							<input type="radio" name="board" value="{{ board.uri }}" id="ban-board-{{ board.uri }}"> 
+							<input type="checkbox" name="board[]" value="{{ board.uri }}" id="ban-board-{{ board.uri }}"> 
 							<label style="display:inline" for="ban-board-{{ board.uri }}">
 								{{ config.board_abbreviation|sprintf(board.uri) }} - {{ board.title|e }}
 							</label>
