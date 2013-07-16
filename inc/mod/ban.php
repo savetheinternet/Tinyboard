@@ -53,9 +53,13 @@ function parse_time($str) {
 	return time() + $expire;
 }
 
-function ban($mask, $reason, $length, $board) {
+function ban($mask, $reason, $length, $boardes) {
 	global $mod, $pdo;
-	
+	$boards = count(listBoards());
+	$allboards = "*";
+if ($boards > count($_REQUEST['board'])){
+if (!in_array("*", $_REQUEST['board'])){
+	foreach ($boardes as $board ){
 	$query = prepare("INSERT INTO `bans` VALUES (NULL, :ip, :mod, :time, :expires, :reason, :board)");
 	$query->bindValue(':ip', $mask);
 	$query->bindValue(':mod', $mod['id']);
@@ -80,13 +84,74 @@ function ban($mask, $reason, $length, $board) {
 	
 	modLog('Created a new ' .
 		($length > 0 ? preg_replace('/^(\d+) (\w+?)s?$/', '$1-$2', until($length)) : 'permanent') .
-		' ban on ' .
-		($board ? '/' . $board . '/' : 'all boards') .
-		' for ' .
+		' ban (<small>#' . $pdo->lastInsertId() . '</small>) for ' .
 		(filter_var($mask, FILTER_VALIDATE_IP) !== false ? "<a href=\"?/IP/$mask\">$mask</a>" : utf8tohtml($mask)) .
-		' (<small>#' . $pdo->lastInsertId() . '</small>)' .
 		' with ' . ($reason ? 'reason: ' . utf8tohtml($reason) . '' : 'no reason'));
 }
+
+} else {
+//ban from all boards since all boards were checked instead of making a cloumn for each ban
+$query = prepare("INSERT INTO `bans` VALUES (NULL, :ip, :mod, :time, :expires, :reason, :board)");
+	$query->bindValue(':ip', $mask);
+	$query->bindValue(':mod', $mod['id']);
+	$query->bindValue(':time', time());
+	if ($reason !== '') {
+		markup($reason);
+		$query->bindValue(':reason', $reason);
+	} else
+		$query->bindValue(':reason', null, PDO::PARAM_NULL);
+	
+	if ($length > 0)
+		$query->bindValue(':expires', $length);
+	else
+		$query->bindValue(':expires', null, PDO::PARAM_NULL);
+	
+	if ($allboards == "*")
+		$query->bindValue(':board', null, PDO::PARAM_NULL);
+	
+	$query->execute() or error(db_error($query));
+	
+	modLog('Created a new ' .
+		($length > 0 ? preg_replace('/^(\d+) (\w+?)s?$/', '$1-$2', until($length)) : 'permanent') .
+		' ban (<small>#' . $pdo->lastInsertId() . '</small>) for ' .
+		(filter_var($mask, FILTER_VALIDATE_IP) !== false ? "<a href=\"?/IP/$mask\">$mask</a>" : utf8tohtml($mask)) .
+		' with ' . ($reason ? 'reason: ' . utf8tohtml($reason) . '' : 'no reason'));
+ 
+}
+		
+		} else {
+		// if all boards selected ignore other board selections and just ban from all boards
+		
+		$query = prepare("INSERT INTO `bans` VALUES (NULL, :ip, :mod, :time, :expires, :reason, :board)");
+	$query->bindValue(':ip', $mask);
+	$query->bindValue(':mod', $mod['id']);
+	$query->bindValue(':time', time());
+	if ($reason !== '') {
+		markup($reason);
+		$query->bindValue(':reason', $reason);
+	} else
+		$query->bindValue(':reason', null, PDO::PARAM_NULL);
+	
+	if ($length > 0)
+		$query->bindValue(':expires', $length);
+	else
+		$query->bindValue(':expires', null, PDO::PARAM_NULL);
+	
+		if ($allboards == "*")
+		$query->bindValue(':board', null, PDO::PARAM_NULL);
+	
+	$query->execute() or error(db_error($query));
+	
+	modLog('Created a new ' .
+		($length > 0 ? preg_replace('/^(\d+) (\w+?)s?$/', '$1-$2', until($length)) : 'permanent') .
+		' ban (<small>#' . $pdo->lastInsertId() . '</small>) for ' .
+		(filter_var($mask, FILTER_VALIDATE_IP) !== false ? "<a href=\"?/IP/$mask\">$mask</a>" : utf8tohtml($mask)) .
+		' with ' . ($reason ? 'reason: ' . utf8tohtml($reason) . '' : 'no reason'));
+		
+		}
+
+		
+		}
 
 function unban($id) {
 	$query = prepare("SELECT `ip` FROM `bans` WHERE `id` = :id");
