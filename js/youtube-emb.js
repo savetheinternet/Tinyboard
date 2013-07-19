@@ -8,7 +8,7 @@ $(document).ready(function () {
     var PlayerWidth = "420px";
 
     //load stylesheet for youtube player
-    $("head").append('<link rel="stylesheet" media="screen" href="/tinyboard/js/ytstyle/youtube.css">');
+    $("head").append('<link rel="stylesheet" media="screen" href="/js/ytstyle/youtube.css">');
 
     //global regex
     var youtubeExphtml = /<a[^>]+(?:youtube.com\/watch\?[^>]*v=|youtu.be\/)([\w_-]{11})(?:(?:#|\?|&amp;)a?t=([ms\d]+)|[^"])*.*?<\/a>/gi;
