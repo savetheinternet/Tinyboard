@@ -14,9 +14,9 @@ table+br+hr+center+hr,
 .doubledash {display:none !important}
 
 * {
+	color: #555;
 	border: none !important;
 	background: none !important;
-	color: inherit !important;
 }
 html {
 	color: #555 !important;
@@ -50,12 +50,18 @@ a>img {
 .logo b {
 	color: #fff !important;
 }
+div.boardlist {
+	color: #555 !important;
+}
 div.boardlist a {
 	text-decoration: none;
 	color: #615A5A !important;
 }
 div.boardlist a:hover {
 	color: #C08E8E !important;
+}
+div.blotter {
+	color: #555 !important;
 }
 .postarea {
 	color: #fff !important;
@@ -244,6 +250,4 @@ span.spoiler:hover {
 }
 br+br+b[style] {
 	color: #f00 !important;
-}
-
 }
