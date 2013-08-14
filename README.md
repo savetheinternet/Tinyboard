@@ -3,8 +3,8 @@ Tinyboard - A lightweight PHP imageboard.
 
 About
 ------------
-Tinyboard is a light-weight, fast, highly configurable and user-friendly
-imageboard software package released under a non-restrictive open-source
+Tinyboard is a light-weight, fast, highly configurable, and user-friendly
+imageboard software package, released under a non-restrictive open-source
 license. It is written in PHP and has few dependencies.
 
 Requirements
