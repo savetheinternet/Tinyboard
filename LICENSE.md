@@ -8,10 +8,12 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-All copyright notices and permission notices (including this file) shall be
-included and remain unedited in all copies or substantial portions of the
-Software. This explicitly includes but is not limited to the Tinyboard copyright
-notices found in the footers of some template files.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+No portion of the Software shall be used to form a work licensed under any
+version of the GNU General Public License, as published by the Free Software
+Foundation.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
