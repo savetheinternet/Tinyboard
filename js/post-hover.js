@@ -4,8 +4,6 @@
  *
  * Released under the MIT license
  * Copyright (c) 2012 Michael Save <savetheinternet@tinyboard.org>
- * Copyright (c) 2013-2014 Marcin Łabanowski <marcin@6irc.net>
- * Copyright (c) 2013 Macil Tech <maciltech@gmail.com>
  *
  * Usage:
  *   $config['additional_javascript'][] = 'js/jquery.min.js';
@@ -26,24 +24,6 @@ onready(function(){
 			return;
 		}
 		
-		var board = $(this);
-		var i = 0;
-		while (board.data('board') === undefined) {
-			board = board.parent();
-			i++;
-			if (i >= 10) return;
-		}
-		var threadid;
-		if ($link.is('[data-thread]')) threadid = 0;
-		else threadid = board.attr('id').replace("thread_", "");
-
-		board = board.data('board');
-
-		var parentboard = board;
-		
-		if ($link.is('[data-thread]')) parentboard = $('form[name="post"] input[name="board"]').val();
-		else if (matches[1] !== undefined) board = matches[1];
-
 		var $post = false;
 		var hovering = false;
 		var hovered_at;
@@ -68,9 +48,7 @@ onready(function(){
 						.css('border-style', 'solid')
 						.css('box-shadow', '1px 1px 1px #999')
 						.css('display', 'block')
-						.css('z-index', '100')
-						.addClass('reply').addClass('post')
-						.insertAfter($link.parent())
+						.insertAfter($link.parent());
 					$link.trigger('mousemove');
 				}
 			};
