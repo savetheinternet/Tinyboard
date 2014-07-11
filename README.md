@@ -10,9 +10,9 @@ Requirements
 ------------
 1.	PHP >= 5.3
 2.	MySQL server
-3.	[mbstring](http://www.php.net/manual/en/mbstring.installation.php) 
-4.	[PHP GD](http://www.php.net/manual/en/intro.image.php)
-5.	[PHP PDO](http://www.php.net/manual/en/intro.pdo.php)
+3.	[mbstring](https://www.php.net/manual/en/mbstring.installation.php)
+4.	[PHP GD](https://www.php.net/manual/en/intro.image.php)
+5.	[PHP PDO](https://www.php.net/manual/en/intro.pdo.php)
 
 We try to make sure Tinyboard is compatible with all major web servers and
 operating systems. Tinyboard does not include an Apache ```.htaccess``` file nor does
@@ -21,7 +21,7 @@ it need one.
 ### Recommended
 1.	MySQL server >= 5.5.3
 2.	ImageMagick (command-line ImageMagick or GraphicsMagick preferred).
-3.	[APC (Alternative PHP Cache)](http://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/) or [Memcached](http://www.php.net/manual/en/intro.memcached.php)
+3.	[APC (Alternative PHP Cache)](https://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/) or [Memcached](https://www.php.net/manual/en/intro.memcached.php)
 
 Contributing
 ------------
@@ -37,7 +37,7 @@ Installation
 1.	Download and extract Tinyboard to your web directory or get the latest
 	development version with:
 
-        git clone git://github.com/savetheinternet/Tinyboard.git
+        git clone https://github.com/savetheinternet/Tinyboard.git
 	
 2.	Navigate to ```install.php``` in your web browser and follow the
 	prompts.
@@ -65,5 +65,5 @@ find support from a variety of sources:
 
 License
 --------
-See [LICENSE.md](http://github.com/savetheinternet/Tinyboard/blob/master/LICENSE.md).
+See [LICENSE.md](https://github.com/savetheinternet/Tinyboard/blob/master/LICENSE.md).
 
