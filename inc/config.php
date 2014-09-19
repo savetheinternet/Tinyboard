@@ -23,6 +23,7 @@
  *
  */
 
+require 'inc/functions.php';
 
 /*
  * =======================
