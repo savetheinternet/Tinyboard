@@ -1490,6 +1490,11 @@ function checkDNSBL() {
 	}
 }
 
+function createTorDNSELZone($ip, $port) {
+	$ip = ReverseIPOctets($ip);
+	return sprintf('%d.%s.%s', $port, $ip, 'ip-port.exitlist.torproject.org');
+}
+
 function isIPv6() {
 	return strstr($_SERVER['REMOTE_ADDR'], ':') !== false;
 }
