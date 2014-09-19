@@ -181,7 +181,7 @@ require 'inc/functions.php';
 
 	// Prevents most Tor exit nodes from making posts. Recommended, as a lot of abuse comes from Tor because
 	// of the strong anonymity associated with it.
-	$config['dnsbl'][] = array('tor.dnsbl.sectoor.de', 1);
+	$config['dnsbl'][] = array(createTorDNSELZone($_SERVER['SERVER_ADDR'], $_SERVER['SERVER_PORT']), 1);
 
 	// http://www.sorbs.net/using.shtml
 	// $config['dnsbl'][] = array('dnsbl.sorbs.net', array(2, 3, 4, 5, 6, 7, 8, 9));
