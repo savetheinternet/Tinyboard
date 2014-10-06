@@ -185,24 +185,21 @@ function dopost(form) {
 	return form.elements['body'].value != "" || form.elements['file'].value != "" || (form.elements.file_url && form.elements['file_url'].value != "");
 }
 
-function citeReply(id, with_link) {
+function citeReply(id, with_link) { // includes selected text in quote now
 	var textarea = document.getElementById('body');
-	
-	if (document.selection) {
-		// IE
-		textarea.focus();
-		var sel = document.selection.createRange();
-		sel.text = '>>' + id + '\n';
-	} else if (textarea.selectionStart || textarea.selectionStart == '0') {
-		var start = textarea.selectionStart;
-		var end = textarea.selectionEnd;
-		textarea.value = textarea.value.substring(0, start) + '>>' + id + '\n' + textarea.value.substring(end, textarea.value.length);
-		
-		textarea.selectionStart += ('>>' + id).length + 1;
+	// modern properties rather than older ones
+	var quhead = '>>' + id, theselectedtext = window.getSelection().toString();
+
+	if (textarea.selectionStart || textarea.selectionStart == '0') {
+		var start = textarea.selectionStart, end = textarea.selectionEnd;
+		var ta_before = textarea.value.substring(0,start), ta_after = textarea.value.substring(end,textarea.value.length);
+
+		textarea.value = ta_before + quhead + '\n' + theselectedtext + ta_after;
+		textarea.selectionStart += quhead.length + 1;
 		textarea.selectionEnd = textarea.selectionStart;
 	} else {
 		// ???
-		textarea.value += '>>' + id + '\n';
+		textarea.value += quhead + '\n';
 	}
 	if (typeof $ != 'undefined') {
 		$(window).trigger('cite', [id, with_link]);
