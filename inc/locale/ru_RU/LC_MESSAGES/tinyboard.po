@@ -18,6 +18,9 @@ msgstr  "Project-Id-Version: Tinyboard i18n\n"
 msgid "Name"
 msgstr "Имя"
 
+msgid "Username"
+msgstr "Логин"
+
 msgid "Email"
 msgstr "Адрес"
 
@@ -52,22 +55,22 @@ msgid "Return"
 msgstr "Назад"
 
 msgid "Posting mode: Reply"
-msgstr "Ответ"
+msgstr "Режим поста: Ответ"
 
 msgid "Reply"
 msgstr "Ответить"
 
 msgid "Sticky"
-msgstr "Sticky"
+msgstr "Закрепить"
 
 msgid "Lock"
-msgstr "Lock"
+msgstr "Блокир"
 
 msgid "Raw HTML"
 msgstr "Сырой HTML"
 
 msgid "Delete Post"
-msgstr "удалить пост"
+msgstr "Удалить пост"
 
 msgid "Delete"
 msgstr "Удалить"
