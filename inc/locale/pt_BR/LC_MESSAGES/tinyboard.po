@@ -3,26 +3,28 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Tinyboard PT BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-21 11:29-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2015-10-17 16:20-0300\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural==(n != 1);n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.5\n"
 
 #: ../../inc/lib/gettext/examples/pigs_dropin.php:77
 msgid ""
 "This is how the story goes.\n"
 "\n"
-msgstr "Era uma vez\n\n"
+msgstr ""
+"Era uma vez\n"
+"\n"
 
 #: ../../inc/functions.php:1046 ../../inc/functions.php:1060
 msgid "Previous"
@@ -30,7 +32,7 @@ msgstr "Anterior"
 
 #: ../../inc/functions.php:1065 ../../inc/functions.php:1074
 msgid "Next"
-msgstr "Proximo"
+msgstr "Próximo"
 
 #: ../../inc/display.php:91 ../../inc/mod/pages.php:62
 msgid "Login"
@@ -38,15 +40,15 @@ msgstr "Login"
 
 #: ../../inc/config.php:687
 msgid "Lurk some more before posting."
-msgstr "Lurke mais antes de postar."
+msgstr "Procure um pouco mais antes de postar."
 
 #: ../../inc/config.php:688
 msgid "You look like a bot."
-msgstr "Você não parece humano."
+msgstr "Você parece ser um robô."
 
 #: ../../inc/config.php:689
 msgid "Your browser sent an invalid or no HTTP referer."
-msgstr "Seu browser enviou um referial HTTP inválido ou não enviou o referencial."
+msgstr "Seu browser enviou um header HTTP inválido ou não o enviou."
 
 #: ../../inc/config.php:690
 #, php-format
@@ -67,7 +69,7 @@ msgstr "Você deve fazer upload de uma imagem."
 
 #: ../../inc/config.php:694
 msgid "The server failed to handle your upload."
-msgstr "O servidor não conseguiu lidar com seu upload."
+msgstr "O servidor não conseguiu fazer seu upload."
 
 #: ../../inc/config.php:695
 msgid "Unsupported image format."
@@ -79,7 +81,7 @@ msgstr "Board inválida!"
 
 #: ../../inc/config.php:697
 msgid "Thread specified does not exist."
-msgstr "O tópico especificado não existe.."
+msgstr "O tópico especificado não existe."
 
 #: ../../inc/config.php:698
 msgid "Thread locked. You may not reply at this time."
@@ -109,7 +111,7 @@ msgstr "Conteudo não original! Você está impedido de postar por %d segundos."
 #: ../../inc/config.php:704
 #, php-format
 msgid "You are muted! Expires in %d seconds."
-msgstr "Você está impedido de postar! Expira em %d segundos."
+msgstr "Você está mudo! Expira em %d segundos."
 
 #: ../../inc/config.php:705
 #, php-format
@@ -200,8 +202,7 @@ msgid "You are not a mod…"
 msgstr "Você não é mod…"
 
 #: ../../inc/config.php:728
-msgid ""
-"Invalid username and/or password. Your user may have been deleted or changed."
+msgid "Invalid username and/or password. Your user may have been deleted or changed."
 msgstr "Login e/ou senha inválido(s). Seu login deve ter sido mudado ou removido."
 
 #: ../../inc/config.php:729
@@ -276,13 +277,11 @@ msgstr "Não foi possivel abrir a board após a criação."
 msgid "New board"
 msgstr "Nova board"
 
-#: ../../inc/mod/pages.php:322
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:96
+#: ../../inc/mod/pages.php:322 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:96
 msgid "Noticeboard"
 msgstr "Quadro de noticias"
 
-#: ../../inc/mod/pages.php:382
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:166
+#: ../../inc/mod/pages.php:382 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:166
 msgid "News"
 msgstr "Noticias"
 
@@ -291,8 +290,7 @@ msgstr "Noticias"
 msgid "Moderation log"
 msgstr "Log da moderação"
 
-#: ../../inc/mod/pages.php:592
-#: ../../templates/cache/24/a0/f1ddafed7a8f9625e747a5ca33f5.php:247
+#: ../../inc/mod/pages.php:592 ../../templates/cache/24/a0/f1ddafed7a8f9625e747a5ca33f5.php:247
 #: ../../templates/cache/18/9c/c365d711719f494c684aab98a4ae.php:65
 msgid "IP"
 msgstr "IP"
@@ -300,12 +298,11 @@ msgstr "IP"
 #: ../../inc/mod/pages.php:602 ../../inc/mod/pages.php:993
 #: ../../templates/cache/24/a0/f1ddafed7a8f9625e747a5ca33f5.php:377
 msgid "New ban"
-msgstr "Nova expulsão"
+msgstr "Novo banimento"
 
-#: ../../inc/mod/pages.php:670
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:224
+#: ../../inc/mod/pages.php:670 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:224
 msgid "Ban list"
-msgstr "Lista de expulsões"
+msgstr "Lista de banimentos"
 
 #: ../../inc/mod/pages.php:765
 msgid "Target and source board are the same."
@@ -327,8 +324,7 @@ msgstr "Editar mensagem"
 msgid "Edit user"
 msgstr "Editar usuário"
 
-#: ../../inc/mod/pages.php:1333
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:232
+#: ../../inc/mod/pages.php:1333 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:232
 msgid "Manage users"
 msgstr "Administrar usuários"
 
@@ -340,8 +336,7 @@ msgstr "Nova MP para"
 msgid "Private message"
 msgstr "Mensagem pessoal"
 
-#: ../../inc/mod/pages.php:1420
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:171
+#: ../../inc/mod/pages.php:1420 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:171
 msgid "PM inbox"
 msgstr "Entrada de MP"
 
@@ -350,8 +345,7 @@ msgstr "Entrada de MP"
 msgid "Rebuild"
 msgstr "Reconstruir"
 
-#: ../../inc/mod/pages.php:1621
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:207
+#: ../../inc/mod/pages.php:1621 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:207
 msgid "Report queue"
 msgstr "Fila de denuncias"
 
@@ -367,8 +361,7 @@ msgstr "Diretório de temas não existe!"
 msgid "Cannot open themes directory; check permissions."
 msgstr "Não é possivel abrir diretorio de temas; reveja suas permissões."
 
-#: ../../inc/mod/pages.php:1769
-#: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:247
+#: ../../inc/mod/pages.php:1769 ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:247
 msgid "Manage themes"
 msgstr "Administrar temas"
 
@@ -397,7 +390,7 @@ msgstr "Debug: Mensagens recentes"
 
 #: ../../inc/mod/pages.php:1956
 msgid "Debug: SQL"
-msgstr ""
+msgstr "Debug: Banco de Dados"
 
 #: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:19
 #: ../../templates/cache/c5/a7/fac83da087ee6e24edaf09e01122.php:29
@@ -450,8 +443,8 @@ msgstr "Frase:"
 
 #: ../../templates/cache/3a/df/ab38a77244cb9c729b4c6f99759a.php:297
 msgid ""
-"(Search is case-insensitive, and based on keywords. To match exact phrases, "
-"use \"quotes\". Use an asterisk (*) for wildcard.)"
+"(Search is case-insensitive, and based on keywords. To match exact phrases, use \"quotes\". Use an asterisk (*) for "
+"wildcard.)"
 msgstr ""
 "(A procura não diferencia maiúsculas de minusculas, e baseia-se em palavras chave. para procurar por frases exatas, "
 "use \"quotes\". Utilize um asterisco (*) como coringa.)"
@@ -702,7 +695,7 @@ msgstr "Tamanho"
 
 #: ../../templates/cache/18/9c/c365d711719f494c684aab98a4ae.php:192
 msgid "New Ban"
-msgstr "Nova Expulsão"
+msgstr "Novo Banimento"
 
 #: ../../templates/cache/c5/a7/fac83da087ee6e24edaf09e01122.php:20
 msgid "ID"
