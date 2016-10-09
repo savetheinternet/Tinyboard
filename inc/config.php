@@ -664,7 +664,7 @@
  */
 	// Maximum number of images allowed. Increasing this number enabled multi image.
 	// If you make it more than 1, make sure to enable the below script for the post form to change.
-	// $config['additional_javascript'][] = 'js/multi_image.js';
+	// $config['additional_javascript'][] = 'js/multi-image.js';
 	$config['max_images'] = 1;
 
 	// Method to use for determing the max filesize. 
