@@ -89,7 +89,7 @@ $(document).ready(function(){
 		Options.extend_tab('general', '<label id="show-relative-time"><input type="checkbox">' + _('Show relative time') + '</label>');
 
 		$('#show-relative-time>input').on('change', function() {
-			if (localStorage.show_relative_time === 'true') {
+			if (localStorage.show_relative_time !== 'false') {
 				localStorage.show_relative_time = 'false';
 				clearInterval(interval_id);
 			} else {
@@ -100,7 +100,7 @@ $(document).ready(function(){
 			do_localtime(document);
 		});
 
-		if (localStorage.show_relative_time === 'true') {
+		if (localStorage.show_relative_time !== 'false') {
 			$('#show-relative-time>input').attr('checked','checked');
 			interval_id = setInterval(do_localtime, 30000, document);
 		}
