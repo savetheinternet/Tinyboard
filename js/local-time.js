@@ -73,7 +73,7 @@ $(document).ready(function(){
 
 			times[i].setAttribute('data-local', 'true');
 
-			if (!localStorage.show_relative_time || localStorage.show_relative_time === 'false') {
+			if (localStorage.show_relative_time === 'false') {
 				times[i].innerHTML = dateformat(iso8601(t));
 				times[i].setAttribute('title', timeDifference(currentTime, postTime.getTime()));
 			} else {
