@@ -305,8 +305,8 @@ CREATE TABLE IF NOT EXISTS `ban_appeals` (
 
 CREATE TABLE `pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `board` varchar(255) DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
+  `board` varchar(58) CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `content` text,
