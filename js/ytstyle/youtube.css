@@ -1,0 +1,48 @@
+.youtube-box,
+.youtube-frame {
+  display:block;
+  width:420px; /* video width */
+  height:315px; /* video height */
+  background-color:black;
+  background-size:100%;
+  position:relative;
+  border:none;
+  margin:0px auto 15px;
+}
+
+.youtube-box span {
+  display:block;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+}
+
+.youtube-box .youtube-title {
+  background-color:rgba(0,0,0,0.4);
+  font:bold 15px Verdana,Arial,Sans-Serif;
+  color:white;
+  text-shadow:0px 1px 2px black;
+  bottom:auto;
+  line-height:30px;
+  height:30px;
+  overflow:hidden;
+  padding:0px 15px;
+}
+
+
+
+.youtube-box .youtube-play {
+  cursor:pointer;
+  width:83px;
+  height:56px;
+  top:50%;
+  left:50%;
+  margin:-28px 0px 0px -42px;
+  background:transparent url('ytimage/yt-play.png') no-repeat top left;
+}
+
+.youtube-box .youtube-play:hover {
+  background-position:bottom left;
+}
