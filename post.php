@@ -488,6 +488,10 @@ if (isset($_POST['delete'])) {
 	$reason = escape_markup_modifiers($_POST['reason']);
 	markup($reason);
 
+	if (strlen($reason) > 30) {
+		error($config['error']['toolongreport']);
+	}
+
 	foreach ($report as &$id) {
 		$query = prepare(sprintf("SELECT `id`, `thread` FROM ``posts_%s`` WHERE `id` = :id", $board['uri']));
 		$query->bindValue(':id', $id, PDO::PARAM_INT);
