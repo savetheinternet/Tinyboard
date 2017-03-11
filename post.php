@@ -310,7 +310,7 @@ if (isset($_POST['delete'])) {
 	
 	$reason = escape_markup_modifiers($_POST['reason']);
 	markup($reason);
-	
+
 	foreach ($report as &$id) {
 		$query = prepare(sprintf("SELECT `id`, `thread` FROM ``posts_%s`` WHERE `id` = :id", $board['uri']));
 		$query->bindValue(':id', $id, PDO::PARAM_INT);
@@ -318,6 +318,12 @@ if (isset($_POST['delete'])) {
 		
 		$post = $query->fetch(PDO::FETCH_ASSOC);
 		
+	        $error = event('report', array('ip' => $_SERVER['REMOTE_ADDR'], 'board' => $board['uri'], 'post' => $post, 'reason' => $reason));
+
+	        if ($error) {
+	                error($error);
+	        }
+
 		if ($config['syslog'])
 			_syslog(LOG_INFO, 'Reported post: ' .
 				'/' . $board['dir'] . $config['dir']['res'] . link_for($post) . ($post['thread'] ? '#' . $id : '') .
