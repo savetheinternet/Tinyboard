@@ -2634,7 +2634,7 @@ function mod_theme_uninstall($theme_name) {
 
 	// Clean cache
 	Cache::delete("themes");
-	Cache::delete("theme_settings_".$theme);
+	Cache::delete("theme_settings_".$theme_name);
 
 	header('Location: ?/themes', true, $config['redirect_http']);
 }
