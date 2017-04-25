@@ -343,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `captchas` (
   `extra` VARCHAR(200),
   `text` VARCHAR(255),
   `created_at` INT(11),
-  PRIMARY KEY (cookie, extra)
+  PRIMARY KEY (`cookie`,`extra`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
 
 
