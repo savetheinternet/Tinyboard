@@ -1641,6 +1641,9 @@
 	// Enable the search form
 	$config['search']['enable'] = false;
 
+	// Enable search in the board index.
+	$config['board_search'] = false;
+
 	// Maximal number of queries per IP address per minutes
 	$config['search']['queries_per_minutes'] = Array(15, 2);
 
