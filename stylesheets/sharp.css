@@ -2,11 +2,6 @@
  * sharp.css
  * For AwsumChan by Circlepuller
  */
-@font-face {
-	font-family: Tahoma;
-	src: url('fonts/tahoma.ttf');
-}
-
 body {
 	background: #FFF url('img/fade-gray.png') repeat-x 50% 0%;
 	color: black;
@@ -51,7 +46,7 @@ h2 {
 	padding: 0px;
 }
 h1 {
-	font-family: tahoma;
+	font-family: tahoma, sans-serif;
 	letter-spacing: -2px;
 	font-size: 20pt;
 	margin-bottom: 0;
