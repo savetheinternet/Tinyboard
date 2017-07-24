@@ -1,7 +1,12 @@
 /**
- * wasabi.css
+ * sharp.css
  * For AwsumChan by Circlepuller
  */
+@font-face {
+	font-family: Tahoma;
+	src: url('fonts/tahoma.ttf');
+}
+
 body {
 	background: #FFF url('img/fade-gray.png') repeat-x 50% 0%;
 	color: black;
@@ -59,7 +64,7 @@ h1.logo img {
 	background-position: center;
 }
 div.title, h1 {
-	color: #AF0A0F;
+	color: #000;
 	text-align: center;
 }
 div.title {
