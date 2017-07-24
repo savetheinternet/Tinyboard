@@ -49,7 +49,7 @@ h1 {
 	font-family: tahoma, sans-serif;
 	letter-spacing: -2px;
 	font-size: 20pt;
-	margin-bottom: 0;
+	margin: 0;
 }
 h1.logo img {
 	display: inline;
@@ -58,13 +58,12 @@ h1.logo img {
 	background-repeat: no-repeat;
 	background-position: center;
 }
-div.title, h1 {
+header div.subtitle, h1 {
 	color: #000;
 	text-align: center;
 }
-div.title {
+header div.subtitle {
 	font-size: 8pt;
-	margin-bottom: 2em;
 }
 form {
 	margin-bottom: 4em;
