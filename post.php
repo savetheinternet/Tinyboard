@@ -383,14 +383,15 @@ if (isset($_POST['delete'])) {
 	if (!$dropped_post) {
 		// Check for CAPTCHA right after opening the board so the "return" link is in there
 		if ($config['recaptcha']) {
-			if (!isset($_POST['recaptcha_challenge_field']) || !isset($_POST['recaptcha_response_field']))
+			if (!isset($_POST['g-recaptcha-response']))
 				error($config['error']['bot']);	
 				// Check what reCAPTCHA has to say...
-				$resp = recaptcha_check_answer($config['recaptcha_private'],
-				$_SERVER['REMOTE_ADDR'],
-				$_POST['recaptcha_challenge_field'],
-				$_POST['recaptcha_response_field']);
-			if (!$resp->is_valid) {
+			$resp = json_decode(file_get_contents(sprintf('https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s&remoteip=%s',
+				$config['recaptcha_private'],
+				$_POST['g-recaptcha-response'],
+				$_SERVER['REMOTE_ADDR'])), true);
+
+			if (!$resp['success']) {
 				error($config['error']['captcha']);
 			}
 		// Same, but now with our custom captcha provider
