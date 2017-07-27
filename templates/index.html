@@ -4,17 +4,19 @@
 	<meta charset="utf-8">
 
         <script type="text/javascript">
+	  var
           {% if not no_post_form %}
-            var active_page = "index";
+              active_page = "index"
+            , board_name = "{{ board.uri }}";
 	  {% else %}
-            var active_page = "ukko";
+              active_page = "ukko";
           {% endif %}
         </script>
 
 	{% include 'header.html' %}
 	<title>{{ board.url }} - {{ board.title|e }}</title>
 </head>
-<body>	
+<body class="8chan vichan {% if mod %}is-moderator{% else %}is-not-moderator{% endif %} active-{% if not no_post_form %}index{% else %}ukko{% endif %}" data-stylesheet="{% if config.default_stylesheet.1 != '' %}{{ config.default_stylesheet.1 }}{% else %}default{% endif %}">
 	{{ boardlist.top }}
 	
 	{% if pm %}<div class="top_notice">You have <a href="?/PM/{{ pm.id }}">an unread PM</a>{% if pm.waiting > 0 %}, plus {{ pm.waiting }} more waiting{% endif %}.</div><hr />{% endif %}
@@ -55,6 +57,17 @@
 	
 	{% if config.global_message %}<hr /><div class="blotter">{{ config.global_message }}</div>{% endif %}
 	<hr />
+	<!-- Start Search Form -->
+	{% if config.board_search %}
+        	<form style="display:inline" action="/search.php">
+                	<p style="margin: 10px;">
+                    		<input type="text" name="search" placeholder="{{ board.uri }} search">
+                    		<input type="hidden" name="board" value="{{ board.uri }}">
+                    		<input type="submit" value="Search">
+                	</p>
+        	</form>
+    	{% endif %}
+    	<!-- End Search Form -->
 	<form name="postcontrols" action="{{ config.post_url }}" method="post">
 	<input type="hidden" name="board" value="{{ board.uri }}" />
 	{% if mod %}<input type="hidden" name="mod" value="1" />{% endif %}
@@ -67,7 +80,7 @@
 		 [<a {% if page.selected %}class="selected"{% endif %}{% if not page.selected %}href="{{ page.link }}"{% endif %}>{{ page.num }}</a>]{% if loop.last %} {% endif %}
 		{% endfor %} {{ btn.next }}
 		{% if config.catalog_link %}
-			 | <a href="{{ config.root }}{{ board.dir }}{{ config.catalog_link }}">Catalog</a>
+			 | <a href="{{ config.root }}{{ board.dir }}{{ config.catalog_link }}">{% trans %}Catalog{% endtrans %}</a>
 		{% endif %}
 	</div>
 	
@@ -76,10 +89,10 @@
 	{{ config.ad.bottom }}
 
 	<footer>
-		<p class="unimportant" style="margin-top:20px;text-align:center;">- <a href="http://tinyboard.org/">Tinyboard</a> + 
-			<a href='https://int.vichan.net/devel/'>vichan</a> {{ config.version }} -
-		<br><a href="http://tinyboard.org/">Tinyboard</a> Copyright &copy; 2010-2014 Tinyboard Development Group
-		<br><a href="https://engine.vichan.net/">vichan</a> Copyright &copy; 2012-2015 vichan-devel</p>
+		<p class="unimportant" style="margin-top:20px;text-align:center;">- Tinyboard + 
+			<a href="https://engine.vichan.net/">vichan</a> {{ config.version }} -
+		<br>Tinyboard Copyright &copy; 2010-2014 Tinyboard Development Group
+		<br><a href="https://engine.vichan.net/">vichan</a> Copyright &copy; 2012-2016 vichan-devel</p>
 
 		{% for footer in config.footer %}<p class="unimportant" style="text-align:center;">{{ footer }}</p>{% endfor %}
 	</footer>

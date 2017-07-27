@@ -76,20 +76,20 @@ function generate_salt() {
 function login($username, $password) {
 	global $mod, $config;
 	
-	$query = prepare("SELECT `id`, `type`, `boards`, `password`, `salt` FROM ``mods`` WHERE `username` = :username");
+	$query = prepare("SELECT `id`, `type`, `boards`, `password`, `version` FROM ``mods`` WHERE BINARY `username` = :username");
 	$query->bindValue(':username', $username);
 	$query->execute() or error(db_error($query));
 	
 	if ($user = $query->fetch(PDO::FETCH_ASSOC)) {
-		list($version, $ok) = test_password($user['password'], $user['salt'], $password);
+		list($version, $ok) = test_password($user['password'], $user['version'], $password);
 
 		if ($ok) {
 			if ($config['password_crypt_version'] > $version) {
 				// It's time to upgrade the password hashing method!
-				list ($user['salt'], $user['password']) = crypt_password($password);
-				$query = prepare("UPDATE ``mods`` SET `password` = :password, `salt` = :salt WHERE `id` = :id");
+				list ($user['version'], $user['password']) = crypt_password($password);
+				$query = prepare("UPDATE ``mods`` SET `password` = :password, `version` = :version WHERE `id` = :id");
 				$query->bindValue(':password', $user['password']);
-				$query->bindValue(':salt', $user['salt']);
+				$query->bindValue(':version', $user['version']);
 				$query->bindValue(':id', $user['id']);
 				$query->execute() or error(db_error($query));
 			}
@@ -130,7 +130,7 @@ function destroyCookies() {
 function modLog($action, $_board=null) {
 	global $mod, $board, $config;
 	$query = prepare("INSERT INTO ``modlogs`` VALUES (:id, :ip, :board, :time, :text)");
-	$query->bindValue(':id', $mod['id'], PDO::PARAM_INT);
+	$query->bindValue(':id', (isset($mod['id']) ? $mod['id'] : -1), PDO::PARAM_INT);
 	$query->bindValue(':ip', $_SERVER['REMOTE_ADDR']);
 	$query->bindValue(':time', time(), PDO::PARAM_INT);
 	$query->bindValue(':text', $action);
@@ -144,39 +144,6 @@ function modLog($action, $_board=null) {
 	
 	if ($config['syslog'])
 		_syslog(LOG_INFO, '[mod/' . $mod['username'] . ']: ' . $action);
-}
-
-// Validate session
-
-if (isset($_COOKIE[$config['cookies']['mod']])) {
-	// Should be username:hash:salt
-	$cookie = explode(':', $_COOKIE[$config['cookies']['mod']]);
-	if (count($cookie) != 3) {
-		// Malformed cookies
-		destroyCookies();
-		mod_login();
-		exit;
-	}
-	
-	$query = prepare("SELECT `id`, `type`, `boards`, `password` FROM ``mods`` WHERE `username` = :username");
-	$query->bindValue(':username', $cookie[0]);
-	$query->execute() or error(db_error($query));
-	$user = $query->fetch(PDO::FETCH_ASSOC);
-	
-	// validate password hash
-	if ($cookie[1] !== mkhash($cookie[0], $user['password'], $cookie[2])) {
-		// Malformed cookies
-		destroyCookies();
-		mod_login();
-		exit;
-	}
-	
-	$mod = array(
-		'id' => $user['id'],
-		'type' => $user['type'],
-		'username' => $cookie[0],
-		'boards' => explode(',', $user['boards'])
-	);
 }
 
 function create_pm_header() {
@@ -212,4 +179,37 @@ function make_secure_link_token($uri) {
 	return substr(sha1($config['cookies']['salt'] . '-' . $uri . '-' . $mod['id']), 0, 8);
 }
 
-
+function check_login($prompt = false) {
+	global $config, $mod;
+	// Validate session
+	if (isset($_COOKIE[$config['cookies']['mod']])) {
+		// Should be username:hash:salt
+		$cookie = explode(':', $_COOKIE[$config['cookies']['mod']]);
+		if (count($cookie) != 3) {
+			// Malformed cookies
+			destroyCookies();
+			if ($prompt) mod_login();
+			exit;
+		}
+		
+		$query = prepare("SELECT `id`, `type`, `boards`, `password` FROM ``mods`` WHERE `username` = :username");
+		$query->bindValue(':username', $cookie[0]);
+		$query->execute() or error(db_error($query));
+		$user = $query->fetch(PDO::FETCH_ASSOC);
+		
+		// validate password hash
+		if ($cookie[1] !== mkhash($cookie[0], $user['password'], $cookie[2])) {
+			// Malformed cookies
+			destroyCookies();
+			if ($prompt) mod_login();
+			exit;
+		}
+		
+		$mod = array(
+			'id' => $user['id'],
+			'type' => $user['type'],
+			'username' => $cookie[0],
+			'boards' => explode(',', $user['boards'])
+		);
+	}
+}

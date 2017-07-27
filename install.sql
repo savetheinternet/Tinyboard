@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `boards` (
   `uri` varchar(58) CHARACTER SET utf8 NOT NULL,
   `title` tinytext NOT NULL,
   `subtitle` tinytext,
+  -- `indexed` boolean default true,
   PRIMARY KEY (`uri`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -132,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `mods` (
   `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
   `password` varchar(256) CHARACTER SET ascii NOT NULL COMMENT 'SHA256',
-  `salt` varchar(64) CHARACTER SET ascii NOT NULL,
+  `version` varchar(64) CHARACTER SET ascii NOT NULL,
   `type` smallint(2) NOT NULL,
   `boards` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
@@ -244,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `search_queries` (
   `ip` varchar(39) NOT NULL,
   `time` int(11) NOT NULL,
   `query` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -296,6 +297,57 @@ CREATE TABLE IF NOT EXISTS `ban_appeals` (
   KEY `ban_id` (`ban_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `board` varchar(58) CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `content` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `u_pages` (`name`,`board`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nntp_references`
+--
+
+CREATE TABLE IF NOT EXISTS `nntp_references` (
+  `board` varchar(30) NOT NULL,
+  `id` int(11) unsigned NOT NULL,
+  `message_id` varchar(255) CHARACTER SET ascii NOT NULL,
+  `message_id_digest` varchar(40) CHARACTER SET ascii NOT NULL,
+  `own` tinyint(1) NOT NULL,
+  `headers` text,
+  PRIMARY KEY (`message_id_digest`),
+  UNIQUE KEY `message_id` (`message_id`),
+  UNIQUE KEY `u_board_id` (`board`, `id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `captchas`
+--
+
+CREATE TABLE IF NOT EXISTS `captchas` (
+  `cookie` VARCHAR(50),
+  `extra` VARCHAR(200),
+  `text` VARCHAR(255),
+  `created_at` INT(11),
+  PRIMARY KEY (`cookie`,`extra`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

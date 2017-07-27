@@ -281,12 +281,12 @@
 		
 		$postForm.find('textarea[name="body"]').removeAttr('id').removeAttr('cols').attr('placeholder', _('Comment'));
 	
-		$postForm.find('textarea:not([name="body"]),input[type="hidden"]').removeAttr('id').appendTo($dummyStuff);
+		$postForm.find('textarea:not([name="body"]),input[type="hidden"]:not(.captcha_cookie)').removeAttr('id').appendTo($dummyStuff);
 	
 		$postForm.find('br').remove();
 		$postForm.find('table').prepend('<tr><th colspan="2">\
 			<span class="handle">\
-				<a class="close-btn" href="javascript:void(0)">X</a>\
+				<a class="close-btn" href="javascript:void(0)">×</a>\
 				' + _('Quick Reply') + '\
 			</span>\
 			</th></tr>');

@@ -16,20 +16,25 @@
 		if ($action == 'all') {
 			foreach ($boards as $board) {
 				$b = new Catalog();
-				if ($config['smart_build']) {
+
+				$action = generation_strategy("sb_catalog", array($board));
+				if ($action == 'delete') {
 					file_unlink($config['dir']['home'] . $board . '/catalog.html');
+					file_unlink($config['dir']['home'] . $board . '/index.rss');
 				}
-				else {
+				elseif ($action == 'rebuild') {
 					$b->build($settings, $board);
 				}
 			}
 		} elseif ($action == 'post-thread' || ($settings['update_on_posts'] && $action == 'post') || ($settings['update_on_posts'] && $action == 'post-delete') && in_array($board, $boards)) {
 			$b = new Catalog();
 
-			if ($config['smart_build']) {
+			$action = generation_strategy("sb_catalog", array($board));
+			if ($action == 'delete') {
 				file_unlink($config['dir']['home'] . $board . '/catalog.html');
+				file_unlink($config['dir']['home'] . $board . '/index.rss');
 			}
-			else {
+			elseif ($action == 'rebuild') {
 				$b->build($settings, $board);
 			}
 		}
@@ -88,9 +93,12 @@
 							$post['file'] = $config['uri_thumb'] . $files[0]->thumb;
 						}
 					}
+				} else {
+					$post['file'] = $config['root'] . $config['image_deleted'];
 				}
 
 				if (empty($post['image_count'])) $post['image_count'] = 0;
+				$post['pubdate'] = date('r', $post['time']);
 				$recent_posts[] = $post;
 			}
 			
@@ -110,6 +118,12 @@
 				'stats' => $stats,
 				'board' => $board_name,
 				'link' => $config['root'] . $board['dir']
+			)));
+
+			file_write($config['dir']['home'] . $board_name . '/index.rss', Element('themes/catalog/index.rss', Array(
+				'config' => $config,
+				'recent_posts' => $recent_posts,
+				'board' => $board
 			)));
 		}
 	};

@@ -8,6 +8,10 @@ body {
   padding-right: 4px;
 }
 
+.hidden {
+  display:none;
+}
+
 a,a:visited {
   text-decoration: underline;
   color: #34345C;
@@ -192,6 +196,10 @@ img.banner,img.board_image {
   float: left;
   margin: 5px 20px 10px 20px;
   border: none;
+}
+
+.full-image {
+  max-width: 98%;
 }
 
 div.post .post-image {
@@ -412,12 +420,13 @@ fieldset label {
 }
 
 div.pages {
-  color: #89A;
-  background: #D6DAF0;
-  display: inline;
-  padding: 8px;
-  border-right: 1px solid #B7C5D9;
-  border-bottom: 1px solid #B7C5D9;
+	color: #89A;
+	background: #D6DAF0;
+	display: inline-block;
+	padding: 8px;
+	margin: 8px 0 4px 0;
+	border-right: 1px solid #B7C5D9;
+	border-bottom: 1px solid #B7C5D9;
 }
 
 div.pages.top {
@@ -461,20 +470,6 @@ hr {
   border-top: 1px solid #B7C5D9;
   height: 0;
   clear: left;
-}
-
-div.boardlist {
-  color: #89A;
-  font-size: 9pt;
-  margin-top: 3px;
-}
-
-div.boardlist.bottom {
-  margin-top: 20px;
-}
-
-div.boardlist a {
-  text-decoration: none;
 }
 
 div.report {
@@ -661,7 +656,7 @@ pre {
   margin-left: -20px;
 }
 
-div.thread:hover {
+.theme-catalog div.thread:hover {
   background: #D6DAF0;
   border-color: #B7C5D9;
 }
@@ -824,9 +819,13 @@ div.thread:hover {
 }
 
 #options_div {
-  width: 600px;
-  height: 320px;
+  width: 620px;
+  height: 400px;
+  resize: both;
+  overflow: auto;
 }
+
+
 
 #alert_div {
   width: 500px;
@@ -858,7 +857,7 @@ div.thread:hover {
 #options_tablist {
   padding: 0px 5px;
   left: 0px;
-  width: 70px;
+  width: 90px;
   top: 0px;
   bottom: 0px;
   height: 100%;
@@ -887,8 +886,8 @@ div.thread:hover {
   padding: 10px;
   position: absolute;
   top: 0px;
-  bottom: 0px;
-  left: 81px;
+  bottom: 10px;
+  left: 101px;
   right: 0px;
   text-align: left;
   font-size: 12px;
@@ -913,6 +912,18 @@ div.thread:hover {
 
 .poster_id {
   cursor: pointer;
+  display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.poster_id:hover {
+  color: #800000!important;
+}
+.poster_id::before {
+  content: " ID: ";
 }
 
 pre {
@@ -939,6 +950,78 @@ span.pln {
     clear: none;
   }
 }
+
+.clearfix {
+	display: block;
+	clear: both;
+	visibility: hidden;
+	overflow: hidden;
+	
+	font-size: 0px;
+	line-height: 0px;
+	
+	box-sizing: border-box;
+	border: none;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	zoom: 1;
+}
+
+/* === SPECIFIC PAGES & FEATURES === */
+
+/* Board List */
+div.boardlist {
+	margin-top: 3px;
+	
+	color: #89A;
+	font-size: 9pt;
+}
+div.boardlist.bottom {
+	margin-top: 12px;
+	clear: both;
+}
+div.boardlist a {
+	text-decoration: none;
+}
+
+/* Threads */
+/* Thread Footer */
+#thread-interactions {
+	margin: 8px 0;
+	clear: both;
+}
+#thread-links {
+	float: left;
+}
+#thread-links > a {
+	padding-left: none;
+	padding-right: 10px;
+}
+#thread-quick-reply {
+	display: none;
+	position: absolute;
+	left: 50%;
+	right: 50%;
+	text-align: center;
+	width: 100px;
+	margin-left: -50px;
+}
+#thread_stats {
+	float: right;
+}
+
+#post-moderation-fields {
+	float: right;
+	text-align: right;
+}
+#delete-fields {
+}
+#report-fields {
+}
+
+
 
 /* threadwatcher */
 
@@ -1114,4 +1197,12 @@ table.fileboard .intro a {
   max-width: 100%;
   max-height: 100%;
   position: absolute;
+}
+.own_post {
+	font-style: italic;
+	font-weight: normal;
+	opacity: .666;
+}
+div.mix {
+	display: inline-block;
 }
