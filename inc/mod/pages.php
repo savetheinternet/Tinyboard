@@ -1167,6 +1167,7 @@ function mod_move_reply($originBoard, $postID) {
 			$post['has_file'] = true;
 			foreach ($post['files'] as $i => &$file) {
 				$file['file_path'] = sprintf($config['board_path'], $board['uri']) . $config['dir']['img'] . $file['file'];
+				if (isset($file['thumb'])) 
 				$file['thumb_path'] = sprintf($config['board_path'], $board['uri']) . $config['dir']['thumb'] . $file['thumb'];
 			}
 		} else {
