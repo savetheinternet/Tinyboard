@@ -1356,6 +1356,7 @@ function mod_move($originBoard, $postID) {
 				// copy image
 				foreach ($post['files'] as $i => &$file) {
 					$clone($file['file_path'], sprintf($config['board_path'], $board['uri']) . $config['dir']['img'] . $file['file']);
+					if ($file['thumb'] != 'spoiler') { //trying to move/copy the spoiler thumb raises an error
 					$clone($file['thumb_path'], sprintf($config['board_path'], $board['uri']) . $config['dir']['thumb'] . $file['thumb']);
 				}
 			}
