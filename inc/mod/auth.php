@@ -70,7 +70,7 @@ function test_password($password, $salt, $test) {
 
 function generate_salt() {
 	// mcrypt_create_iv() was deprecated in PHP 7.1.0, only use it if we're below that version number.
-	if (PHP_VERSION_ID < 701000) {
+	if (PHP_VERSION_ID < 70100) {
 		// 128 bits of entropy
 		return strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
 	}
