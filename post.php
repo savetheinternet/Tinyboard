@@ -655,6 +655,13 @@ if (isset($_POST['delete'])) {
 	if ($post['has_file']) {
 		$i = 0;
 		foreach ($_FILES as $key => $file) {
+			if ($file['error'] > 0) {
+				error(sprintf3($config['error']['phpfileserror'], array(
+					'index' => $i+1,
+					'code' => $file['error']
+				)));
+			}
+
 			if ($file['size'] && $file['tmp_name']) {
 				$file['filename'] = urldecode($file['name']);
 				$file['extension'] = strtolower(mb_substr($file['filename'], mb_strrpos($file['filename'], '.') + 1));
