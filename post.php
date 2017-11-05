@@ -655,7 +655,7 @@ if (isset($_POST['delete'])) {
 	if ($post['has_file']) {
 		$i = 0;
 		foreach ($_FILES as $key => $file) {
-			if ($file['error'] > 0) {
+			if (!in_array($file['error'], array(UPLOAD_ERR_NO_FILE, UPLOAD_ERR_OK))) {
 				error(sprintf3($config['error']['phpfileserror'], array(
 					'index' => $i+1,
 					'code' => $file['error']
