@@ -378,6 +378,10 @@ if (isset($_POST['delete'])) {
 
 
 	if (!$dropped_post) {
+
+		// Check if banned
+		checkBan($board['uri']);
+
 		// Check for CAPTCHA right after opening the board so the "return" link is in there
 		if ($config['recaptcha']) {
 			if (!isset($_POST['g-recaptcha-response']))
@@ -418,8 +422,6 @@ if (isset($_POST['delete'])) {
 	
 		checkDNSBL();
 		
-		// Check if banned
-		checkBan($board['uri']);
 
 		if ($post['mod'] = isset($_POST['mod']) && $_POST['mod']) {
 			check_login(false);
