@@ -212,8 +212,8 @@ function check_login($prompt = false) {
 		}
 		
 		$mod = array(
-			'id' => $user['id'],
-			'type' => $user['type'],
+			'id' => (int)$user['id'],
+			'type' => (int)$user['type'],
 			'username' => $cookie[0],
 			'boards' => explode(',', $user['boards'])
 		);
