@@ -10,7 +10,7 @@ In November 2017, Marcin Łabanowski (@czaks) retired as maintainer for personal
 
 *Security problems can be reported to Fredrick Brennan at his email: COPYPASTE \<AT\> KITTENS \<DOT\> PH.*
 	
-Vichan is still accepting patches, but there is at the moment no active development besides fixing security problems as they emerge. Given the lack of active development, we strongly urge you to consider other imageboard packages. It is the opinion of the vichan development team that no new vichan imageboards should be deployed, and other imageboard packages, such as lynxchan, used instead.
+Vichan is still accepting patches, but there is at the moment no active development besides fixing security problems and other serious bugs as they emerge. Given the lack of active development, we strongly urge you to consider other imageboard packages. It is the opinion of the vichan development team that no new vichan imageboards should be deployed, and other imageboard packages, such as lynxchan, used instead.
 
 History
 ------------
