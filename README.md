@@ -23,7 +23,7 @@ Support and announcements: https://engine.vichan.net/
 Requirements
 ------------
 1.	PHP >= 5.4 (we still try to keep compatibility with php 5.3 as much as possible)
-        PHP 7.0 is explicitly supported.
+        PHP 7.0 is explicitly supported. PHP 7.2 works as well, but may cause as yet unreported bugs.
 2.	MySQL/MariaDB server
 3.	[mbstring](http://www.php.net/manual/en/mbstring.installation.php) 
 4.	[PHP GD](http://www.php.net/manual/en/intro.image.php)
@@ -95,15 +95,6 @@ vichan is based on a Tinyboard, so both engines have very much in common. These
 links may be helpful for you as well: 
 
 *	Tinyboard documentation can be found [here](https://web.archive.org/web/20121016074303/http://tinyboard.org/docs/?p=Main_Page).
-
-Donations
----------
-Do you like our work? You can motivate us financially to do better ;)
-* Bitcoin: 1GjZEdLaTQ8JWVFGZW921Yv4x59f9oiZME
-
-You can also ask us to develop some feature specially for you <3. Join our IRC
-channel and ask for a quote (there are a few of us, who work with the codebase
-and are skilled enough to develop such features pretty quickly).
 
 CLI tools
 -----------------
