@@ -15,9 +15,6 @@
 	padding: 3px 7px;
 	font-size: 12pt;
 }
-.box ul {
-	padding: 2px 15px;
-}
 .box ul li {
 	list-style: none;
 	margin: 0;
@@ -37,8 +34,9 @@
     border: none;
     width: 100%;
     min-height: 250px;
-    max-height: 700px;
-    overflow: hidden auto;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y:  auto;;
 }
 .box.image h2 {
 	background: #9C6;
@@ -46,9 +44,10 @@
 }
 .box img {
 	float: left;
-	margin: 10px auto;
+	margin: 5px;
 	width: auto !important;
 	height: 100px !important;
+	border-radius: 10px;
 }
 .icon {
     display: block;
