@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>{{ settings.title }}</title>
 	<link rel="stylesheet" media="screen" href="{{ config.url_stylesheet }}"/>
 	<link rel="stylesheet" media="screen" href="{{ config.root }}{{ settings.css }}"/>
@@ -62,8 +62,8 @@
 			{% endfor %}
 		{% endif %}
 	    </div>
+	    <h1>Recent Images</h1>
 		<div class="box image">
-			<h2>Recent Images</h2>
 			<ul>
 				{% for post in recent_images %}
 					<li>

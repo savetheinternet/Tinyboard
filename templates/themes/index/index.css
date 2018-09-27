@@ -34,13 +34,9 @@
     border: none;
     width: 100%;
     min-height: 250px;
-    max-height: 600px;
+    max-height: 400px;
     overflow-x: hidden;
     overflow-y:  auto;;
-}
-.box.image h2 {
-	background: #9C6;
-	color: #060;
 }
 .box img {
 	float: left;
