@@ -30,9 +30,7 @@ Requirements
 5.	[PHP PDO](http://www.php.net/manual/en/intro.pdo.php)
 6.	A Unix-like OS, preferrably FreeBSD or Linux
 
-We try to make sure vichan is compatible with all major web servers and
-operating systems. vichan does not include an Apache ```.htaccess``` file nor does
-it need one.
+We try to make sure vichan is compatible with all major web servers and. vichan does not include an Apache ```.htaccess``` file nor does it need one.
 
 ### Recommended
 1.	MySQL/MariaDB server >= 5.5.3
