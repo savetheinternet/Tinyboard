@@ -7,10 +7,6 @@ require_once 'inc/functions.php';
 require_once 'inc/anti-bot.php';
 require_once 'inc/bans.php';
 
-if ((!isset($_POST['mod']) || !$_POST['mod']) && $config['board_locked']) {
-    error("Board is locked");
-}
-
 $dropped_post = false;
 
 // Is it a post coming from NNTP? Let's extract it and pretend it's a normal post.
@@ -198,6 +194,10 @@ if (isset($_POST['delete'])) {
 	// Check if board exists
 	if (!openBoard($_POST['board']))
 		error($config['error']['noboard']);
+
+	if ((!isset($_POST['mod']) || !$_POST['mod']) && $config['board_locked']) {
+    	error("Board is locked");
+	}
 	
 	// Check if banned
 	checkBan($board['uri']);
@@ -281,6 +281,10 @@ if (isset($_POST['delete'])) {
 	// Check if board exists
 	if (!openBoard($_POST['board']))
 		error($config['error']['noboard']);
+
+	if ((!isset($_POST['mod']) || !$_POST['mod']) && $config['board_locked']) {
+   		error("Board is locked");
+	}
 	
 	// Check if banned
 	checkBan($board['uri']);
@@ -357,6 +361,10 @@ if (isset($_POST['delete'])) {
 	// Check if board exists
 	if (!openBoard($post['board']))
 		error($config['error']['noboard']);
+
+	if ((!isset($_POST['mod']) || !$_POST['mod']) && $config['board_locked']) {
+    	error("Board is locked");
+	}
 	
 	if (!isset($_POST['name']))
 		$_POST['name'] = $config['anonymous'];
