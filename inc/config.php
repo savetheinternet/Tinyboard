@@ -37,7 +37,7 @@
 	$config['blotter'] = &$config['global_message'];
 
 	// Automatically check if a newer version of Tinyboard is available when an administrator logs in.
-	$config['check_updates'] = true;
+	$config['check_updates'] = false;
 	// How often to check for updates
 	$config['check_updates_time'] = 43200; // 12 hours
 
