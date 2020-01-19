@@ -45,7 +45,7 @@
 		public function build($settings, $board_name) {
 			global $config, $board;
 
-			if ($board['uri'] != $board_name) {			
+			if (!isset($board) || $board['uri'] != $board_name) {			
 				if (!openBoard($board_name)) {
 					error(sprintf(_("Board %s doesn't exist"), $board_name));
 				}
