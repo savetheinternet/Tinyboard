@@ -45,6 +45,9 @@
 	$config['debug'] = false;
 	// For development purposes. Displays (and "dies" on) all errors and warnings. Turn on with the above.
 	$config['verbose_errors'] = true;
+	// Warn about deprecations? See vichan-devel/vichan#363 and https://www.youtube.com/watch?v=9crnlHLVdno
+	$config['deprecation_errors'] = false;
+
 	// EXPLAIN all SQL queries (when in debug mode).
 	$config['debug_explain'] = false;
 

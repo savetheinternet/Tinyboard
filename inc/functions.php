@@ -4,6 +4,7 @@
  *  Copyright (c) 2010-2014 Tinyboard Development Group
  */
 
+
 if (realpath($_SERVER['SCRIPT_FILENAME']) == str_replace('\\', '/', __FILE__)) {
 	// You cannot request this file directly.
 	exit;
@@ -279,7 +280,7 @@ function loadConfig() {
 
 	if ($config['verbose_errors']) {
 		set_error_handler('verbose_error_handler');
-		error_reporting(E_ALL);
+		error_reporting($config['deprecation_errors'] ? E_ALL : E_ALL & ~E_DEPRECATED);
 		ini_set('display_errors', true);
 		ini_set('html_errors', false);
 	} else {
@@ -377,8 +378,13 @@ function _syslog($priority, $message) {
 }
 
 function verbose_error_handler($errno, $errstr, $errfile, $errline) {
+	global $config;
+
 	if (error_reporting() == 0)
 		return false; // Looks like this warning was suppressed by the @ operator.
+	if ($errno == E_DEPRECATED && !$config['deprecation_errors'])
+		return false;
+
 	error(utf8tohtml($errstr), true, array(
 		'file' => $errfile . ':' . $errline,
 		'errno' => $errno,
