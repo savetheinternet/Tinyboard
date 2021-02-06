@@ -13,7 +13,7 @@ imageboard software package. It is written in PHP and has few dependencies.
 While there is currently no active development besides fixing security problems, we don't exclude the possibility to refactor the code in order to meet today's standards and continue our work from the point where @czaks retired in 2017.
 Before this milestone is achieved though, we strongly urge you to consider other imageboard packages. It is the opinion of the vichan development team that no new vichan imageboards should be deployed at the moment, and other imageboard packages used instead.
 
-For support, feel free to join our [IRC channel](https://webchat.6an.org/?channels=vichan) at irc.6an.org.
+For support, feel free to join our [IRC channel](https://webchat.6an.org/?channels=vichan-dev) at irc.6an.org.
 
 History
 ------------
