@@ -10,10 +10,12 @@ imageboard software package. It is written in PHP and has few dependencies.
 
 *Security problems can be reported to the development team: DEVELOPMENT \<AT\> VICHAN \<DOT\> NET.*
 	
-While there is currently no active development besides fixing security problems, we don't exclude the possibility to refactor the code in order to meet today's standards and continue our work from the point where @czaks retired in 2017.
+While there is currently no active development besides fixing security problems, we don't exclude the possibility to refactor the code in order to meet today's standards and continue our work from the point where [@czaks](https://github.com/czaks) retired in 2017.
 Before this milestone is achieved though, we strongly urge you to consider other imageboard packages. It is the opinion of the vichan development team that no new vichan imageboards should be deployed at the moment, and other imageboard packages used instead.
 
 For support, feel free to join our [IRC channel](https://webchat.6an.org/?channels=vichan-dev) at irc.6an.org.
+
+Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
 
 History
 ------------
@@ -21,7 +23,11 @@ vichan is a fork of (now defunc'd) [Tinyboard](http://github.com/savetheinternet
 a great imageboard package, actively building on it and adding a lot of features and other
 improvements.
 
-Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
+### Maintainer timeline
+1. [@h00j](https://github.com/h00j) (2021 - present)
+2. [@ctrlcctrlv](https://github.com/ctrlcctrlv) (2017 - 2021)
+3. [@czaks](https://github.com/czaks) (2014 - 2017) (The author of vichan fork)
+4. [@savetheinternet](https://github.com/savetheinternet) (2010 - 2014) (The creator of Tinyboard)
 
 Requirements
 ------------
