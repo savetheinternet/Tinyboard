@@ -312,7 +312,7 @@
 	$config['recaptcha_private'] = '6LcXTcUSAAAAAOGVbVdhmEM1_SyRF4xTKe8jbzf_';
 
 	// Enable Custom Captcha you need to change a couple of settings 
-	//Read more at: /captcha/instructions.md
+	//Read more at: /inc/captcha/readme.md
 	 $config['captcha'] = array();
 
 	// Enable custom captcha provider
