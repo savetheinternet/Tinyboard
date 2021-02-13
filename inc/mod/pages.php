@@ -773,7 +773,8 @@ function mod_view_thread50($boardName, $thread) {
 	echo $page;
 }
 
-function mod_ip_remove_note($ip, $id) {
+function mod_ip_remove_note($cloaked_ip, $id) {
+	$ip = uncloak_ip($cloaked_ip);
 	global $config, $mod;
 	
 	if (!hasPermission($config['mod']['remove_notes']))
@@ -786,13 +787,14 @@ function mod_ip_remove_note($ip, $id) {
 	$query->bindValue(':ip', $ip);
 	$query->bindValue(':id', $id);
 	$query->execute() or error(db_error($query));
+
+	modLog("Removed a note for <a href=\"?/IP/{$cloaked_ip}\">{$cloaked_ip}</a>");
 	
-	modLog("Removed a note for <a href=\"?/IP/{$ip}\">{$ip}</a>");
-	
-	header('Location: ?/IP/' . $ip . '#notes', true, $config['redirect_http']);
+	header('Location: ?/IP/' . $cloaked_ip . '#notes', true, $config['redirect_http']);
 }
 
-function mod_page_ip($ip) {
+function mod_page_ip($cip) {
+	$ip = uncloak_ip($cip);
 	global $config, $mod;
 	
 	if (filter_var($ip, FILTER_VALIDATE_IP) === false)
@@ -804,7 +806,7 @@ function mod_page_ip($ip) {
 		
 		Bans::delete($_POST['ban_id'], true, $mod['boards']);
 		
-		header('Location: ?/IP/' . $ip . '#bans', true, $config['redirect_http']);
+		header('Location: ?/IP/' . $cip . '#bans', true, $config['redirect_http']);
 		return;
 	}
 	
@@ -821,9 +823,9 @@ function mod_page_ip($ip) {
 		$query->bindValue(':body', $_POST['note']);
 		$query->execute() or error(db_error($query));
 		
-		modLog("Added a note for <a href=\"?/IP/{$ip}\">{$ip}</a>");
+		modLog("Added a note for <a href=\"?/IP/{$cip}\">{$cip}</a>");
 		
-		header('Location: ?/IP/' . $ip . '#notes', true, $config['redirect_http']);
+		header('Location: ?/IP/' . $cip . '#notes', true, $config['redirect_http']);
 		return;
 	}
 	
@@ -831,7 +833,7 @@ function mod_page_ip($ip) {
 	$args['ip'] = $ip;
 	$args['posts'] = array();
 	
-	if ($config['mod']['dns_lookup'])
+	if ($config['mod']['dns_lookup'] && empty($config['ipcrypt_key']))
 		$args['hostname'] = rDNS($ip);
 	
 	$boards = listBoards();
@@ -873,16 +875,16 @@ function mod_page_ip($ip) {
 	
 	if (hasPermission($config['mod']['modlog_ip'])) {
 		$query = prepare("SELECT `username`, `mod`, `ip`, `board`, `time`, `text` FROM ``modlogs`` LEFT JOIN ``mods`` ON `mod` = ``mods``.`id` WHERE `text` LIKE :search ORDER BY `time` DESC LIMIT 50");
-		$query->bindValue(':search', '%' . $ip . '%');
+		$query->bindValue(':search', '%' . $cip . '%');
 		$query->execute() or error(db_error($query));
 		$args['logs'] = $query->fetchAll(PDO::FETCH_ASSOC);
 	} else {
 		$args['logs'] = array();
 	}
 	
-	$args['security_token'] = make_secure_link_token('IP/' . $ip);
+	$args['security_token'] = make_secure_link_token('IP/' . $cip);
 	
-	mod_page(sprintf('%s: %s', _('IP'), htmlspecialchars($ip)), 'mod/view_ip.html', $args, $args['hostname']);
+	mod_page(sprintf('%s: %s', _('IP'), htmlspecialchars($cip)), 'mod/view_ip.html', $args, $args['hostname'] ?? null);
 }
 
 function mod_ban() {
@@ -974,7 +976,7 @@ function mod_ban_appeals() {
 			error(_('Ban appeal not found!'));
 		}
 		
-		$ban['mask'] = Bans::range_to_string(array($ban['ipstart'], $ban['ipend']));
+		$ban['mask'] = cloak_mask(Bans::range_to_string(array($ban['ipstart'], $ban['ipend'])));
 		
 		if (isset($_POST['unban'])) {
 			modLog('Accepted ban appeal #' . $ban['id'] . ' for ' . $ban['mask']);
@@ -1751,7 +1753,8 @@ function mod_deletebyip($boardName, $post, $global = false) {
 	}
 	
 	// Record the action
-	modLog("Deleted all posts by IP address: <a href=\"?/IP/$ip\">$ip</a>");
+	$cip = cloak_ip($ip);
+	modLog("Deleted all posts by IP address: <a href=\"?/IP/$cip\">$cip</a>");
 	
 	// Redirect
 	header('Location: ?/' . sprintf($config['board_path'], $boardName) . $config['file_index'], true, $config['redirect_http']);
@@ -2210,7 +2213,7 @@ function mod_reports() {
 	$reports = $query->fetchAll(PDO::FETCH_ASSOC);
 	
 	$report_queries = array();
-	foreach ($reports as $report) {
+	foreach ($reports as &$report) {
 		if (!isset($report_queries[$report['board']]))
 			$report_queries[$report['board']] = array();
 		$report_queries[$report['board']][] = $report['post'];
@@ -2308,9 +2311,9 @@ function mod_report_dismiss($id, $all = false) {
 	}
 	$query->execute() or error(db_error($query));
 	
-	
+	$cip = cloak_ip($ip);
 	if ($all)
-		modLog("Dismissed all reports by <a href=\"?/IP/$ip\">$ip</a>");
+		modLog("Dismissed all reports by <a href=\"?/IP/$cip\">$cip</a>");
 	else
 		modLog("Dismissed a report for post #{$id}", $board);
 	
