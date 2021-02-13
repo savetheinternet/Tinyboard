@@ -2860,3 +2860,118 @@ function strategy_first($fun, $array) {
 		return array('defer');
 	}
 }
+
+function base32_decode($d) {
+	$charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+	$d = str_split($d);
+	$l = array_pop($d);
+	$b = '';
+	foreach ($d as $c) {
+		$b .= sprintf("%05b", strpos($charset, $c));
+	}
+	$padding = 8 - strlen($b) % 8;
+	$b .= str_pad(decbin(strpos($charset, $l)), $padding, '0', STR_PAD_LEFT);
+
+	return implode('', array_map(function($c) { return chr(bindec($c)); }, str_split($b, 8)));
+}
+
+function base32_encode($d) {
+	$charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+	$b = implode('', array_map(function($c) { return sprintf("%08b", ord($c)); }, str_split($d)));
+	return implode('', array_map(function($c) use ($charset) { return $charset[bindec($c)]; }, str_split($b, 5)));
+}
+
+function cloak_ip($ip) {
+	global $config;
+	$ipcrypt_key = $config['ipcrypt_key'] ?: null;
+
+	if (empty($ipcrypt_key))
+		return $ip;
+
+	$ip_dec = inet_pton($ip);
+
+	if ($config['ipcrypt_dns']) {
+		$host = gethostbyaddr($ip);
+
+		if ($host !== $ip) {
+			$segments = explode('.', $host);
+
+			$tld = [];
+			$tld[] = array_pop($segments);
+			if (count($segments) >= 2) {
+				$tld[] = array_pop($segments);
+			}
+
+			$tld = implode('.', array_reverse($tld));
+		}
+	}
+
+	if (is_numeric($ip))
+		$ipbytes = pack('N', $ip);
+	else if ($ip_dec !== false)
+		$ipbytes = $ip_dec;
+	else
+		return "#ERROR";
+
+	if (strlen($ipbytes) >= 16)
+		$ipbytes = substr($ipbytes, 0, 16);
+
+	$cyphertext = openssl_encrypt($ipbytes, 'rc4-40', $ipcrypt_key, OPENSSL_RAW_DATA);
+
+	$ret = $config['ipcrypt_prefix'].':' . base32_encode($cyphertext);
+	if (isset($tld) && !empty($tld)) {
+		$ret .= '.'.$tld;
+	}
+
+	return $ret;
+}
+
+function uncloak_ip($ip) {
+	global $config;
+	$ipcrypt_key = ($config['ipcrypt_key']);
+
+	if (empty($ipcrypt_key))
+		return $ip;
+
+	$juice = substr($ip, strlen($config['ipcrypt_prefix']) + 1);
+	if ($delimiter = strpos($juice, '.')) {
+		$juice = substr($juice, 0, $delimiter);
+	}
+
+	if (substr($ip, 0, strlen($config['ipcrypt_prefix']) + 1) === $config['ipcrypt_prefix'].':') {
+		$plaintext = openssl_decrypt(base32_decode($juice), 'rc4-40', $ipcrypt_key, OPENSSL_RAW_DATA);
+
+		if ($plaintext === false || strlen($plaintext) == 0)
+			return '#ERROR';
+
+		if (strlen($ip) >= 16)
+			return inet_ntop($plaintext);
+		else
+			return long2ip(unpack('N', $plaintext)[1]);
+	}
+
+	return '#ERROR';
+}
+
+function cloak_mask($mask) {
+	list($net, $block) = explode('/', $mask, 2);
+	$mask = cloak_ip($net);
+	if ($block) {
+		$mask .= '/'.$block;
+	}
+
+	return $mask;
+}
+
+function uncloak_mask($mask) {
+	list($addr, $block) = explode('/', $mask, 2);
+	$mask = uncloak_ip($addr);
+	if ($mask === '#ERROR') {
+		$mask = $addr;
+	}
+	if ($block) {
+		$mask .= '/'.$block;
+	}
+
+	return $mask;
+}

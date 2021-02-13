@@ -28,6 +28,8 @@ class Twig_Extensions_Extension_Tinyboard extends Twig_Extension
 			new Twig_SimpleFilter('push', 'twig_push_filter'),
 			new Twig_SimpleFilter('bidi_cleanup', 'bidi_cleanup'),
 			new Twig_SimpleFilter('addslashes', 'addslashes'),
+			new Twig_SimpleFilter('cloak_ip', 'cloak_ip'),
+			new Twig_SimpleFilter('cloak_mask', 'cloak_mask'),
 		);
 	}
 	

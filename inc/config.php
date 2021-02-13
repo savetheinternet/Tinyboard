@@ -1874,3 +1874,13 @@
 
 	// Allowed HTML tags in ?/edit_pages.
 	$config['allowed_html'] = 'a[href|title],p,br,li,ol,ul,strong,em,u,h2,b,i,tt,div,img[src|alt|title],hr';
+
+	// Secret passphrase for IP cloaking
+	// Disabled if empty.
+	$config['ipcrypt_key'] = '';
+
+	// IP cloak prefix
+	$config['ipcrypt_prefix'] = 'Cloak';
+
+	// Whether to append domain names to IP cloaks
+	$config['ipcrypt_dns'] = false;
