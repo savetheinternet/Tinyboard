@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fb3b7d5875cbc1a9818a0f64ec66c39",
+    "content-hash": "e78104dfc51d725ae15a17e7a70e7ca3",
     "packages": [
         {
             "name": "geoip/geoip",
@@ -374,7 +374,11 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-mbstring": ">=5.4",
+        "ext-gd": ">=5.4",
+        "ext-pdo": ">=5.4"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
 }
