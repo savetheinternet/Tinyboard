@@ -31,8 +31,20 @@
     "license": "Tinyboard + vichan",
     "authors": [
         {
+            "name": "savetheinternet",
+            "homepage": "https://github.com/savetheinternet"
+        },
+        {
+            "name": "czaks",
+            "homepage": "https://github.com/czaks"
+        },
+        {
+            "name": "ctrlcctrlv",
+            "homepage": "https://github.com/ctrlcctrlv"
+        },
+        {
             "name": "h00j",
-            "email": "admin@vichan.net"
+            "homepage": "https://github.com/h00j"
         }
     ]
 }
