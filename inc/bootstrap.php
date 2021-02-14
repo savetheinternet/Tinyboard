@@ -1,3 +1,3 @@
 <?php
-define('TINYBOARD', 'xD');
+@define('TINYBOARD', 'xD');
 require_once('vendor/autoload.php');
