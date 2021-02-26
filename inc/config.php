@@ -199,11 +199,11 @@
 
 	// Prevents most Tor exit nodes from making posts. Recommended, as a lot of abuse comes from Tor because
 	// of the strong anonymity associated with it.
-	// Example: $config['dnsbl'][] = 'another.blacklist.net'; // 
+	// Example: $config['dnsbl'][] = 'another.blacklist.net';
 	// $config['dnsbl'][] = array('tor.dnsbl.sectoor.de', 1); //sectoor.de site is dead. the number stands for (an) ip adress(es) I guess. 
-	
+
 	// Replacement for sectoor.de
-	$config['dnsbl'][] = array('rbl.efnet.org', 4);
+	$config['dnsbl'][] = array('rbl.efnetrbl.org', 4);
 
 	// http://www.sorbs.net/using.shtml
 	// $config['dnsbl'][] = array('dnsbl.sorbs.net', array(2, 3, 4, 5, 6, 7, 8, 9));
@@ -225,7 +225,7 @@
 
 	// Skip checking certain IP addresses against blacklists (for troubleshooting or whatever)
 	$config['dnsbl_exceptions'][] = '127.0.0.1';
-	
+
 	// To prevent bump atacks; returns the thread to last position after the last post is deleted. 
 	$config['anti_bump_flood'] = false;
 
@@ -258,7 +258,7 @@
 
 	// How soon after regeneration do hashes expire (in seconds)?
 	$config['spam']['hidden_inputs_expire'] = 60 * 60 * 3; // three hours
-	
+
 	// Whether to use Unicode characters in hidden input names and values.
 	$config['spam']['unicode'] = true;
 
@@ -313,7 +313,7 @@
 
 	// Enable Custom Captcha you need to change a couple of settings 
 	//Read more at: /inc/captcha/readme.md
-	 $config['captcha'] = array();
+	$config['captcha'] = array();
 
 	// Enable custom captcha provider
 	$config['captcha']['enabled'] = false;
@@ -321,7 +321,7 @@
 	//New thread captcha
  	//Require solving a captcha to post a thread. 
  	//Default off.
- 	 $config['new_thread_capt'] = false;
+ 	$config['new_thread_capt'] = false;
 
 	// Custom captcha get provider path (if not working get the absolute path aka your url.)
 	$config['captcha']['provider_get'] = '../inc/captcha/entrypoint.php';
@@ -329,7 +329,7 @@
 	$config['captcha']['provider_check'] = '../inc/captcha/entrypoint.php';
 
 	// Custom captcha extra field (eg. charset)
-	 $config['captcha']['extra'] = 'abcdefghijklmnopqrstuvwxyz';
+	$config['captcha']['extra'] = 'abcdefghijklmnopqrstuvwxyz';
 	
 	// Ability to lock a board for normal users and still allow mods to post.  Could also be useful for making an archive board
 	$config['board_locked'] = false;
@@ -613,7 +613,7 @@
 	// that you will have to disable BOTH country_flags and contry_flags_condensed optimization (at least on a board
 	// where they are enabled).
 	$config['user_flag'] = false;
-	
+
 	// List of user_flag the user can choose. Flags must be placed in the directory set by $config['uri_flags']
 	$config['user_flags'] = array();
 	/* example: 
@@ -630,7 +630,7 @@
 
 	// Use semantic URLs for threads, like /b/res/12345/daily-programming-thread.html
 	$config['slugify'] = false;
-	
+
 	// Max size for slugs
 	$config['slug_max_size'] = 80;
 
