@@ -402,17 +402,19 @@ if (isset($_POST['delete'])) {
 			if (!$resp['success']) {
 				error($config['error']['captcha']);
 			}
-		// Same, but now with our custom captcha provider
- 		if (($config['captcha']['enabled']) || (($post['op']) && ($config['new_thread_capt'])) ) {
-		$resp = file_get_contents($config['captcha']['provider_check'] . "?" . http_build_query([
-			'mode' => 'check',
-			'text' => $_POST['captcha_text'],
-			'extra' => $config['captcha']['extra'],
-			'cookie' => $_POST['captcha_cookie']
-		]));
-		if ($resp !== '1') {
-                        error($config['error']['captcha'] .
-			'<script>if (actually_load_captcha !== undefined) actually_load_captcha("'.$config['captcha']['provider_get'].'", "'.$config['captcha']['extra'].'");</script>');
+			// Same, but now with our custom captcha provider
+			if (($config['captcha']['enabled']) || (($post['op']) && ($config['new_thread_capt'])) ) {
+				$resp = file_get_contents($config['captcha']['provider_check'] . "?" . http_build_query([
+						'mode' => 'check',
+						'text' => $_POST['captcha_text'],
+						'extra' => $config['captcha']['extra'],
+						'cookie' => $_POST['captcha_cookie']
+					]));
+				if ($resp !== '1') {
+					error($config['error']['captcha'] .
+						'<script>if (actually_load_captcha !== undefined) actually_load_captcha("'.$config['captcha']['provider_get'].'", "'.$config['captcha']['extra'].'");</script>');
+				}
+			}
 		}
 	}
 }
@@ -1201,6 +1203,15 @@ if (isset($_POST['delete'])) {
 	
 	if (!$post['mod']) header('X-Associated-Content: "' . $redirect . '"');
 
+	// Any telegrams to show?
+	$query = prepare('SELECT * FROM ``telegrams`` WHERE ``ip`` = :ip AND ``seen`` = 0');
+	$query->bindValue(':ip', $_SERVER['REMOTE_ADDR']);
+	$query->execute() or error(db_error($query));
+	$telegrams = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	if (count($telegrams) > 0)
+		goto skip_redirect;
+
 	if (!isset($_POST['json_response'])) {
 		header('Location: ' . $redirect, true, $config['redirect_http']);
 	} else {
@@ -1211,7 +1222,9 @@ if (isset($_POST['delete'])) {
 			'id' => $id
 		));
 	}
-	
+
+	skip_redirect:
+
 	if ($config['try_smarter'] && $post['op'])
 		$build_pages = range(1, $config['max_pages']);
 	
@@ -1222,6 +1235,20 @@ if (isset($_POST['delete'])) {
 	
 	buildIndex();
 
+ 	if (count($telegrams) > 0) {
+		$ids = implode(', ', array_map(function($x) { return (int)$x['id']; }, $telegrams));
+		query("UPDATE ``telegrams`` SET ``seen`` = 1 WHERE ``id`` IN({$ids})") or error(db_error());
+		die(Element('page.html', array(
+			'title' => _('Important message from Moderation'),
+			'config' => $config,
+			'body' => Element('important.html', array(
+				'config' => $config,
+				'redirect' => $redirect,
+				'telegrams' => $telegrams,
+			))
+		)));
+	}
+
 	// We are already done, let's continue our heavy-lifting work in the background (if we run off FastCGI)
 	if (function_exists('fastcgi_finish_request'))
 		@fastcgi_finish_request();
@@ -1230,7 +1257,7 @@ if (isset($_POST['delete'])) {
 		rebuildThemes('post-thread', $board['uri']);
 	else
 		rebuildThemes('post', $board['uri']);
-	
+
 } elseif (isset($_POST['appeal'])) {
 	if (!isset($_POST['ban_id']))
 		error($config['error']['bot']);
