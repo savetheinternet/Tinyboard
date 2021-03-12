@@ -1,4 +1,4 @@
-6<?php
+<?php
 
 /*
  *  Copyright (c) 2010-2014 Tinyboard Development Group
