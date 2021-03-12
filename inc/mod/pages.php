@@ -793,6 +793,27 @@ function mod_ip_remove_note($cloaked_ip, $id) {
 	header('Location: ?/IP/' . $cloaked_ip . '#notes', true, $config['redirect_http']);
 }
 
+function mod_ip_remove_telegram($cloaked_ip, $id) {
+	$ip = uncloak_ip($cloaked_ip);
+	global $config, $mod;
+
+	if (!hasPermission($config['mod']['remove_telegrams']))
+		error($config['error']['noaccess']);
+
+	if (filter_var($ip, FILTER_VALIDATE_IP) === false)
+		error("Invalid IP address.");
+
+	$query = prepare('DELETE FROM ``telegrams`` WHERE `ip` = :ip AND `id` = :id');
+	$query->bindValue(':ip', $ip);
+	$query->bindValue(':id', $id);
+	$query->execute() or error(db_error($query));
+
+	modLog("Removed a telegram for <a href=\"?/IP/{$cloaked_ip}\">{$cloaked_ip}</a>");
+
+	header('Location: ?/IP/' . $cloaked_ip . '#telegrams', true, $config['redirect_http']);
+}
+
+
 function mod_page_ip($cip) {
 	$ip = uncloak_ip($cip);
 	global $config, $mod;
@@ -828,7 +849,26 @@ function mod_page_ip($cip) {
 		header('Location: ?/IP/' . $cip . '#notes', true, $config['redirect_http']);
 		return;
 	}
-	
+
+	if (isset($_POST['telegram'])) {
+		if (!hasPermission($config['mod']['create_telegrams']))
+			error($config['error']['noaccess']);
+
+		$_POST['telegram'] = escape_markup_modifiers($_POST['telegram']);
+		markup($_POST['telegram']);
+		$query = prepare('INSERT INTO ``telegrams`` VALUES (NULL, :mod_id, :ip, :message, 0, :created_at)');
+		$query->bindValue(':ip', $ip);
+		$query->bindValue(':mod_id', $mod['id']);
+		$query->bindValue(':created_at', time());
+		$query->bindValue(':message', $_POST['telegram']);
+		$query->execute() or error(db_error($query));
+
+		modLog("Added a telegram for <a href=\"?/IP/{$cip}\">{$cip}</a>");
+
+		header('Location: ?/IP/' . $cip . '#telegrams', true, $config['redirect_http']);
+		return;
+	}
+
 	$args = array();
 	$args['ip'] = $ip;
 	$args['posts'] = array();
@@ -872,7 +912,14 @@ function mod_page_ip($cip) {
 		$query->execute() or error(db_error($query));
 		$args['notes'] = $query->fetchAll(PDO::FETCH_ASSOC);
 	}
-	
+
+	if (hasPermission($config['mod']['view_telegrams'])) {
+		$query = prepare("SELECT ``telegrams``.*, `username` FROM ``telegrams`` LEFT JOIN ``mods`` ON `mod_id` = ``mods``.`id` WHERE `ip` = :ip ORDER BY `created_at` DESC");
+		$query->bindValue(':ip', $ip);
+		$query->execute() or error(db_error($query));
+		$args['telegrams'] = $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+
 	if (hasPermission($config['mod']['modlog_ip'])) {
 		$query = prepare("SELECT `username`, `mod`, `ip`, `board`, `time`, `text` FROM ``modlogs`` LEFT JOIN ``mods`` ON `mod` = ``mods``.`id` WHERE `text` LIKE :search ORDER BY `time` DESC LIMIT 50");
 		$query->bindValue(':search', '%' . $cip . '%');

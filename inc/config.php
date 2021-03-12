@@ -1554,6 +1554,12 @@
 	$config['mod']['create_notes'] = $config['mod']['view_notes'];
 	// Remote notes
 	$config['mod']['remove_notes'] = ADMIN;
+	// View telegrams
+	$config['mod']['view_telegrams'] = JANITOR;
+	// Create telegrams
+	$config['mod']['create_telegrams'] = $config['mod']['view_telegrams'];
+	// Remote telegrams
+	$config['mod']['remove_telegrams'] = ADMIN;
 	// Create a new board
 	$config['mod']['newboard'] = ADMIN;
 	// Manage existing boards (change title, etc)

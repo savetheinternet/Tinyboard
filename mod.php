@@ -1,4 +1,4 @@
-<?php
+6<?php
 
 /*
  *  Copyright (c) 2010-2014 Tinyboard Development Group
@@ -59,7 +59,8 @@ $pages = array(
 	
 	'/IP/([\w.:]+)'				=> 'secure_POST ip',		// view ip address
 	'/IP/([\w.:]+)/remove_note/(\d+)'	=> 'secure ip_remove_note',	// remove note from ip address
-	
+	'/IP/([\w.:-]+)/remove_telegram/(\d+)'	=> 'secure ip_remove_telegram',	// remove telegram from ip address
+
 	'/ban'					=> 'secure_POST ban',		// new ban
 	'/bans'					=> 'secure_POST bans',		// ban list
 	'/bans.json'				=> 'secure bans_json',		// ban list JSON
