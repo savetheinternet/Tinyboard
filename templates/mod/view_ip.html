@@ -112,7 +112,7 @@
 				{{ telegram.message }}
 			</td>
 			<td class="minimal">
-				{{ telegram.time|date(config.post_date) }}
+				{{ telegram.created_at|date(config.post_date) }}
 			</td>
 			<td>
 				{%  if telegram.seen %}
