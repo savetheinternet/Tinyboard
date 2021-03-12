@@ -1558,7 +1558,7 @@
 	$config['mod']['view_telegrams'] = JANITOR;
 	// Create telegrams
 	$config['mod']['create_telegrams'] = $config['mod']['view_telegrams'];
-	// Remote telegrams
+	// Remove telegrams
 	$config['mod']['remove_telegrams'] = ADMIN;
 	// Create a new board
 	$config['mod']['newboard'] = ADMIN;
