@@ -3027,7 +3027,7 @@ function uncloak_ip($ip) {
 }
 
 function cloak_mask($mask) {
-	list($net, $block) = explode('/', $mask, 2);
+	list($net, $block) = array_pad(explode('/', $mask, 2), 2, null);
 	$mask = cloak_ip($net);
 	if ($block) {
 		$mask .= '/'.$block;
@@ -3037,7 +3037,7 @@ function cloak_mask($mask) {
 }
 
 function uncloak_mask($mask) {
-	list($addr, $block) = explode('/', $mask, 2);
+	list($addr, $block) = array_pad(explode('/', $mask, 2), 2, null);
 	$mask = uncloak_ip($addr);
 	if ($mask === '#ERROR') {
 		$mask = $addr;
