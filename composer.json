@@ -10,7 +10,8 @@
         "lifo/ip": "^1.0",
         "gettext/gettext": "^1.0",
         "mrclay/minify": "^2.1.6",
-        "geoip/geoip": "^1.17"
+        "geoip/geoip": "^1.17",
+        "dapphp/securimage": "^4.0"
     },
     "autoload": {
         "classmap": ["inc/"],

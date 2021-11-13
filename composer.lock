@@ -4,8 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e78104dfc51d725ae15a17e7a70e7ca3",
+    "content-hash": "1e3723687369c82eea457d2dded76b74",
     "packages": [
+        {
+            "name": "dapphp/securimage",
+            "version": "4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dapphp/securimage.git",
+                "reference": "aabde76d839d75a238970661187f83312c2eeda7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dapphp/securimage/zipball/aabde76d839d75a238970661187f83312c2eeda7",
+                "reference": "aabde76d839d75a238970661187f83312c2eeda7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.4"
+            },
+            "suggest": {
+                "ext-pdo": "For database storage support",
+                "ext-pdo_mysql": "For MySQL database support",
+                "ext-pdo_sqlite": "For SQLite3 database support"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "securimage.php"
+                ],
+                "psr-4": {
+                    "Securimage\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Drew Phillips",
+                    "email": "drew@drew-phillips.com"
+                }
+            ],
+            "description": "PHP CAPTCHA Library",
+            "homepage": "https://www.phpcaptcha.org",
+            "keywords": [
+                "Forms",
+                "anti-spam",
+                "captcha",
+                "security"
+            ],
+            "support": {
+                "issues": "https://github.com/dapphp/securimage/issues",
+                "source": "https://github.com/dapphp/securimage/tree/4.0.2"
+            },
+            "abandoned": true,
+            "time": "2020-05-30T10:05:48+00:00"
+        },
         {
             "name": "geoip/geoip",
             "version": "v1.17",
@@ -212,16 +269,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
+            "version": "v1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "c6c942b1ac76c82448322025e084cadc56048b4e"
+                "reference": "46cd95797e9df938fdd2b03693b5fca5e64b01ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/c6c942b1ac76c82448322025e084cadc56048b4e",
-                "reference": "c6c942b1ac76c82448322025e084cadc56048b4e",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/46cd95797e9df938fdd2b03693b5fca5e64b01ce",
+                "reference": "46cd95797e9df938fdd2b03693b5fca5e64b01ce",
                 "shasum": ""
             },
             "require": {
@@ -233,7 +290,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.22-dev"
+                    "dev-main": "1.23-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -271,7 +328,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.23.0"
             },
             "funding": [
                 {
@@ -287,20 +344,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T16:49:33+00:00"
+            "time": "2021-02-19T12:13:01+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v1.44.2",
+            "version": "v1.44.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "138c493c5b8ee7cff3821f80b8896d371366b5fe"
+                "reference": "dd4353357c5a116322e92a00d16043a31881a81e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/138c493c5b8ee7cff3821f80b8896d371366b5fe",
-                "reference": "138c493c5b8ee7cff3821f80b8896d371366b5fe",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd4353357c5a116322e92a00d16043a31881a81e",
+                "reference": "dd4353357c5a116322e92a00d16043a31881a81e",
                 "shasum": ""
             },
             "require": {
@@ -353,7 +410,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v1.44.2"
+                "source": "https://github.com/twigphp/Twig/tree/v1.44.5"
             },
             "funding": [
                 {
@@ -365,7 +422,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-05T10:10:05+00:00"
+            "time": "2021-09-17T08:35:19+00:00"
         }
     ],
     "packages-dev": [],
