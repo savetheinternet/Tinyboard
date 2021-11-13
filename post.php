@@ -169,6 +169,11 @@ elseif (isset($_GET['Newsgroups'])) {
 	error("NNTPChan: NNTPChan support is disabled");
 }
 
+session_start();
+if (!isset($_POST['captcha_cookie']) && isset($_SESSION['captcha_cookie'])) {
+	$_POST['captcha_cookie'] = $_SESSION['captcha_cookie'];
+}
+
 if (isset($_POST['delete'])) {
 	// Delete
 	
@@ -298,12 +303,14 @@ if (isset($_POST['delete'])) {
 	}
 
 	if ($config['report_captcha']) {
-		$resp = file_get_contents($config['captcha']['provider_check'] . "?" . http_build_query([
+		$ch = curl_init($config['domain'].'/'.$config['captcha']['provider_check'] . "?" . http_build_query([
 			'mode' => 'check',
 			'text' => $_POST['captcha_text'],
 			'extra' => $config['captcha']['extra'],
 			'cookie' => $_POST['captcha_cookie']
 		]));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$resp = curl_exec($ch);
 
 		if ($resp !== '1') {
                         error($config['error']['captcha']);
@@ -402,20 +409,23 @@ if (isset($_POST['delete'])) {
 			if (!$resp['success']) {
 				error($config['error']['captcha']);
 			}
+		}
 		// Same, but now with our custom captcha provider
  		if (($config['captcha']['enabled']) || (($post['op']) && ($config['new_thread_capt'])) ) {
-		$resp = file_get_contents($config['captcha']['provider_check'] . "?" . http_build_query([
+		$ch = curl_init($config['domain'].'/'.$config['captcha']['provider_check'] . "?" . http_build_query([
 			'mode' => 'check',
 			'text' => $_POST['captcha_text'],
 			'extra' => $config['captcha']['extra'],
 			'cookie' => $_POST['captcha_cookie']
 		]));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$resp = curl_exec($ch);
+
 		if ($resp !== '1') {
                         error($config['error']['captcha'] .
 			'<script>if (actually_load_captcha !== undefined) actually_load_captcha("'.$config['captcha']['provider_get'].'", "'.$config['captcha']['extra'].'");</script>');
 		}
 	}
-}
 
 		if (!(($post['op'] && $_POST['post'] == $config['button_newtopic']) ||
 			(!$post['op'] && $_POST['post'] == $config['button_reply'])))
