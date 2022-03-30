@@ -1764,6 +1764,21 @@ function buildIndex($global_api = "yes") {
 			if (!$content)
 				break;
 
+			// Tries to avoid rebuilding if the body is the same as the one in cache.
+			if ($config['cache']['enabled']) {
+				$contentHash = md5(json_encode($content['body']));
+				$contentHashKey = '_index_hashed_'. $board['uri'] . '_' . $page;
+				$cachedHash = cache::get($contentHashKey);
+				if ($cachedHash == $contentHash){
+					if ($config['api']['enabled']) {
+						// this is needed for the thread.json and catalog.json rebuilding below, which includes all pages.
+						$catalog[$page-1] = $content['threads'];
+					}
+					continue;
+				}
+				cache::set($contentHashKey, $contentHash, 3600);
+			}
+
 			// json api
 			if ($config['api']['enabled']) {
 				$threads = $content['threads'];
