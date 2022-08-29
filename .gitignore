@@ -12,7 +12,7 @@
 !/inc/config.php
 
 # instance-config
-/inc/instance-config.php
+/inc/secrets.php
 
 # .installed
 /.installed

@@ -869,16 +869,17 @@ if ($step == 0) {
 		),
 		array(
 			'category' => 'File permissions',
-			'name' => getcwd() . '/inc/instance-config.php',
-			'result' => is_writable('inc/instance-config.php'),
+			'name' => getcwd() . '/inc/secrets.php',
+			'result' => is_writable('inc/secrets.php'),
 			'required' => false,
-			'message' => 'vichan does not have permission to make changes to <code>inc/instance-config.php</code>. To complete the installation, you will be asked to manually copy and paste code into the file instead.'
+			'message' => 'vichan does not have permission to make changes to <code>inc/secrets.php</code>. To complete the installation, you will be asked to manually copy and paste code into the file instead.'
 		),
 		array(
 			'category' => 'Misc',
-			'name' => 'Caching available (APC, XCache, Memcached or Redis)',
-			'result' => extension_loaded('apc') || extension_loaded('xcache')
-				|| extension_loaded('memcached') || extension_loaded('redis'),
+			'name' => 'Caching available (APC(u), XCache, Memcached or Redis)',
+			'result' => extension_loaded('apcu') || extension_loaded('apc') ||
+						extension_loaded('xcache') || extension_loaded('memcached') ||
+						extension_loaded('redis'),
 			'required' => false,
 			'message' => 'You will not be able to enable the additional caching system, designed to minimize SQL queries and significantly improve performance. <a href="http://php.net/manual/en/book.apc.php">APC</a> is the recommended method of caching, but <a href="http://xcache.lighttpd.net/">XCache</a>, <a href="http://www.php.net/manual/en/intro.memcached.php">Memcached</a> and <a href="http://pecl.php.net/package/redis">Redis</a> are also supported.'
 		),
@@ -952,17 +953,17 @@ if ($step == 0) {
 	$instance_config .= $more;
 	$instance_config .= "\n";
 	
-	if (@file_put_contents('inc/instance-config.php', $instance_config)) {
+	if (@file_put_contents('inc/secrets.php', $instance_config)) {
 		// flushes opcache if php >= 5.5.0 or opcache is installed via PECL
 		if (function_exists('opcache_invalidate')) {
-			opcache_invalidate('inc/instance-config.php');
+			opcache_invalidate('inc/secrets.php');
 		}
 		header('Location: ?step=4', true, $config['redirect_http']);
 	} else {
 		$page['title'] = 'Manual installation required';
 		$page['body'] = '
-			<p>I couldn\'t write to <strong>inc/instance-config.php</strong> with the new configuration, probably due to a permissions error.</p>
-			<p>Please complete the installation manually by copying and pasting the following code into the contents of <strong>inc/instance-config.php</strong>:</p>
+			<p>I couldn\'t write to <strong>inc/secrets.php</strong> with the new configuration, probably due to a permissions error.</p>
+			<p>Please complete the installation manually by copying and pasting the following code into the contents of <strong>inc/secrets.php</strong>:</p>
 			<textarea style="width:700px;height:370px;margin:auto;display:block;background:white;color:black">' . htmlentities($instance_config) . '</textarea>
 			<p style="text-align:center">
 				<a href="?step=4">Once complete, click here to complete installation.</a>
