@@ -44,6 +44,9 @@ class Cache {
 			case 'apc':
 				$data = apc_fetch($key);
 				break;
+			case 'apcu':
+				$data = apcu_fetch($key);
+				break;
 			case 'xcache':
 				$data = xcache_get($key);
 				break;
@@ -95,6 +98,9 @@ class Cache {
 			case 'apc':
 				apc_store($key, $value, $expires);
 				break;
+			case 'apcu':
+				apcu_store($key, $value, $expires);
+				break;
 			case 'xcache':
 				xcache_set($key, $value, $expires);
 				break;
@@ -130,6 +136,9 @@ class Cache {
 			case 'apc':
 				apc_delete($key);
 				break;
+			case 'apcu':
+				apcu_delete($key);
+				break;
 			case 'xcache':
 				xcache_unset($key);
 				break;
@@ -156,6 +165,8 @@ class Cache {
 				return self::$cache->flush();
 			case 'apc':
 				return apc_clear_cache('user');
+			case 'apcu':
+				return apcu_clear_cache('user');
 			case 'php':
 				self::$cache = array();
 				break;

@@ -39,12 +39,13 @@ Requirements
 5.	[PHP PDO](http://www.php.net/manual/en/intro.pdo.php)
 6.	A Unix-like OS, preferrably FreeBSD or Linux
 
-We try to make sure vichan is compatible with all major web servers. vichan does not include an Apache ```.htaccess``` file nor does it need one.
+We try to make sure vichan is compatible with all major web servers. vichan does not include an Apache `.htaccess` file nor does it need one.
 
 ### Recommended
 1.	MySQL/MariaDB server >= 5.5.3
 2.	ImageMagick (command-line ImageMagick or GraphicsMagick preferred).
-3.	[APC (Alternative PHP Cache)](http://php.net/manual/en/book.apc.php),
+3.	~~[APC (Alternative PHP Cache)](http://php.net/manual/en/book.apc.php)~~,
+	[APCu (Alternative PHP Cache)](http://php.net/manual/en/book.apcu.php),
 	[XCache](http://xcache.lighttpd.net/),
 	[Memcached](http://www.php.net/manual/en/intro.memcached.php) or
 	[Redis](https://redis.io/docs/about/)
