@@ -91,7 +91,7 @@ Demo
 --------
 Demo with the most updated version of [Vichan](https://vichan.27chan.org).
 
-1. PHP 7.2
+1. PHP 8.1
 2. MySQL 5.7
 3. KeyDB 6.2.1 (Redis)
 4. NGINX 1.14.0
