@@ -105,7 +105,7 @@ function error($message, $priority = true, $debug_stuff = false) {
 	}
 
 	$pw = $config['db']['password'];
-	$debug_callback = function(&$item) use (&$debug_callback, $pw) {
+	$debug_callback = function($item) use (&$debug_callback, $pw) {
 		if (is_array($item)) {
 			$item = array_filter($item, $debug_callback);
 		}
@@ -125,7 +125,7 @@ function error($message, $priority = true, $debug_stuff = false) {
 			'message' => $message,
 			'mod' => $mod,
 			'board' => isset($board) ? $board : false,
-			'debug' => is_array($debug_stuff) ? str_replace("\n", '&#10;', utf8tohtml(print_r($debug_stuff, true))) : utf8tohtml($debug_stuff)
+			'debug' => $config['debug'] ? (is_array($debug_stuff) ? str_replace("\n", '&#10;', utf8tohtml(print_r($debug_stuff, true))) : utf8tohtml($debug_stuff)) : null
 		))
 	)));
 }
