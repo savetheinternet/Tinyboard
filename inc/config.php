@@ -1159,6 +1159,8 @@
 	$config['error']['mime_exploit']	= _('MIME type detection XSS exploit (IE) detected; post discarded.');
 	$config['error']['invalid_embed']	= _('Couldn\'t make sense of the URL of the video you tried to embed.');
 	$config['error']['captcha']		= _('You seem to have mistyped the verification.');
+	$config['error']['flag_undefined']	= _('The flag %s is undefined, your PHP version is too old!');
+	$config['error']['flag_wrongtype']	= _('defined_flags_accumulate(): The flag %s is of the wrong type!');
 
 
 	// Moderator errors

@@ -2286,8 +2286,25 @@ function escape_markup_modifiers($string) {
 	return preg_replace('@<(tinyboard) ([\w\s]+)>@mi', '<$1 escape $2>', $string);
 }
 
+function defined_flags_accumulate($desired_flags) {
+	$output_flags = 0x0;
+	foreach ($desired_flags as $flagname) {
+		if (defined($flagname)) {
+			$flag = constant($flagname);
+			if (gettype($flag) != 'integer')
+				error(sprintf($config['error']['flag_wrongtype'], $flagname));
+			$output_flags |= $flag;
+		} else {
+			if ($config['deprecation_errors'])
+				error(sprintf($config['error']['flag_undefined'], $flagname));
+		}
+	}
+	return $output_flags;
+}
+
 function utf8tohtml($utf8) {
-	return htmlspecialchars($utf8, ENT_NOQUOTES, 'UTF-8');
+	$flags = defined_flags_accumulate(['ENT_QUOTES', 'ENT_SUBSTITUTE', 'ENT_DISALLOWED']);
+	return htmlspecialchars($utf8, $flags, 'UTF-8');
 }
 
 function ordutf8($string, &$offset) {
