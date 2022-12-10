@@ -2444,7 +2444,7 @@ function mod_config($board_config = false) {
 	if (!hasPermission($config['mod']['edit_config'], $board_config))
 		error($config['error']['noaccess']);
 	
-	$config_file = $board_config ? $board['dir'] . 'config.php' : 'inc/instance-config.php';
+	$config_file = $board_config ? $board['dir'] . 'config.php' : 'inc/secrets.php';
 	
 	if ($config['mod']['config_editor_php']) {
 		$readonly = !(is_file($config_file) ? is_writable($config_file) : is_writable(dirname($config_file)));
