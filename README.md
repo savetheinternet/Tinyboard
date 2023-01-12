@@ -5,6 +5,14 @@ vichan - A lightweight and full featured PHP imageboard.
 
 As of 29 August 2022, though, it supports PHP8.1.
 
+##### Unapplied patches
+
+Some patches remain unapplied due to their uncertain maintenance burden. You may wish to apply them:
+
+<ul dir="auto">
+<li><a class="commit-link" href="https://github.com/vichan-devel/vichan/commit/5d31f3bab70de7f983fd56aa18817ede38d1d4f3"><tt>5d31f3b</tt></a> (<span class="reference"><a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="1530457642" data-permission-text="Title is private" data-url="https://github.com/vichan-devel/vichan/issues/527" data-hovercard-type="pull_request" data-hovercard-url="/vichan-devel/vichan/pull/527/hovercard" href="https://github.com/vichan-devel/vichan/pull/527">Allow open parentheses before cite: "(&gt;&gt;1"<span class="issue-shorthand">&nbsp;#527</span></a></span>) by <a class="user-mention notranslate" href="https://github.com/discomrade">@discomrade</a></li>
+</ul>
+
 About
 ------------
 vichan is a free light-weight, fast, highly configurable and user-friendly
