@@ -3,11 +3,11 @@ vichan - A lightweight and full featured PHP imageboard.
 
 **Vichan was recently taken on by new maintainers. Please stay tuned for updates. The new maintainers at this time are basedgentoo, along with Kuz and  Angeleno of KolymaNET**
 
-**Please do not contact Fredrick Brennan in regards to vichan issues. You can contact me at [e-mail pending] or use the issue tracker and I will help you with any issues you experience when I have time.**
+**Please do not contact Fredrick Brennan in regards to vichan issues.**
 
-**We have a community support Discord that is currently being setup. You can join [here.](https://discord.gg/8dmm7KA3jk) I plan on bridging this to Matrix and IRC.**
+**A community support board is coming soon. In the meantime you can join our IRC support channel. Connection details are below!**
 
-As of 29 August 2022, though, it supports PHP8.1.
+As of 29 August 2022 it supports PHP8.1.
 
 ##### Unapplied patches
 
@@ -24,11 +24,7 @@ About
 vichan is a free light-weight, fast, highly configurable and user-friendly
 imageboard software package. It is written in PHP and has few dependencies.
 
-[SECURITY E-MAIL PENDING: Will be in place (very) soon]	
-While there is currently no active development besides fixing security problems, we don't exclude the possibility to refactor the code in order to meet today's standards and continue our work from the point where [@czaks](https://github.com/czaks) retired in 2017.
-Before this milestone is achieved though, we strongly urge you to consider other imageboard packages. It is the opinion of the vichan development team that no new vichan imageboards should be deployed at the moment, and other imageboard packages used instead.
-
-For support, feel free to join our [IRC channel](https://webchat.6an.org/?channels=vichan-dev) at irc.6an.org.
+For support, feel free to join our [IRC channel](http://irc.kolyma.net/#/connect?channels=vichan) at irc.kolyma.net.
 
 Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
 
