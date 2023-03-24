@@ -35,7 +35,7 @@ a great imageboard package, actively building on it and adding a lot of features
 improvements.
 
 ### Maintainer timeline
-1. Collaboration of [@kuz-sysadmin](https://github.com/kuz-sysadmin), [@RealAngeleno](https://github.com/RealAngeleno) and [@basedgentoo](https://github.com/basedgentoo) (Note: basedgentoo is independent and not affiliated with KolymaNET) (2023-present)
+1. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - )
 2. [@h00j](https://github.com/h00j) (2021 - ???)
 3. [@ctrlcctrlv](https://github.com/ctrlcctrlv) (2017 - 2021)
 4. [@czaks](https://github.com/czaks) (2014 - 2017) (The author of vichan fork)
