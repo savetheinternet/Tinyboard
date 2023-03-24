@@ -24,7 +24,7 @@ About
 vichan is a free light-weight, fast, highly configurable and user-friendly
 imageboard software package. It is written in PHP and has few dependencies.
 
-For support, feel free to join our [IRC channel](http://irc.kolyma.net/#/connect?channels=vichan) at irc.kolyma.net.
+For support, feel free to join our [IRC channel](https://chat.kolyma.net/#/connect?channels=vichan) at irc.kolyma.net.
 
 Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
 
