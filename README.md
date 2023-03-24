@@ -1,7 +1,9 @@
 vichan - A lightweight and full featured PHP imageboard.
 ========================================================
 
-**Vichan has next to no active development<!--, however you can still pay for support. Basic support costs $40/hr, and is only payable in BTC. New features depend on what you want. Email COPYPASTE &lt;AT&gt; KITTENS &lt;DOT&gt; PH if you're interested&mdash;Vichan forks such as OpenIB are included in this offer-->.** **You should not even try to use it if you don't know a lot about configuring web servers and how to code in PHP, or are unwilling to learn (somewhere else).**
+**Vichan has next to no active development**
+
+**Please do not contact Fredrick Brennan in regards to vichan issues. You can contact me at [e-mail pending] or use the issue tracker and I will help you with any issues you experience when I have time. I will also be setting up a Discord community which will be bridged with Matrix & IRC very soon, where users of vichan can discuss the software, navigate issues, and get help. Thank you for being patient while I begin as a maintainer**
 
 As of 29 August 2022, though, it supports PHP8.1.
 
@@ -20,8 +22,7 @@ About
 vichan is a free light-weight, fast, highly configurable and user-friendly
 imageboard software package. It is written in PHP and has few dependencies.
 
-*Security problems can be reported to the development team: DEVELOPMENT \<AT\> VICHAN \<DOT\> NET.*
-	
+[SECURITY E-MAIL PENDING: Will be in place (very) soon]	
 While there is currently no active development besides fixing security problems, we don't exclude the possibility to refactor the code in order to meet today's standards and continue our work from the point where [@czaks](https://github.com/czaks) retired in 2017.
 Before this milestone is achieved though, we strongly urge you to consider other imageboard packages. It is the opinion of the vichan development team that no new vichan imageboards should be deployed at the moment, and other imageboard packages used instead.
 
