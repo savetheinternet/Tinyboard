@@ -3,7 +3,9 @@ vichan - A lightweight and full featured PHP imageboard.
 
 **Vichan has next to no active development**
 
-**Please do not contact Fredrick Brennan in regards to vichan issues. You can contact me at [e-mail pending] or use the issue tracker and I will help you with any issues you experience when I have time. I will also be setting up a Discord community which will be bridged with Matrix & IRC very soon, where users of vichan can discuss the software, navigate issues, and get help. Thank you for being patient while I begin as a maintainer.**
+**Please do not contact Fredrick Brennan in regards to vichan issues. You can contact me at [e-mail pending] or use the issue tracker and I will help you with any issues you experience when I have time.**
+
+**We have a community support Discord that is currently being setup. You can join [here.](https://discord.gg/8dmm7KA3jk) I plan on bridging this to Matrix and IRC.**
 
 As of 29 August 2022, though, it supports PHP8.1.
 
