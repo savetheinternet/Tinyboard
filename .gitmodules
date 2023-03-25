@@ -7,3 +7,6 @@
 	path = inc/lib/parsedown
 	url = https://github.com/vichan-devel/parsedown.git
 	branch = master
+[submodule "js/twemoji"]
+	path = js/twemoji
+	url = https://github.com/basedgentoo/twemoji
