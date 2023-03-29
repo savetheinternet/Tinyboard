@@ -92,7 +92,6 @@ class Tinyboard extends Twig\Extension\AbstractExtension
 			new Twig\TwigFilter('hasPermission', 'twig_hasPermission_filter'),
 			new Twig\TwigFilter('date', 'twig_date_filter'),
 			new Twig\TwigFilter('poster_id', 'poster_id'),
-			new Twig\TwigFilter('remove_whitespace', 'twig_remove_whitespace_filter'),
 			new Twig\TwigFilter('count', 'count'),
 			new Twig\TwigFilter('ago', 'ago'),
 			new Twig\TwigFilter('until', 'until'),
@@ -142,10 +141,6 @@ function twig_timezone_function() {
 function twig_push_filter($array, $value) {
 	array_push($array, $value);
 	return $array;
-}
-
-function twig_remove_whitespace_filter($data) {
-	return preg_replace('/[\t\r\n]/', '', $data);
 }
 
 function twig_date_filter($date, $format) {
