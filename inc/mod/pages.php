@@ -2268,7 +2268,7 @@ function mod_rebuild() {
 			
 			$log[] = 'Clearing template cache';
 			load_twig();
-			$twig->clearCacheFiles();
+			$twig->getCache()->clear();
 		}
 		
 		if (isset($_POST['rebuild_themes'])) {

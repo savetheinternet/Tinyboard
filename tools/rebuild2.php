@@ -44,7 +44,7 @@ echo "== Tinyboard + vichan {$config['version']} ==\n";
 if ($options['cache']) {
 	echo "Clearing template cache...\n";
 	load_twig();
-	$twig->clearCacheFiles();
+	$twig->getCache()->clear();
 }
 
 if($options['themes']) {

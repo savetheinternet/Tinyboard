@@ -6,10 +6,12 @@
 		{% if board %}
 			<li><a href="?/config">Edit site-wide config</a></li>
 		{% endif %}
-		{% for _board in boards if _board.uri != board %}
-			<li>
-				<a href="?/config/{{ _board.uri }}">Edit config for {{ config.board_abbreviation|sprintf(_board.uri) }}</a>
-			</li>
+		{% for _board in boards %}
+			{% if _board.uri != board %}
+				<li>
+					<a href="?/config/{{ _board.uri }}">Edit config for {{ config.board_abbreviation|sprintf(_board.uri) }}</a>
+				</li>
+			{% endif %}
 		{% endfor %}
 	</ul>
 {% endif %}
@@ -22,54 +24,56 @@
 			<th class="minimal">{% trans 'Type' %}</th>
 			<th>{% trans 'Description' %}</th>
 		</tr>
-		{% for var in conf if var.type != 'array' %}
-			{% if var.name|length == 1 %}
-				{% set name = 'cf_' ~ var.name %}
-			{% else %}
-				{% set name = 'cf_' ~ var.name|join('/') %}
-			{% endif %}
-			
-			<tr>
-				<th class="minimal">
-					{% if var.name|length == 1 %}
-						{{ var.name }}
-					{% else %}
-						{{ var.name|join(' &rarr; ') }}
-					{% endif %}
-				</th>
+		{% for var in conf %}
+			{% if var.type != 'array' %}
+				{% if var.name|length == 1 %}
+					{% set name = 'cf_' ~ var.name %}
+				{% else %}
+					{% set name = 'cf_' ~ var.name|join('/') %}
+				{% endif %}
 				
-				<td>
-					{% if var.type == 'string' %}
-						<input name="{{ name }}" type="text" value="{{ var.value|e }}">
-					{% elseif var.permissions %}
-						<select name="{{ name }}">
-							{% for group_value, group_name in config.mod.groups %}
-								<option value="{{ group_value }}"{% if var.value == group_value %} selected{% endif %}>
-									{{ group_name }}
-								</option>
-							{% endfor %}
-						</select>
-					{% elseif var.type == 'integer' %}
-						<input name="{{ name }}" type="number" value="{{ var.value|e }}">
-					{% elseif var.type == 'boolean' %}
-						<input name="{{ name }}" type="checkbox" {% if var.value %}checked{% endif %}>
-					{% else %}
-						?
-					{% endif %}
+				<tr>
+					<th class="minimal">
+						{% if var.name|length == 1 %}
+							{{ var.name }}
+						{% else %}
+							{{ var.name|join(' &rarr; ') }}
+						{% endif %}
+					</th>
 					
-					{% if var.type == 'integer' or var.type == 'boolean' %}
-					 <small>Default: <code>{{ var.default }}</code></small>
-					{% endif %}
-				</td>
-				
-				<td class="minimal">
-					{{ var.type|e }}
-				</td>
-				
-				<td style="word-wrap:break-word;width:50%">
-					{{ var.comment|join(' ') }}
-				</td>
-			</tr>
+					<td>
+						{% if var.type == 'string' %}
+							<input name="{{ name }}" type="text" value="{{ var.value|e }}">
+						{% elseif var.permissions %}
+							<select name="{{ name }}">
+								{% for group_value, group_name in config.mod.groups %}
+									<option value="{{ group_value }}"{% if var.value == group_value %} selected{% endif %}>
+										{{ group_name }}
+									</option>
+								{% endfor %}
+							</select>
+						{% elseif var.type == 'integer' %}
+							<input name="{{ name }}" type="number" value="{{ var.value|e }}">
+						{% elseif var.type == 'boolean' %}
+							<input name="{{ name }}" type="checkbox" {% if var.value %}checked{% endif %}>
+						{% else %}
+							?
+						{% endif %}
+						
+						{% if var.type == 'integer' or var.type == 'boolean' %}
+						<small>Default: <code>{{ var.default }}</code></small>
+						{% endif %}
+					</td>
+					
+					<td class="minimal">
+						{{ var.type|e }}
+					</td>
+					
+					<td style="word-wrap:break-word;width:50%">
+						{{ var.comment|join(' ') }}
+					</td>
+				</tr>
+			{% endif %}
 		{% endfor %}
 	</table>
 	

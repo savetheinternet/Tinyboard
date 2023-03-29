@@ -6,9 +6,10 @@
         "ext-mbstring": ">=5.4",
         "ext-gd": ">=5.4",
         "ext-pdo": ">=5.4",
-        "twig/twig": "^1.44.2",
+        "twig/twig": "^2.9",
+        "phpmyadmin/twig-i18n-extension": "^4.0",
         "lifo/ip": "^1.0",
-        "gettext/gettext": "^1.0",
+        "gettext/gettext": "^5.5",
         "mrclay/minify": "^2.1.6",
         "geoip/geoip": "^1.17",
         "dapphp/securimage": "^4.0"
