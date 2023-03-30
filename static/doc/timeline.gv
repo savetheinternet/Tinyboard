@@ -1,0 +1,87 @@
+digraph {
+	graph [overlap=false];
+	subgraph main {
+		node [fontname="sans-serif",
+			shape=box,
+			style="rounded,filled"
+		];
+		tb	[label=<Tinyboard<BR/><B><FONT POINT-SIZE="9">(@savetheinternet)</FONT></B><BR/>2010–2014>];
+		ponychan	[label=<ponychan.net<BR/><B><FONT POINT-SIZE="9">(???)</FONT></B><BR/>2012–2015 (as MLPchan)<BR/>2015–>];
+		tb -> ponychan;
+		fourchon	[label=<proprietary 4chon.net fork<BR/><B><FONT POINT-SIZE="9">(@savetheinternet)</FONT></B><BR/>2010–2014>];
+		tb -> fourchon;
+		vichan	[color=gold,
+			label=<vichan<BR/><B><FONT POINT-SIZE="9">(@czaks)</FONT></B><BR/>2012–>];
+		tb -> vichan;
+		vichannet	[label=<Production vichan.net software<BR/><B><FONT POINT-SIZE="9">(Polish-language imageboard)<BR/>(@czaks)</FONT></B><BR/>2012–>];
+		tb -> vichannet;
+		fourchon -> tb;
+		vichan -> tb;
+		vichan -> vichannet;
+		leftypol	[label=<leftypol.org<BR/><B>(@discomrade <I>et al.</I>)</B><BR/>≈2016–>];
+		vichan -> leftypol;
+		inf	[label=<infinity<BR/><B><FONT POINT-SIZE="9">(@copypaste /<BR/>★コピペ)</FONT></B><BR/>2013–2017>];
+		vichan -> inf;
+		infco	[label=<Production 8chan.co fork<BR/><B><FONT POINT-SIZE="9">(@copypaste /<BR/>★コピペ)</FONT></B><BR/>2013–2016>];
+		vichan -> infco;
+		lc	[label=<lainchan<BR/>2016–>];
+		vichan -> lc;
+		npf	[label=<NPFchan<BR/>2017–2019>];
+		vichan -> npf;
+		kuz	[label=<KolymaNET<BR/>d/b/a soyjak.party<BR/>~2020–>];
+		vichan -> kuz;
+		vichannet -> vichan:nw;
+		leftypol -> vichan	[style=dashed];
+		inf -> tb	[style=dotted];
+		inf -> vichan;
+		infpl	[label=<Production 8ch.pl fork<BR/><B><FONT POINT-SIZE="9">(@czaks)</FONT></B><BR/>2014–2016>];
+		inf -> infpl;
+		oib	[label=<OpenIB<BR/>~2017–2019>];
+		inf -> oib;
+		infco -> vichan	[rank=min];
+		infco -> inf;
+		infpl -> vichan	[style=dotted];
+		infpl -> inf;
+		e8ch	[label=<Proprietary 8chan software<BR/>~2017–2019>];
+		oib -> e8ch;
+		e8kun	[label=<Proprietary 8kun software<BR/>~2019–>];
+		e8ch -> e8kun;
+		kuz -> vichan;
+	}
+	subgraph B {
+		subgraph title {
+			TITLE	[fontname="sans-serif",
+				fontsize=16,
+				label=<<FONT POINT-SIZE="24"><FONT FACE="monospace">vichan</FONT>&nbsp;Timeline</FONT><BR/>…as of 20230329>,
+				shape=box,
+				width=10];
+		}
+		subgraph sig {
+			graph [rank=sink];
+			SIG	[label=<<FONT FACE="serif">by kopipe</FONT>>,
+				labelloc=b,
+				shape=none];
+		}
+		tb;
+		vichan;
+		tb -> vichan	[arrowhead=0,
+			penwidth=0,
+			weight=max];
+		infco;
+		vichan -> infco	[arrowhead=0,
+			penwidth=0,
+			weight=max];
+		kuz;
+		infco -> kuz	[arrowhead=0,
+			penwidth=0,
+			weight=max];
+		kuz -> SIG	[arrowhead=0,
+			penwidth=0,
+			weight=max];
+		TITLE -> tb	[arrowhead=0,
+			penwidth=0,
+			weight=max];
+		TITLE -> SIG	[arrowhead=0,
+			penwidth=0];
+	}
+}

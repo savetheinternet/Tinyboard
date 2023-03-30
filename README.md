@@ -34,6 +34,8 @@ vichan is a fork of (now defunc'd) [Tinyboard](http://github.com/savetheinternet
 a great imageboard package, actively building on it and adding a lot of features and other
 improvements.
 
+![](static/doc/timeline.svg)
+
 ### Maintainer timeline
 1. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - )
 2. [@h00j](https://github.com/h00j) (2021 - ???)
