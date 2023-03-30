@@ -3,12 +3,15 @@ digraph {
          overlap=false];
   fontname="sans-serif";
   subgraph main {
+    edge [fontname="sans-serif", fontsize=8];
     node [fontname="sans-serif",
           shape=box,
           style="rounded,filled"
     ];
-    fourchon  [label=<Proprietary 4chon.net fork<BR/><B><FONT POINT-SIZE="9">(@savetheinternet)</FONT></B><BR/>2010–2014>];
-    fourchon -> tb;
+    fourchan [label=<Proprietary 4chan.org software<BR/><B><FONT POINT-SIZE="9">(@moot&nbsp;<I>et al.</I>)</FONT></B><BR/>>];
+    fourchan -> fourchon [xlabel=<inspired&nbsp;>, style=dotted, penwidth=2, color=darkred];
+    fourchon  [label=<Proprietary 4chon.net fork<BR/><B><FONT POINT-SIZE="9">(@savetheinternet)</FONT></B><BR/>2009–2014>];
+    fourchon -> tb [penwidth=2, color=darkred];
     tb  [label=<Tinyboard<BR/><B><FONT POINT-SIZE="9">(@savetheinternet)</FONT></B><BR/>2010–2014>];
     tb -> fourchon;
     ponychan  [label=<Proprietary ponychan.net fork<BR/><B><FONT POINT-SIZE="9">(???)</FONT></B><BR/>2012–2015 (as MLPchan)<BR/>2015–>];
@@ -26,9 +29,8 @@ digraph {
     wizana -> wizchan;
     vichan  [color=gold,
       label=<vichan<BR/><B><FONT POINT-SIZE="9">(@czaks)</FONT></B><BR/>2012–>];
-    tb -> vichan;
     vichannet  [label=<Production vichan.net software<BR/><B><FONT POINT-SIZE="9">(Polish-language imageboard)<BR/>(@czaks)</FONT></B><BR/>2012–>];
-    tb -> vichannet;
+    tb -> vichannet [penwidth=2, color=darkred];
     vichan -> tb;
     vichan -> vichannet;
     leftypol  [label=<leftypol.org<BR/><B><FONT POINT-SIZE="9">(@discomrade&nbsp;<I>et al.</I>)</FONT></B><BR/>≈2016–>];
@@ -43,7 +45,7 @@ digraph {
     vichan -> npf;
     kuz  [label=<Proprietary KolymaNET fork<BR/><B><FONT POINT-SIZE="9">(@kuz)</FONT></B><BR/>d/b/a soyjak.party<BR/>≈2020–>];
     vichan -> kuz;
-    vichannet -> vichan:nw;
+    vichannet -> vichan [color=darkred, penwidth=2];
     leftypol -> vichan  [style=dashed];
     inf -> tb  [style=dotted];
     inf -> vichan;
@@ -76,9 +78,9 @@ digraph {
         shape=none];
     }
     {
-      TITLE -> fourchon -> tb -> vichan -> infco -> kuz -> SIG [arrowhead=0,
-                                                                penwidth=0,
-                                                                weight=max];
+      TITLE -> fourchan -> fourchon -> tb -> vichan -> infco -> kuz -> SIG [arrowhead=0,
+                                                                            penwidth=0,
+                                                                            weight=max];
     }
   }
 }
