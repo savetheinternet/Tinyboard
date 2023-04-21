@@ -61,6 +61,7 @@ function mod_login($redirect = false) {
 }
 
 function mod_confirm($request) {
+	global $config;
 	mod_page(_('Confirm action'), $config['file_mod_confim'], array('request' => $request, 'token' => make_secure_link_token($request)));
 }
 
