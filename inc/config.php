@@ -485,8 +485,11 @@
 
 	// Strip superfluous new lines at the end of a post.
 	$config['strip_superfluous_returns'] = true;
-	// Strip combining characters from Unicode strings (eg. "Zalgo").
+	/// Strip combining characters from Unicode strings (eg. "Zalgo").  This will impact some non-English languages.
 	$config['strip_combining_chars'] = true;
+    // Maximum number of combining characters in a row allowed in Unicode strings so that they can still be used in moderation.
+    // Requires $config['strip_combining_chars'] = true;
+    $config['max_combining_chars'] = 3;
 
 	// Maximum post body length.
 	$config['max_body'] = 1800;

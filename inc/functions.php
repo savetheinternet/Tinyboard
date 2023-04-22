@@ -2330,19 +2330,11 @@ function ordutf8($string, &$offset) {
 	return $code;
 }
 
+// Limit Non_Spacing_Mark and Enclosing_Mark characters
 function strip_combining_chars($str) {
-	$chars = preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY);
-	$str = '';
-	foreach ($chars as $char) {
-		$o = 0;
-		$ord = ordutf8($char, $o);
-
-		if ( ($ord >= 768 && $ord <= 879) || ($ord >= 1536 && $ord <= 1791) || ($ord >= 3655 && $ord <= 3659) || ($ord >= 7616 && $ord <= 7679) || ($ord >= 8400 && $ord <= 8447) || ($ord >= 65056 && $ord <= 65071))
-			continue;
-
-		$str .= $char;
-	}
-	return $str;
+	global $config;
+	$limit = strval($config['max_combining_chars']+1);
+	return preg_replace('/(\p{Me}|\p{Mn}){'.$limit.',}/u','', $str);
 }
 
 function buildThread($id, $return = false, $mod = false) {
