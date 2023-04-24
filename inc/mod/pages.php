@@ -2377,8 +2377,7 @@ function mod_reports() {
 			'config' => $config,
 			'mod' => $mod,
 			'token' => make_secure_link_token('reports/' . $report['id'] . '/dismiss'),
-			'token_all' => make_secure_link_token('reports/' . $report['id'] . '/dismiss&all'),
-			'token_post' => make_secure_link_token('reports/'. $report['id'] . '/dismiss&post'),
+			'token_all' => make_secure_link_token('reports/' . $report['id'] . '/dismissall')
 		));
 		
 		// Bug fix for https://github.com/savetheinternet/Tinyboard/issues/21
@@ -2403,7 +2402,7 @@ function mod_reports() {
 	mod_page(sprintf('%s (%d)', _('Report queue'), $count), $config['file_mod_reports'], array('reports' => $body, 'count' => $count));
 }
 
-function mod_report_dismiss($id, $action) {
+function mod_report_dismiss($id, $all = false) {
 	global $config;
 	
 	$query = prepare("SELECT `post`, `board`, `ip` FROM ``reports`` WHERE `id` = :id");
@@ -2416,34 +2415,26 @@ function mod_report_dismiss($id, $action) {
 	} else
 		error($config['error']['404']);
 	
-	switch($action){
-		case '&post':
-			if (!hasPermission($config['mod']['report_dismiss_post'], $board))
-				error($config['error']['noaccess']);
-			
-			$query = prepare("DELETE FROM ``reports`` WHERE `post` = :post");
-			$query->bindValue(':post', $post);
-			modLog("Dismissed all reports for post #{$id}", $board);
-		case '&all':
-			if (!hasPermission($config['mod']['report_dismiss_ip'], $board))
-				error($config['error']['noaccess']);
-
-			$query = prepare("DELETE FROM ``reports`` WHERE `ip` = :ip");
-			$query->bindValue(':ip', $ip);
-			$cip = cloak_ip($ip);
-			modLog("Dismissed all reports by <a href=\"?/IP/$cip\">$cip</a>");
-			break;
-		case '':
-		default:
-			if (!hasPermission($config['mod']['report_dismiss'], $board))
-				error($config['error']['noaccess']);
-
-			$query = prepare("DELETE FROM ``reports`` WHERE `id` = :id");
-			$query->bindValue(':id', $id);
-			modLog("Dismissed a report for post #{$id}", $board);
-			break;
+	if (!$all && !hasPermission($config['mod']['report_dismiss'], $board))
+		error($config['error']['noaccess']);
+	
+	if ($all && !hasPermission($config['mod']['report_dismiss_ip'], $board))
+		error($config['error']['noaccess']);
+	
+	if ($all) {
+		$query = prepare("DELETE FROM ``reports`` WHERE `ip` = :ip");
+		$query->bindValue(':ip', $ip);
+	} else {
+		$query = prepare("DELETE FROM ``reports`` WHERE `id` = :id");
+		$query->bindValue(':id', $id);
 	}
 	$query->execute() or error(db_error($query));
+	
+	$cip = cloak_ip($ip);
+	if ($all)
+		modLog("Dismissed all reports by <a href=\"?/IP/$cip\">$cip</a>");
+	else
+		modLog("Dismissed a report for post #{$post} <small>(#{$id})</small>", $board);
 	
 	header('Location: ?/reports', true, $config['redirect_http']);
 }

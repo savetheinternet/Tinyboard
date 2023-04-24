@@ -17,15 +17,9 @@
 		{% endif %}
 		{% if mod|hasPermission(config.mod.report_dismiss_ip, report.board) %}
 			{% if mod|hasPermission(config.mod.report_dismiss, report.board) %}
-			 |&nbsp;
+			 | 
 			{% endif %}
-			<a title="{% trans 'Discard all abuse reports by this IP address' %}" href="?/reports/{{ report.id }}/dismiss&amp;all/{{ token_all }}">Dismiss+</a>
-			{% endif %}
-		{% if mod|hasPermission(config.mod.report_dismiss_post, report.board) %}
-			{% if mod|hasPermission(config.mod.report_dismiss, report.board) %}
-			 |&nbsp;
-			{% endif %}
-			<a title="{% trans 'Dismissed all reports for the post' %}" href="?/reports/{{ report.id }}/dismiss&amp;post/{{ token_post }}">Dismiss Post</a>
+			<a title="{% trans 'Discard all abuse reports by this IP address' %}" href="?/reports/{{ report.id }}/dismissall/{{ token_all }}">Dismiss+</a>
 		{% endif %}
 	{% endif %}
 </div>
