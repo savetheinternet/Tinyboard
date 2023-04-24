@@ -31,15 +31,17 @@
 	{% if errors or warnings %}
 		<p><strong>There were {{ errors }} error(s) and {{ warnings }} warning(s).</strong></p>
 		<ul>
-			{% for test in tests if not test.result%}
-				<li style="margin-bottom:5px">
-					{% if test.required %}
-						<i style="font-size:11pt;color:#d00" class="fa fa-exclamation"></i> <strong>Error:</strong> 
-					{% else %}
-						<i style="font-size:11pt;color:#f80" class="fa fa-warning"></i> <strong>Warning:</strong> 
-					{% endif %}
-					{{ test.message }}
-				</li>
+			{% for test in tests %}
+				{% if not test.result %}
+					<li style="margin-bottom:5px">
+						{% if test.required %}
+							<i style="font-size:11pt;color:#d00" class="fa fa-exclamation"></i> <strong>Error:</strong> 
+						{% else %}
+							<i style="font-size:11pt;color:#f80" class="fa fa-warning"></i> <strong>Warning:</strong> 
+						{% endif %}
+						{{ test.message }}
+					</li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 		{% if errors %}

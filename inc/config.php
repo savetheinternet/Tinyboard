@@ -47,6 +47,8 @@
 	$config['verbose_errors'] = false;
 	// Warn about deprecations? See vichan-devel/vichan#363 and https://www.youtube.com/watch?v=9crnlHLVdno
 	$config['deprecation_errors'] = false;
+	// Skip cache in twig. this is already enabled with debug
+	$config['twig_auto_reload'] = false;
 
 	// EXPLAIN all SQL queries (when in debug mode).
 	$config['debug_explain'] = false;

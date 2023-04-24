@@ -14,11 +14,11 @@
 {% if mod|hasPermission(config.mod.view_notes) %}
 	<fieldset id="notes">
 		<legend>
-			{% set notes_on_record = 'note' ~ (notes|count != 1 ? 's' : '') ~ ' on record' %}
-			<legend>{{ notes|count }} {% trans notes_on_record %}</legend>
+			{% set notes_length = notes|length %}
+			<legend>{{ notes_length }} {% trans %}note on record{% plural notes_length %}notes on record{% endtrans %}</legend>
 		</legend>
 
-		{% if notes|count > 0 %}
+		{% if notes|length > 0 %}
 			<table class="modlog">
 				<tr>
 					<th>{% trans 'Staff' %}</th>
@@ -84,11 +84,11 @@
 {% if mod|hasPermission(config.mod.view_telegrams) %}
 <fieldset id="telegrams">
 	<legend>
-		{% set telegrams_on_record = 'telegram' ~ (telegrams|count != 1 ? 's' : '') ~ ' on record' %}
-		<legend>{{ telegrams|count }} {% trans telegrams_on_record %}</legend>
+		{% set telegrams_length = telegrams|length %}
+		<legend>{{ telegrams_length }} {% trans %}telegram on record{% plural notes_length %}telegrams on record{% endtrans %}</legend>
 	</legend>
 
-	{% if telegrams|count > 0 %}
+	{% if telegrams|length > 0 %}
 	<table class="modlog">
 		<tr>
 			<th>{% trans 'Staff' %}</th>
@@ -159,10 +159,10 @@
 </fieldset>
 {% endif %}
 
-{% if bans|count > 0 and mod|hasPermission(config.mod.view_ban) %}
+{% if bans|length > 0 and mod|hasPermission(config.mod.view_ban) %}
 	<fieldset id="bans">
-		{% set bans_on_record = 'ban' ~ (bans|count != 1 ? 's' : '') ~ ' on record' %}
-		<legend>{{ bans|count }} {% trans bans_on_record %}</legend>
+		{% set bans_length = bans|length %}
+		<legend>{{ bans_length }} {% trans %}ban on record{% plural notes_length %}bans on record{% endtrans %}</legend>
 
 		{% for ban in bans %}
 			<form action="" method="post" style="text-align:center">
@@ -184,7 +184,7 @@
 	</fieldset>
 {% endif %}
 
-{% if logs|count > 0  %}
+{% if logs|length > 0  %}
 	<fieldset id="history">
 		<legend>History</legend>
 		<table class="modlog" style="width:100%">

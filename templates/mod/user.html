@@ -32,11 +32,13 @@
 				<th>{% trans 'Group' %}</th>
 				<td>
 					<ul style="padding:5px 8px;list-style:none">
-						{% for group_value, group_name in config.mod.groups if group_name != 'Disabled' %}
-							<li>
-								<input type="radio" name="type" id="group_{{ group_name }}" value="{{ group_value }}"> 
-								<label for="group_{{ group_name }}">{% trans group_name %}</label>
-							</li>
+						{% for group_value, group_name in config.mod.groups %}
+							{% if group_name != 'Disabled' %}
+								<li>
+									<input type="radio" name="type" id="group_{{ group_name }}" value="{{ group_value }}"> 
+									<label for="group_{{ group_name }}">{% trans group_name %}</label>
+								</li>
+							{% endif %}
 						{% endfor %}
 					</ul>
 				</td>
@@ -87,7 +89,7 @@
 	</ul>
 </form>
 
-{% if logs and logs|count > 0  %}
+{% if logs and logs|length > 0  %}
 	<table class="modlog" style="width:600px">
 		<tr>
 			<th>{% trans 'IP address' %}</th>			

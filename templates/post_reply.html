@@ -1,4 +1,4 @@
-{% filter remove_whitespace %}
+{% apply spaceless %}
 {# tabs and new lines will be ignored #}
 <div class="post reply" id="reply_{{ post.id }}">
 <p class="intro">
@@ -18,11 +18,11 @@
     {% include 'post/fileinfo.html' %} 
     {% include 'post/post_controls.html' %}
 	<div class="body" {% if post.files|length > 1 %}style="clear:both"{% endif %}>
-		{% endfilter %}{% if index %}{{ post.body|truncate_body(post.link) }}{% else %}{{ post.body }}{% endif %}{% filter remove_whitespace %}
+		{% endapply %}{% if index %}{{ post.body|truncate_body(post.link) }}{% else %}{{ post.body }}{% endif %}{% apply spaceless %}
 		{% if post.modifiers['ban message'] %}
 			{{ config.mod.ban_message|sprintf(post.modifiers['ban message']) }}
 		{% endif %}
 	</div>
 </div>
 <br/>
-{% endfilter %}
+{% endapply %}
