@@ -1608,6 +1608,8 @@
 	$config['mod']['report_dismiss'] = JANITOR;
 	// Dismiss all abuse reports by an IP
 	$config['mod']['report_dismiss_ip'] = JANITOR;
+	// Dismiss all abuse reports for a post
+	$config['mod']['report_dismiss_post'] = JANITOR;
 	// View list of bans
 	$config['mod']['view_banlist'] = MOD;
 	// View the username of the mod who made a ban
