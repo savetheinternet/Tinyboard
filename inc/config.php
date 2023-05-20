@@ -495,6 +495,8 @@
 
 	// Maximum post body length.
 	$config['max_body'] = 1800;
+	// Maximum number of lines allowed in a post.
+	$config['max_lines'] = 100;
 	// Maximum number of post body lines to show on the index page.
 	$config['body_truncate'] = 15;
 	// Maximum number of characters to show on the index page.
@@ -1127,6 +1129,7 @@
 	$config['error']['toolong']		= _('The %s field was too long.');
 	$config['error']['toolong_body']	= _('The body was too long.');
 	$config['error']['tooshort_body']	= _('The body was too short or empty.');
+	$config['error']['toomanylines']	= _('Your post contains too many lines!');
 	$config['error']['noimage']		= _('You must upload an image.');
 	$config['error']['toomanyimages'] = _('You have attempted to upload too many images!');
 	$config['error']['nomove']		= _('The server failed to handle your upload.');
