@@ -1,7 +1,7 @@
 vichan - A lightweight and full featured PHP imageboard.
 ========================================================
 
-**Vichan was recently taken on by new maintainers. Please stay tuned for updates. The new maintainers at this time are basedgentoo, along with Kuz and  Angeleno of KolymaNET**
+**Vichan was recently taken on by new maintainers. Please stay tuned for updates. The new maintainers at this time are basedgentoo, along with Angeleno, and community contributors.**
 
 **Please do not contact Fredrick Brennan in regards to vichan issues.**
 
@@ -16,7 +16,7 @@ imageboard software package. It is written in PHP and has few dependencies.
 
 **For best results, you should use a stable release from the releases page. The master branch is used for development work and testing. You may experience bugs if you use master.**
 
-For support, feel free to join our [IRC channel](https://chat.kolyma.net/#/connect?channels=vichan) at irc.kolyma.net.
+For support, feel free to join our IRC channel at irc.rizon.net #vichan-devel. Use of a bouncer for a persistent connection is highly recommended. If you need to set one up, see https://wiki.rizon.net/index.php?title=RizonBNC_FAQ
 
 Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
 
@@ -29,11 +29,12 @@ improvements.
 ![](static/doc/timeline.svg)
 
 ### Maintainer timeline
-1. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - )
-2. [@h00j](https://github.com/h00j) (2021 - ???)
-3. [@ctrlcctrlv](https://github.com/ctrlcctrlv) (2017 - 2021)
-4. [@czaks](https://github.com/czaks) (2014 - 2017) (The author of vichan fork)
-5. [@savetheinternet](https://github.com/savetheinternet) (2010 - 2014) (The creator of Tinyboard)
+1. Community support by [@basedgentoo](https://github.com/basedgentoo), and [@RealAngeleno](https://github.com/RealAngeleno) - Present.
+2. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - 2023 )
+3. [@h00j](https://github.com/h00j) (2021 - ???)
+4. [@ctrlcctrlv](https://github.com/ctrlcctrlv) (2017 - 2021)
+5. [@czaks](https://github.com/czaks) (2014 - 2017) (The author of vichan fork)
+6. [@savetheinternet](https://github.com/savetheinternet) (2010 - 2014) (The creator of Tinyboard)
 
 Requirements
 ------------
