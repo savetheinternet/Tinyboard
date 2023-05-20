@@ -1129,6 +1129,7 @@
 	$config['error']['toolong']		= _('The %s field was too long.');
 	$config['error']['toolong_body']	= _('The body was too long.');
 	$config['error']['tooshort_body']	= _('The body was too short or empty.');
+	$config['error']['toomanylines']	= _('Your post contains too many lines!');
 	$config['error']['noimage']		= _('You must upload an image.');
 	$config['error']['toomanyimages'] = _('You have attempted to upload too many images!');
 	$config['error']['nomove']		= _('The server failed to handle your upload.');
