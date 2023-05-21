@@ -26,7 +26,12 @@ div.post.reply div.body a {
 	color: #d00;
 }
 form table tr th {
-	background: #EA8;
+	background-color: #ea8;
+    color: #800;
+    font-weight: 700;
+    border: 1px solid #800;
+    padding: 0 5px;
+    font-size:10pt
 }
 div.ban h2 {
 	background: #FCA;
@@ -45,8 +50,14 @@ div.pages {
 div.pages a.selected {
 	color: #800;
 }
+header div.subtitle,h1 {
+  color: #800000;
+  text-align: center;
+}
 hr {
-	border-color: #D9BFB7;
+	border: none;
+	border-top: 1px solid #D9BFB7;
+	height: 0;
 }
 div.boardlist {
 	color: #B86;
