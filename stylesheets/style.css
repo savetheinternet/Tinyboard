@@ -124,7 +124,10 @@ form table tr th {
 }
 
 form table tr th {
-  background: #98E;
+  border: 1px solid #000;
+  background: #9988EE;
+	color: #000000;
+	font-weight: 800;
 }
 
 form table tr td div.center {
