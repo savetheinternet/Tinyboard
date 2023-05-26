@@ -228,7 +228,7 @@
 	// Skip checking certain IP addresses against blacklists (for troubleshooting or whatever)
 	$config['dnsbl_exceptions'][] = '127.0.0.1';
 
-	// To prevent bump atacks; returns the thread to last position after the last post is deleted. 
+	// To prevent bump attacks; returns the thread to last position after the last post is deleted. 
 	$config['anti_bump_flood'] = false;
 
 	/*
