@@ -133,7 +133,7 @@
 			{% else %}
 				<p>{% trans %}You may appeal this ban. Please enter your reasoning below.{% endtrans %}</p>
 			{% endif %}
-			<form class="ban-appeal" action="" method="post">
+			<form class="ban-appeal" action="{{ config.file_post }}" method="post">
 				<input type="hidden" name="ban_id" value="{{ ban.id }}">
 				<textarea name="appeal" rows="4" cols="40"></textarea>
 				<input type="submit" value="Submit">
