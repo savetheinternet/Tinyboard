@@ -2424,6 +2424,7 @@ function mod_report_dismiss($id, $action) {
 			$query = prepare("DELETE FROM ``reports`` WHERE `post` = :post");
 			$query->bindValue(':post', $post);
 			modLog("Dismissed all reports for post #{$id}", $board);
+			break;
 		case '&all':
 			if (!hasPermission($config['mod']['report_dismiss_ip'], $board))
 				error($config['error']['noaccess']);
