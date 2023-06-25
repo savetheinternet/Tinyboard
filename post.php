@@ -730,7 +730,7 @@ if (isset($_POST['delete'])) {
 			error(sprintf($config['error']['toolong'], 'subject'));
 		if (!$mod && mb_strlen($post['body']) > $config['max_body'])
 			error($config['error']['toolong_body']);
-		if (!$mod && substr_count($post['body'], "\n") >= $config['max_lines'])
+		if (!$mod && substr_count($post['body'], "\n") >= $config['maximum_lines'])
 			error($config['error']['toomanylines']);
 		if (mb_strlen($post['password']) > 20)
 			error(sprintf($config['error']['toolong'], 'password'));
