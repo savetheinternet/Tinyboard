@@ -496,7 +496,7 @@
 	// Maximum post body length.
 	$config['max_body'] = 1800;
 	// Maximum number of lines allowed in a post.
-	$config['max_lines'] = 100;
+	$config['maximum_lines'] = 100;
 	// Maximum number of post body lines to show on the index page.
 	$config['body_truncate'] = 15;
 	// Maximum number of characters to show on the index page.
