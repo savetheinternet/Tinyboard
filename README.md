@@ -16,8 +16,6 @@ imageboard software package. It is written in PHP and has few dependencies.
 
 **For best results, you should use a stable release from the releases page. The master branch is used for development work and testing. You may experience bugs if you use master.**
 
-For support, feel free to join our IRC channel at irc.rizon.net #vichan-devel. Use of a bouncer for a persistent connection is highly recommended. If you need to set one up, see https://wiki.rizon.net/index.php?title=RizonBNC_FAQ
-
 Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
 
 History
