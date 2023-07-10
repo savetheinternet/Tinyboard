@@ -89,10 +89,15 @@ class Api {
 
 	private function translateFile($file, $post, &$apiPost) {
 		$this->translateFields($this->fileFields, $file, $apiPost);
-		$apiPost['filename'] = @substr($file->name, 0, strrpos($file->name, '.'));
 		$dotPos = strrpos($file->file, '.');
 		$apiPost['ext'] = substr($file->file, $dotPos);
 		$apiPost['tim'] = substr($file->file, 0, $dotPos);
+		if (isset($this->config['show_filename']) && $this->config['show_filename']) {
+			$apiPost['filename'] = @substr($file->name, 0, strrpos($file->name, '.'));
+		}
+		else {
+			$apiPost['filename'] = substr($file->file, 0, $dotPos);
+		}
 		if (isset ($file->hash) && $file->hash) {
 			$apiPost['md5'] = base64_encode(hex2bin($file->hash));
 		}
