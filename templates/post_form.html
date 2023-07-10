@@ -21,15 +21,20 @@
 		</tr>{% endif %}
 		{% if not config.field_disable_email or (mod and post.mod|hasPermission(config.mod.bypass_field_disable, board.uri)) %}<tr>
 			<th>
+				{% if (mod and not post.mod|hasPermission(config.mod.bypass_field_disable, board.uri) and config.field_email_selectbox) or (not mod and config.field_email_selectbox) or (config.hide_email) %}
+					{% trans %}Options{% endtrans %}
+				{% else %}
 				{% trans %}Email{% endtrans %}
+				{% endif %}
 				{{ antibot.html() }}
 			</th>
 			<td>
-				{% if config.field_email_selectbox %}
+				{% if (mod and not post.mod|hasPermission(config.mod.bypass_field_disable, board.uri) and config.field_email_selectbox) or (not mod and config.field_email_selectbox) %}
 				<select name="email" id="email_selectbox" autocomplete="off">
 					<option value=""></option>
 					<option value="sage">sage</option>
 					{% if not config.always_noko %}<option value="noko">noko</option>{% endif %}
+					{% if config.always_noko %}<option value="nonoko">nonoko</option>{% endif %}
 				</select>
 				{% else %}
 				<input type="text" name="email" size="25" maxlength="40" autocomplete="off">
