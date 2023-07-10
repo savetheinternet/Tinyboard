@@ -80,6 +80,9 @@ class Api {
 
 			$toInt = isset(self::$ints[$translated]);
 			$val = $object->$local;
+			if (isset($this->config['hide_email']) && $this->config['hide_email'] && $local === 'email') {
+				$val = '';
+			}
 			if ($val !== null && $val !== '') {
 				$apiPost[$translated] = $toInt ? (int) $val : $val;
 			}
