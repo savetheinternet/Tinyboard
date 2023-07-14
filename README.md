@@ -64,7 +64,7 @@ You can contribute to vichan by:
 
 Installation
 -------------
-1.	Download and extract vichan to your web directory or get the latest
+1.	[Download and extract vichan to your web directory](https://github.com/vichan-devel/vichan/releases) or get the latest
 	development version with:
 
         git clone git://github.com/vichan-devel/vichan.git
