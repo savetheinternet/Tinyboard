@@ -2287,8 +2287,6 @@ msgstr "usuń"
 msgid "New note"
 msgstr "Nowa notka"
  	
-msgid "New telegram"
-msgstr "Nowa depesza"
 
 #. line 94
 #. line 7
