@@ -81,6 +81,83 @@
 	</fieldset>
 {% endif %}
 
+{% if mod|hasPermission(config.mod.view_telegrams) %}
+<fieldset id="telegrams">
+	<legend>
+		{% set telegrams_length = telegrams|length %}
+		<legend>{{ telegrams_length }} {% trans %}telegram on record{% plural notes_length %}telegrams on record{% endtrans %}</legend>
+	</legend>
+
+	{% if telegrams|length > 0 %}
+	<table class="modlog">
+		<tr>
+			<th>{% trans 'Staff' %}</th>
+			<th>{% trans 'Message' %}</th>
+			<th>{% trans 'Date' %}</th>
+			<th class="minimal">{% trans 'Seen' %}</th>
+			{% if mod|hasPermission(config.mod.remove_telegrams) %}
+			<th>{% trans 'Actions' %}</th>
+			{% endif %}
+		</tr>
+		{% for telegram in telegrams %}
+		<tr>
+			<td class="minimal">
+				{% if telegram.username %}
+				<a href="?/new_PM/{{ telegram.username|e }}">{{ telegram.username|e }}</a>
+				{% else %}
+				<em>{% trans 'deleted?' %}</em>
+				{% endif %}
+			</td>
+			<td>
+				{{ telegram.message }}
+			</td>
+			<td class="minimal">
+				{{ telegram.created_at|date(config.post_date) }}
+			</td>
+			<td>
+				{%  if telegram.seen %}
+				{% trans 'Yes' %}
+				{%  else %}
+				{% trans 'No' %}
+				{%  endif %}
+			</td>
+			{% if mod|hasPermission(config.mod.remove_telegrams) %}
+			<td class="minimal">
+				<a href="?/IP/{{ ip|cloak_ip|url_encode(true) }}/remove_telegram/{{ telegram.id }}">
+					<small>[{% trans 'remove' %}]</small>
+				</a>
+			</td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+	{% if mod|hasPermission(config.mod.create_telegrams) %}
+	<form action="" method="post" style="margin:0">
+		<input type="hidden" name="token" value="{{ security_token }}">
+		<table>
+			<tr>
+				<th>{% trans 'Staff' %}</th>
+				<td>{{ mod.username|e }}</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="telegram">{% trans 'Message' %}</label>
+				</th>
+				<td>
+					<textarea id="telegram" name="telegram" rows="5" cols="30"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="{% trans 'New telegram' %}"></td>
+			</tr>
+		</table>
+	</form>
+	{% endif %}
+</fieldset>
+{% endif %}
 
 {% if bans|length > 0 and mod|hasPermission(config.mod.view_ban) %}
 	<fieldset id="bans">
