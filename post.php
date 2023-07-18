@@ -1217,6 +1217,17 @@ if (isset($_POST['delete'])) {
 	if (!$post['mod']) header('X-Associated-Content: "' . $redirect . '"');
 
 
+	if (!isset($_POST['json_response'])) {
+		header('Location: ' . $redirect, true, $config['redirect_http']);
+	} else {
+		header('Content-Type: text/json; charset=utf-8');
+		echo json_encode(array(
+			'redirect' => $redirect,
+			'noko' => $noko,
+			'id' => $id
+		));
+	}
+
 	if ($config['try_smarter'] && $post['op'])
 		$build_pages = range(1, $config['max_pages']);
 	
@@ -1226,7 +1237,7 @@ if (isset($_POST['delete'])) {
 	event('post-after', $post);
 	
 	buildIndex();
-	
+
 	// We are already done, let's continue our heavy-lifting work in the background (if we run off FastCGI)
 	if (function_exists('fastcgi_finish_request'))
 		@fastcgi_finish_request();
