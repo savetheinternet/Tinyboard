@@ -1216,14 +1216,6 @@ if (isset($_POST['delete'])) {
 	
 	if (!$post['mod']) header('X-Associated-Content: "' . $redirect . '"');
 
-	// Any telegrams to show?
-	$query = prepare('SELECT * FROM ``telegrams`` WHERE ``ip`` = :ip AND ``seen`` = 0');
-	$query->bindValue(':ip', $_SERVER['REMOTE_ADDR']);
-	$query->execute() or error(db_error($query));
-	$telegrams = $query->fetchAll(PDO::FETCH_ASSOC);
-
-	if (count($telegrams) > 0)
-		goto skip_redirect;
 
 	if (!isset($_POST['json_response'])) {
 		header('Location: ' . $redirect, true, $config['redirect_http']);
@@ -1235,8 +1227,6 @@ if (isset($_POST['delete'])) {
 			'id' => $id
 		));
 	}
-	skip_redirect:
-
 
 	if ($config['try_smarter'] && $post['op'])
 		$build_pages = range(1, $config['max_pages']);
@@ -1247,20 +1237,6 @@ if (isset($_POST['delete'])) {
 	event('post-after', $post);
 	
 	buildIndex();
-	
-	if (count($telegrams) > 0) {
-		$ids = implode(', ', array_map(function($x) { return (int)$x['id']; }, $telegrams));
-		query("UPDATE ``telegrams`` SET ``seen`` = 1 WHERE ``id`` IN({$ids})") or error(db_error());
-		die(Element('page.html', array(
-			'title' => _('Important message from Moderation'),
-			'config' => $config,
-			'body' => Element('important.html', array(
-				'config' => $config,
-				'redirect' => $redirect,
-				'telegrams' => $telegrams,
-			))
-		)));
-	}
 
 	// We are already done, let's continue our heavy-lifting work in the background (if we run off FastCGI)
 	if (function_exists('fastcgi_finish_request'))
