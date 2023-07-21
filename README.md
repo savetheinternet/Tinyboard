@@ -5,8 +5,6 @@ vichan - A lightweight and full featured PHP imageboard.
 
 **Please do not contact Fredrick Brennan in regards to vichan issues.**
 
-**A community support board is coming soon. In the meantime you can join our IRC support channel. Connection details are below!**
-
 As of 29 August 2022 it supports PHP8.1.
 
 About
