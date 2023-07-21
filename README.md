@@ -28,7 +28,7 @@ improvements.
 
 ### Maintainer timeline
 1. [@perdedora](https://github.com/perdedora) and [@RealAngeleno](https://github.com/RealAngeleno) - 2023-Present.
-2. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - 2023 )
+2. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - 2023)
 3. [@h00j](https://github.com/h00j) (2021 - ???)
 4. [@ctrlcctrlv](https://github.com/ctrlcctrlv) (2017 - 2021)
 5. [@czaks](https://github.com/czaks) (2014 - 2017) (The author of vichan fork)
