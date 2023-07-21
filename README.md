@@ -27,7 +27,7 @@ improvements.
 ![](static/doc/timeline.svg)
 
 ### Maintainer timeline
-1. Community support by [@basedgentoo](https://github.com/basedgentoo), and [@RealAngeleno](https://github.com/RealAngeleno) - Present.
+1. [@perdedora] and [@RealAngeleno] - ???-2023, 2023-Present.
 2. Development Commission lead by [@basedgentoo](https://github.com/basedgentoo), [@kuz-sysadmin](https://github.com/kuz-sysadmin), and [@RealAngeleno](https://github.com/RealAngeleno). (2023 - 2023 )
 3. [@h00j](https://github.com/h00j) (2021 - ???)
 4. [@ctrlcctrlv](https://github.com/ctrlcctrlv) (2017 - 2021)
