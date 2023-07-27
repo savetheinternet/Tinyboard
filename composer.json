@@ -3,9 +3,9 @@
     "description": "vichan imageboard",
     "type": "project",
     "require": {
-        "ext-mbstring": ">=5.4",
-        "ext-gd": ">=5.4",
-        "ext-pdo": ">=5.4",
+        "ext-mbstring": ">=7.4",
+        "ext-gd": ">=7.4",
+        "ext-pdo": ">=7.4",
         "twig/twig": "^2.9",
         "phpmyadmin/twig-i18n-extension": "^4.0",
         "lifo/ip": "^1.0",
