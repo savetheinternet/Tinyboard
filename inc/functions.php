@@ -207,6 +207,8 @@ function loadConfig() {
 			$config['image_bumplocked'] = $config['dir']['static'] . 'sage.gif';
 		if (!isset($config['image_deleted']))
 			$config['image_deleted'] = $config['dir']['static'] . 'deleted.png';
+		if (!isset($config['image_cyclical']))
+			$config['image_cyclical'] = $config['dir']['static'] . 'cycle.png';
 
 		if (isset($board)) {
 			if (!isset($config['uri_thumb']))
