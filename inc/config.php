@@ -1318,7 +1318,8 @@
 	// $config['font_awesome'] is false (default).
 	// $config['image_sticky']	= 'static/sticky.png';
 	// $config['image_locked']	= 'static/locked.gif';
-	// $config['image_bumplocked']	= 'static/sage.png'.
+	// $config['image_bumplocked']	= 'static/sage.png';
+	// $config['image_cyclical']	= 'static/cycle.png';
 
 	// If you want to put images and other dynamic-static stuff on another (preferably cookieless) domain.
 	// This will override $config['root'] and $config['dir']['...'] directives. "%s" will get replaced with
