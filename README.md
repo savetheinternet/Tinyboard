@@ -1,8 +1,6 @@
 vichan - A lightweight and full featured PHP imageboard.
 ========================================================
 
-**Vichan was recently taken on by new maintainers. Please stay tuned for updates. The new maintainers at this time are basedgentoo, along with Angeleno, and community contributors.**
-
 **Please do not contact Fredrick Brennan in regards to vichan issues.**
 
 As of 29 August 2022 it supports PHP8.1.
