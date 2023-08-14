@@ -396,6 +396,15 @@
 		'message' => &$config['error']['flood']
 	);
 
+	//max threads per hour
+	$config['filters'][] = array(
+		'condition' => array(
+			'custom' => 'check_thread_limit'
+		),
+		'action' => 'reject',
+		'message' => &$config['error']['too_many_threads']
+	);
+
 	// Example: Minimum time between posts with the same file hash.
 	// $config['filters'][] = array(
 	// 	'condition' => array(
@@ -493,6 +502,8 @@
     // Requires $config['strip_combining_chars'] = true;
     $config['max_combining_chars'] = 3;
 
+	// Maximum numbers of threads that can be created every hour on a board.
+	$config['max_threads_per_hour'] = 30;
 	// Maximum post body length.
 	$config['max_body'] = 1800;
 	// Maximum number of lines allowed in a post.
@@ -1141,6 +1152,7 @@
 	$config['error']['image_hard_limit']	= _('Thread has reached its maximum image limit.');
 	$config['error']['nopost']		= _('You didn\'t make a post.');
 	$config['error']['flood']		= _('Flood detected; Post discarded.');
+	$config['error']['too_many_threads']	= _('The hourly thread limit has been reached. Please post in an existing thread.');
 	$config['error']['spam']		= _('Your request looks automated; Post discarded.');
 	$config['error']['unoriginal']		= _('Unoriginal content!');
 	$config['error']['muted']		= _('Unoriginal content! You have been muted for %d seconds.');
