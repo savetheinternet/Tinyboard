@@ -3067,3 +3067,16 @@ function uncloak_mask($mask) {
 
 	return $mask;
 }
+
+function check_thread_limit($post) {
+	global $config, $board;
+	if (!isset($config['max_threads_per_hour']) || !$config['max_threads_per_hour']) return false;
+
+	if ($post['op']) {
+		$query = prepare(sprintf('SELECT COUNT(*) AS `count` FROM ``posts_%s`` WHERE `thread` IS NULL AND FROM_UNIXTIME(`time`) > DATE_SUB(NOW(), INTERVAL 1 HOUR);', $board['uri']));
+		$query->execute() or error(db_error($query));
+		$r = $query->fetch(PDO::FETCH_ASSOC);
+
+		return $r['count'] >= $config['max_threads_per_hour'];
+	}
+}
