@@ -3008,7 +3008,7 @@ function cloak_ip($ip) {
 	if (strlen($ipbytes) >= 16)
 		$ipbytes = substr($ipbytes, 0, 16);
 
-	$cyphertext = openssl_encrypt($ipbytes, 'rc4-40', $ipcrypt_key, OPENSSL_RAW_DATA);
+	$cyphertext = openssl_encrypt($ipbytes, 'aes-256-ctr', $ipcrypt_key, OPENSSL_RAW_DATA);
 
 	$ret = $config['ipcrypt_prefix'].':' . base32_encode($cyphertext);
 	if (isset($tld) && !empty($tld)) {
@@ -3031,7 +3031,7 @@ function uncloak_ip($ip) {
 	}
 
 	if (substr($ip, 0, strlen($config['ipcrypt_prefix']) + 1) === $config['ipcrypt_prefix'].':') {
-		$plaintext = openssl_decrypt(base32_decode($juice), 'rc4-40', $ipcrypt_key, OPENSSL_RAW_DATA);
+		$plaintext = openssl_decrypt(base32_decode($juice), 'aes-256-ctr', $ipcrypt_key, OPENSSL_RAW_DATA);
 
 		if ($plaintext === false || strlen($plaintext) == 0)
 			return '#ERROR';
