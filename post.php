@@ -227,6 +227,10 @@ if (isset($_POST['delete'])) {
 				$thread = $thread_query->fetch(PDO::FETCH_ASSOC);	
 			}
 
+			if ($post['time'] < time() - $config['max_delete_time'] && $config['max_delete_time'] != false) {
+				error(sprintf($config['error']['delete_too_late'], until($post['time'] + $config['max_delete_time'])));
+			}
+			
 			if ($password != '' && $post['password'] != $password && (!$thread || $thread['password'] != $password))
 				error($config['error']['invalidpassword']);
 			
