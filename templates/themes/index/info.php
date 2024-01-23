@@ -60,7 +60,7 @@
 		'title' => 'Video of the Now',
 		'name' => 'videoofnow',
 		'type' => 'text',
-		'default' => 'https://www.youtube.com/embed/zndkMAHKjNM',
+		'default' => 'https://www.youtube.com/embed/YbaTur4A1OU',
 		'size' => 50
 	);
 	
