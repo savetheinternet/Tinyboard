@@ -1931,17 +1931,6 @@
 	// Example: Add links to dashboard (will all be in a new "Other" category).
 	// $config['mod']['dashboard_links']['Something'] = '?/something';
 
-	// Remote servers. I'm not even sure if this code works anymore. It might. Haven't tried it in a while.
-	// $config['remote']['static'] = array(
-	// 	'host' => 'static.example.org',
-	// 	'auth' => array(
-	// 		'method' => 'plain',
-	// 		'username' => 'username',
-	// 		'password' => 'password!123'
-	// 	),
-	// 	'type' => 'scp'
-	// );
-
 	// Create gzipped static files along with ungzipped.
 	// This is useful with nginx with gzip_static on.
 	$config['gzip_static'] = false;

@@ -636,14 +636,8 @@ function file_write($path, $data, $simple = false, $skip_purge = false) {
 	global $config, $debug;
 
 	if (preg_match('/^remote:\/\/(.+)\:(.+)$/', $path, $m)) {
-		if (isset($config['remote'][$m[1]])) {
-			require_once 'inc/remote.php';
-
-			$remote = new Remote($config['remote'][$m[1]]);
-			$remote->write($data, $m[2]);
-			return;
-		} else {
-			error('Invalid remote server: ' . $m[1]);
+		if (isset($config['remote'])) {
+			error('Remote server support has been removed');
 		}
 	}
 
