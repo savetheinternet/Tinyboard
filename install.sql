@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `antispam` (
   PRIMARY KEY (`hash`),
   KEY `board` (`board`,`thread`),
   KEY `expires` (`expires`)
-) ENGINE=MyISAM DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `bans` (
   PRIMARY KEY (`id`),
   KEY `expires` (`expires`),
   KEY `ipstart` (`ipstart`,`ipend`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `boards` (
   `subtitle` tinytext,
   -- `indexed` boolean default true,
   PRIMARY KEY (`uri`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `boards`
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `cites` (
   `target` int(11) NOT NULL,
   KEY `target` (`target_board`,`target`),
   KEY `post` (`board`,`post`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `ip_notes` (
   `body` text NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ip_lookup` (`ip`, `time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `modlogs` (
   `text` text NOT NULL,
   KEY `time` (`time`),
   KEY `mod`(`mod`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `mods` (
   `boards` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`,`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `mods`
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `mutes` (
   `ip` varchar(39) NOT NULL,
   `time` int(11) NOT NULL,
   KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=ascii;
+) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
 -- --------------------------------------------------------
 
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `body` text NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `time` (`time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `noticeboard` (
   `body` text NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `time` (`time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `pms` (
   `unread` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `to` (`to`, `unread`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `post` int(11) NOT NULL,
   `reason` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
 CREATE TABLE IF NOT EXISTS `robot` (
   `hash` varchar(40) COLLATE ascii_bin NOT NULL COMMENT 'SHA1',
   PRIMARY KEY (`hash`)
-) ENGINE=MyISAM DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `search_queries` (
   `ip` varchar(39) NOT NULL,
   `time` int(11) NOT NULL,
   `query` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `theme_settings` (
   `name` varchar(40) DEFAULT NULL,
   `value` text,
   KEY `theme` (`theme`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `flood` (
   KEY `posthash` (`posthash`),
   KEY `filehash` (`filehash`),
   KEY `time` (`time`)
-) ENGINE=MyISAM DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `ban_appeals` (
   `denied` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ban_id` (`ban_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `content` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `u_pages` (`name`,`board`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `nntp_references` (
   PRIMARY KEY (`message_id_digest`),
   UNIQUE KEY `message_id` (`message_id`),
   UNIQUE KEY `u_board_id` (`board`, `id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `captchas` (
   `text` VARCHAR(255),
   `created_at` INT(11),
   PRIMARY KEY (`cookie`,`extra`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
