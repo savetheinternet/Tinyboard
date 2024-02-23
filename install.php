@@ -142,7 +142,7 @@ if (file_exists($config['has_installed'])) {
 				query(sprintf("ALTER TABLE `posts_%s` CHANGE  `subject` `subject` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL", $_board['uri'])) or error(db_error());
 			}
 		case 'v0.9.3-dev-6':
-			// change to MyISAM
+			// change to InnoDB
 			$tables = array(
 				'bans', 'boards', 'ip_notes', 'modlogs', 'mods', 'mutes', 'noticeboard', 'pms', 'reports', 'robot', 'theme_settings', 'news'
 			);
@@ -151,7 +151,7 @@ if (file_exists($config['has_installed'])) {
 			}
 			
 			foreach ($tables as &$table) {
-				query("ALTER TABLE  `{$table}` ENGINE = MYISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci") or error(db_error());
+				query("ALTER TABLE  `{$table}` ENGINE = INNODB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci") or error(db_error());
 			}
 		case 'v0.9.3-dev-7':
 			foreach ($boards as &$board) {
@@ -212,7 +212,7 @@ if (file_exists($config['has_installed'])) {
 			foreach ($boards as &$board) {
 				query(sprintf("ALTER TABLE  `posts_%s` ADD  `body_nomarkup` TEXT NULL AFTER  `body`", $board['uri'])) or error(db_error());
 			}
-			query("CREATE TABLE IF NOT EXISTS `cites` (  `board` varchar(8) NOT NULL,  `post` int(11) NOT NULL,  `target_board` varchar(8) NOT NULL,  `target` int(11) NOT NULL,  KEY `target` (`target_board`,`target`),  KEY `post` (`board`,`post`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;") or error(db_error());
+			query("CREATE TABLE IF NOT EXISTS `cites` (  `board` varchar(8) NOT NULL,  `post` int(11) NOT NULL,  `target_board` varchar(8) NOT NULL,  `target` int(11) NOT NULL,  KEY `target` (`target_board`,`target`),  KEY `post` (`board`,`post`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;") or error(db_error());
 		case 'v0.9.5-dev-2':
 			query("ALTER TABLE  `boards` 
 				CHANGE  `uri`  `uri` VARCHAR( 15 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -235,7 +235,7 @@ if (file_exists($config['has_installed'])) {
 				  `passed` smallint(6) NOT NULL,
 				  PRIMARY KEY (`hash`),
 				  KEY `board` (`board`,`thread`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8;") or error(db_error());
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;") or error(db_error());
 		case 'v0.9.6-dev-2':
 			query("ALTER TABLE `boards`
 				DROP `id`,
@@ -462,7 +462,7 @@ if (file_exists($config['has_installed'])) {
 				  KEY `posthash` (`posthash`),
 				  KEY `filehash` (`filehash`),
 				  KEY `time` (`time`)
-				) ENGINE=MyISAM DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=1 ;") or error(db_error());
+				) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=1 ;") or error(db_error());
 		case 'v0.9.6-dev-19':
 			query("UPDATE ``mods`` SET `type` = 10 WHERE `type` = 0") or error(db_error());
 			query("UPDATE ``mods`` SET `type` = 20 WHERE `type` = 1") or error(db_error());
@@ -483,7 +483,7 @@ if (file_exists($config['has_installed'])) {
 				PRIMARY KEY (`id`),
 				KEY `expires` (`expires`),
 				KEY `ipstart` (`ipstart`,`ipend`)
-				) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1") or error(db_error());
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1") or error(db_error());
 			$listquery = query("SELECT * FROM ``bans`` ORDER BY `id`") or error(db_error());
 			while ($ban = $listquery->fetch(PDO::FETCH_ASSOC)) {
 				$query = prepare("INSERT INTO ``bans_new_temp`` VALUES 
@@ -538,7 +538,7 @@ if (file_exists($config['has_installed'])) {
 				  `denied` tinyint(1) NOT NULL,
 				  PRIMARY KEY (`id`),
 				  KEY `ban_id` (`ban_id`)
-				) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;") or error(db_error());
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;") or error(db_error());
 		case 'v0.9.6-dev-22':
 		case 'v0.9.6-dev-22 + <a href="https://int.vichan.net/devel/">vichan-devel-4.4.91</a>':
 		case 'v0.9.6-dev-22 + <a href="https://int.vichan.net/devel/">vichan-devel-4.4.92</a>':
@@ -634,10 +634,10 @@ if (file_exists($config['has_installed'])) {
 			  	`text` varchar(255),
 			  	`created_at` int(11),
 			  	PRIMARY KEY (`cookie`,`extra`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;') or error(db_error());
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;') or error(db_error());
 		case false:
 			// TODO: enhance Tinyboard -> vichan upgrade path.
-			query("CREATE TABLE IF NOT EXISTS ``search_queries`` (  `ip` varchar(39) NOT NULL,  `time` int(11) NOT NULL,  `query` text NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8;") or error(db_error());
+			query("CREATE TABLE IF NOT EXISTS ``search_queries`` (  `ip` varchar(39) NOT NULL,  `time` int(11) NOT NULL,  `query` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;") or error(db_error());
 
 			// Update version number
 			file_write($config['has_installed'], VERSION);
