@@ -10,7 +10,7 @@ class Cache {
 	private static $cache;
 	public static function init() {
 		global $config;
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				self::$cache = new Memcached();
@@ -31,9 +31,9 @@ class Cache {
 	}
 	public static function get($key) {
 		global $config, $debug;
-		
+
 		$key = $config['cache']['prefix'] . $key;
-		
+
 		$data = false;
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
@@ -70,20 +70,20 @@ class Cache {
 				$data = json_decode(self::$cache->get($key), true);
 				break;
 		}
-		
+
 		if ($config['debug'])
 			$debug['cached'][] = $key . ($data === false ? ' (miss)' : ' (hit)');
-		
+
 		return $data;
 	}
 	public static function set($key, $value, $expires = false) {
 		global $config, $debug;
-		
+
 		$key = $config['cache']['prefix'] . $key;
-		
+
 		if (!$expires)
 			$expires = $config['cache']['timeout'];
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
@@ -113,15 +113,15 @@ class Cache {
 				self::$cache[$key] = $value;
 				break;
 		}
-		
+
 		if ($config['debug'])
 			$debug['cached'][] = $key . ' (set)';
 	}
 	public static function delete($key) {
 		global $config, $debug;
-		
+
 		$key = $config['cache']['prefix'] . $key;
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
@@ -151,13 +151,13 @@ class Cache {
 				unset(self::$cache[$key]);
 				break;
 		}
-		
+
 		if ($config['debug'])
 			$debug['cached'][] = $key . ' (deleted)';
 	}
 	public static function flush() {
 		global $config;
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
@@ -181,7 +181,7 @@ class Cache {
 					self::init();
 				return self::$cache->flushDB();
 		}
-		
+
 		return false;
 	}
 }
