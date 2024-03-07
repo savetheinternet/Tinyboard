@@ -47,9 +47,6 @@ class Cache {
 			case 'apcu':
 				$data = apcu_fetch($key);
 				break;
-			case 'xcache':
-				$data = xcache_get($key);
-				break;
 			case 'php':
 				$data = isset(self::$cache[$key]) ? self::$cache[$key] : false;
 				break;
@@ -101,9 +98,6 @@ class Cache {
 			case 'apcu':
 				apcu_store($key, $value, $expires);
 				break;
-			case 'xcache':
-				xcache_set($key, $value, $expires);
-				break;
 			case 'fs':
 				$key = str_replace('/', '::', $key);
 				$key = str_replace("\0", '', $key);
@@ -138,9 +132,6 @@ class Cache {
 				break;
 			case 'apcu':
 				apcu_delete($key);
-				break;
-			case 'xcache':
-				xcache_unset($key);
 				break;
 			case 'fs':
 				$key = str_replace('/', '::', $key);

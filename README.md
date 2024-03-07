@@ -46,7 +46,6 @@ We try to make sure vichan is compatible with all major web servers. vichan does
 2.	ImageMagick (command-line ImageMagick or GraphicsMagick preferred).
 3.	~~[APC (Alternative PHP Cache)](http://php.net/manual/en/book.apc.php)~~,
 	[APCu (Alternative PHP Cache)](http://php.net/manual/en/book.apcu.php),
-	[XCache](http://xcache.lighttpd.net/),
 	[Memcached](http://www.php.net/manual/en/intro.memcached.php) or
 	[Redis](https://redis.io/docs/about/)
 
