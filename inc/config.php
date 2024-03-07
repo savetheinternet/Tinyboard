@@ -121,7 +121,7 @@
 	 */
 
 	$config['cache']['enabled'] = 'php';
-	// $config['cache']['enabled'] = 'apc';
+	// $config['cache']['enabled'] = 'apcu';
 	// $config['cache']['enabled'] = 'memcached';
 	// $config['cache']['enabled'] = 'redis';
 	// $config['cache']['enabled'] = 'fs';
@@ -1306,7 +1306,6 @@
 	$config['file_mod_debug_antispam'] = 'mod/debug/antispam.html';
 	$config['file_mod_debug_recent_posts'] = 'mod/debug/recent_posts.html';
 	$config['file_mod_debug_sql'] = 'mod/debug/sql.html';
-	$config['file_mod_debug_apc'] = 'mod/debug/apc.html';
 
 	// Board directory, followed by a forward-slash (/).
 	$config['board_path'] = '%s/';
@@ -1707,8 +1706,6 @@
 	$config['mod']['news_delete'] = ADMIN;
 	// Execute un-filtered SQL queries on the database (?/debug/sql)
 	$config['mod']['debug_sql'] = DISABLED;
-	// Look through all cache values for debugging when APC is enabled (?/debug/apc)
-	$config['mod']['debug_apc'] = ADMIN;
 	// Edit the current configuration (via web interface)
 	$config['mod']['edit_config'] = ADMIN;
 	// View ban appeals

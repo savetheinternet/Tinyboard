@@ -41,9 +41,6 @@ class Cache {
 					self::init();
 				$data = self::$cache->get($key);
 				break;
-			case 'apc':
-				$data = apc_fetch($key);
-				break;
 			case 'apcu':
 				$data = apcu_fetch($key);
 				break;
@@ -92,9 +89,6 @@ class Cache {
 					self::init();
 				self::$cache->setex($key, $expires, json_encode($value));
 				break;
-			case 'apc':
-				apc_store($key, $value, $expires);
-				break;
 			case 'apcu':
 				apcu_store($key, $value, $expires);
 				break;
@@ -127,9 +121,6 @@ class Cache {
 					self::init();
 				self::$cache->del($key);
 				break;
-			case 'apc':
-				apc_delete($key);
-				break;
 			case 'apcu':
 				apcu_delete($key);
 				break;
@@ -154,8 +145,6 @@ class Cache {
 				if (!self::$cache)
 					self::init();
 				return self::$cache->flush();
-			case 'apc':
-				return apc_clear_cache('user');
 			case 'apcu':
 				return apcu_clear_cache('user');
 			case 'php':
