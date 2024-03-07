@@ -128,7 +128,7 @@ function download_file_from_url($file_url, $request_timeout, $allowed_extensions
 
 	$fd = fopen($tmp_file, 'w');
 
-	$dl_err = download_file_into($tmp_file, $request_timeout, $fd);
+	$dl_err = download_file_into($fd, $request_timeout, $fd);
 	fclose($fd);
 	if ($dl_err !== null) {
 		throw new Exception($error_array['nomove'] . '<br/>Curl says: ' . $dl_err);
