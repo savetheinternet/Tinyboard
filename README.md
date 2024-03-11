@@ -10,8 +10,6 @@ About
 vichan is a free light-weight, fast, highly configurable and user-friendly
 imageboard software package. It is written in PHP and has few dependencies.
 
-**For best results, you should use a stable release from the releases page. The master branch is used for development work and testing. You may experience bugs if you use master.**
-
 Some documentation may be found on our [wiki](https://github.com/vichan-devel/vichan/wiki). (feel free to contribute)
 
 History
