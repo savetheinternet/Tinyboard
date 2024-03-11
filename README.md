@@ -34,7 +34,7 @@ Requirements
 ------------
 1.	PHP >= 7.4
 2.	MySQL/MariaDB server
-3.	[mbstring](http://www.php.net/manual/en/mbstring.installation.php) 
+3.	[mbstring](http://www.php.net/manual/en/mbstring.installation.php)
 4.	[PHP GD](http://www.php.net/manual/en/intro.image.php)
 5.	[PHP PDO](http://www.php.net/manual/en/intro.pdo.php)
 6.	A Unix-like OS, preferrably FreeBSD or GNU/Linux
@@ -44,9 +44,7 @@ We try to make sure vichan is compatible with all major web servers. vichan does
 ### Recommended
 1.	MySQL/MariaDB server >= 5.5.3
 2.	ImageMagick (command-line ImageMagick or GraphicsMagick preferred).
-3.	~~[APC (Alternative PHP Cache)](http://php.net/manual/en/book.apc.php)~~,
-	[APCu (Alternative PHP Cache)](http://php.net/manual/en/book.apcu.php),
-	[XCache](http://xcache.lighttpd.net/),
+3.	[APCu (Alternative PHP Cache)](http://php.net/manual/en/book.apcu.php),
 	[Memcached](http://www.php.net/manual/en/intro.memcached.php) or
 	[Redis](https://redis.io/docs/about/)
 
@@ -63,7 +61,7 @@ Installation
 
         git clone git://github.com/vichan-devel/vichan.git
 
-2.	run ```composer install``` inside the directory	
+2.	run ```composer install``` inside the directory
 3.	Navigate to ```install.php``` in your web browser and follow the
 	prompts.
 4.	vichan should now be installed. Log in to ```mod.php``` with the

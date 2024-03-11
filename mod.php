@@ -20,16 +20,16 @@ $pages = array(
 	'/'					=> 'dashboard',			// dashboard
 	'/confirm/(.+)'				=> 'confirm',			// confirm action (if javascript didn't work)
 	'/logout'				=> 'secure logout',		// logout
-	
+
 	'/users'				=> 'users',			// manage users
 	'/users/(\d+)/(promote|demote)'		=> 'secure user_promote',	// prmote/demote user
 	'/users/(\d+)'				=> 'secure_POST user',		// edit user
 	'/users/new'				=> 'secure_POST user_new',	// create a new user
-	
+
 	'/new_PM/([^/]+)'			=> 'secure_POST new_pm',	// create a new pm
 	'/PM/(\d+)(/reply)?'			=> 'pm',			// read a pm
 	'/inbox'				=> 'inbox',			// pm inbox
-	
+
 	'/log'					=> 'log',			// modlog
 	'/log/(\d+)'				=> 'log',			// modlog
 	'/log:([^/:]+)'				=> 'user_log',			// modlog
@@ -45,18 +45,18 @@ $pages = array(
 	'/edit_page/(\d+)'			=> 'secure_POST edit_page',
 	'/edit_pages/delete/([a-z0-9]+)'	=> 'secure delete_page',
 	'/edit_pages/delete/([a-z0-9]+)/(\%b)'	=> 'secure delete_page_board',
-	
+
 	'/noticeboard'				=> 'secure_POST noticeboard',	// view noticeboard
 	'/noticeboard/(\d+)'			=> 'secure_POST noticeboard',	// view noticeboard
 	'/noticeboard/delete/(\d+)'		=> 'secure noticeboard_delete',	// delete from noticeboard
-	
+
 	'/edit/(\%b)'				=> 'secure_POST edit_board',	// edit board details
 	'/new-board'				=> 'secure_POST new_board',	// create a new board
-	
+
 	'/rebuild'				=> 'secure_POST rebuild',	// rebuild static files
 	'/reports'				=> 'reports',			// report queue
 	'/reports/(\d+)/dismiss(&all|&post)?'		=> 'secure report_dismiss',	// dismiss a report
-	
+
 	'/IP/([\w.:]+)'				=> 'secure_POST ip',		// view ip address
 	'/IP/([\w.:]+)/remove_note/(\d+)'	=> 'secure ip_remove_note',	// remove note from ip address
 
@@ -65,7 +65,7 @@ $pages = array(
 	'/bans.json'				=> 'secure bans_json',		// ban list JSON
 	'/edit_ban/(\d+)'			=> 'secure_POST edit_ban',
 	'/ban-appeals'				=> 'secure_POST ban_appeals',	// view ban appeals
-	
+
 	'/recent/(\d+)'				=> 'recent_posts',		// view recent posts
 
 	'/search'				=> 'search_redirect',		// search
@@ -84,21 +84,20 @@ $pages = array(
 	'/(\%b)/(un)?sticky/(\d+)'		=> 'secure sticky',		// sticky thread
 	'/(\%b)/(un)?cycle/(\d+)'                         => 'secure cycle',          // cycle thread
 	'/(\%b)/bump(un)?lock/(\d+)'		=> 'secure bumplock',		// "bumplock" thread
-	
+
 	'/themes'				=> 'themes_list',		// manage themes
 	'/themes/(\w+)'				=> 'secure_POST theme_configure',		// configure/reconfigure theme
 	'/themes/(\w+)/rebuild'			=> 'secure theme_rebuild',		// rebuild theme
 	'/themes/(\w+)/uninstall'		=> 'secure theme_uninstall',		// uninstall theme
-	
+
 	'/config'				=> 'secure_POST config',	// config editor
 	'/config/(\%b)'				=> 'secure_POST config',	// config editor
-	
+
 	// these pages aren't listed in the dashboard without $config['debug']
 	//'/debug/antispam'			=> 'debug_antispam',
 	//'/debug/recent'				=> 'debug_recent_posts',
-	//'/debug/apc'				=> 'debug_apc',
 	//'/debug/sql'				=> 'secure_POST debug_sql',
-	
+
 	// This should always be at the end:
 	'/(\%b)/'										=> 'view_board',
 	'/(\%b)/' . preg_quote($config['file_index'], '!')					=> 'view_board',
@@ -139,7 +138,7 @@ $pages = $new_pages;
 foreach ($pages as $uri => $handler) {
 	if (preg_match($uri, $query, $matches)) {
 		$matches = array_slice($matches, 1);
-		
+
 		if (isset($matches['board'])) {
 			$board_match = $matches['board'];
 			unset($matches['board']);
@@ -148,12 +147,12 @@ foreach ($pages as $uri => $handler) {
 				$matches[$key] = $board_match[1];
 			}
 		}
-		
+
 		if (is_string($handler) && preg_match('/^secure(_POST)? /', $handler, $m)) {
 			$secure_post_only = isset($m[1]);
 			if (!$secure_post_only || $_SERVER['REQUEST_METHOD'] == 'POST') {
 				$token = isset($matches['token']) ? $matches['token'] : (isset($_POST['token']) ? $_POST['token'] : false);
-				
+
 				if ($token === false) {
 					if ($secure_post_only)
 						error($config['error']['csrf']);
@@ -162,7 +161,7 @@ foreach ($pages as $uri => $handler) {
 						exit;
 					}
 				}
-			
+
 				// CSRF-protected page; validate security token
 				$actual_query = preg_replace('!/([a-f0-9]{8})$!', '', $query);
 				if ($token != make_secure_link_token(substr($actual_query, 1))) {
@@ -171,7 +170,7 @@ foreach ($pages as $uri => $handler) {
 			}
 			$handler = preg_replace('/^secure(_POST)? /', '', $handler);
 		}
-		
+
 		if ($config['debug']) {
 			$debug['mod_page'] = array(
 				'req' => $query,
@@ -201,7 +200,7 @@ foreach ($pages as $uri => $handler) {
 		} else {
 			error("Mod page '$handler' not a string, and not callable!");
 		}
-		
+
 		exit;
 	}
 }

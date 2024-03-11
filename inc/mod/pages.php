@@ -3001,25 +3001,3 @@ function mod_debug_sql() {
 
 	mod_page(_('Debug: SQL'), $config['file_mod_debug_sql'], $args);
 }
-
-function mod_debug_apc() {
-	global $config;
-
-	if (!hasPermission($config['mod']['debug_apc']))
-		error($config['error']['noaccess']);
-
-	if ($config['cache']['enabled'] != 'apc')
-		error('APC is not enabled.');
-
-	$cache_info = apc_cache_info('user');
-
-	// $cached_vars = new APCIterator('user', '/^' . $config['cache']['prefix'] . '/');
-	$cached_vars = array();
-	foreach ($cache_info['cache_list'] as $var) {
-		if ($config['cache']['prefix'] != '' && strpos(isset($var['key']) ? $var['key'] : $var['info'], $config['cache']['prefix']) !== 0)
-			continue;
-		$cached_vars[] = $var;
-	}
-
-	mod_page(_('Debug: APC'), $config['file_mod_debug_apc'], array('cached_vars' => $cached_vars));
-}

@@ -10,7 +10,7 @@ class Cache {
 	private static $cache;
 	public static function init() {
 		global $config;
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				self::$cache = new Memcached();
@@ -31,9 +31,9 @@ class Cache {
 	}
 	public static function get($key) {
 		global $config, $debug;
-		
+
 		$key = $config['cache']['prefix'] . $key;
-		
+
 		$data = false;
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
@@ -41,14 +41,8 @@ class Cache {
 					self::init();
 				$data = self::$cache->get($key);
 				break;
-			case 'apc':
-				$data = apc_fetch($key);
-				break;
 			case 'apcu':
 				$data = apcu_fetch($key);
-				break;
-			case 'xcache':
-				$data = xcache_get($key);
 				break;
 			case 'php':
 				$data = isset(self::$cache[$key]) ? self::$cache[$key] : false;
@@ -70,20 +64,20 @@ class Cache {
 				$data = json_decode(self::$cache->get($key), true);
 				break;
 		}
-		
+
 		if ($config['debug'])
 			$debug['cached'][] = $key . ($data === false ? ' (miss)' : ' (hit)');
-		
+
 		return $data;
 	}
 	public static function set($key, $value, $expires = false) {
 		global $config, $debug;
-		
+
 		$key = $config['cache']['prefix'] . $key;
-		
+
 		if (!$expires)
 			$expires = $config['cache']['timeout'];
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
@@ -95,14 +89,8 @@ class Cache {
 					self::init();
 				self::$cache->setex($key, $expires, json_encode($value));
 				break;
-			case 'apc':
-				apc_store($key, $value, $expires);
-				break;
 			case 'apcu':
 				apcu_store($key, $value, $expires);
-				break;
-			case 'xcache':
-				xcache_set($key, $value, $expires);
 				break;
 			case 'fs':
 				$key = str_replace('/', '::', $key);
@@ -113,15 +101,15 @@ class Cache {
 				self::$cache[$key] = $value;
 				break;
 		}
-		
+
 		if ($config['debug'])
 			$debug['cached'][] = $key . ' (set)';
 	}
 	public static function delete($key) {
 		global $config, $debug;
-		
+
 		$key = $config['cache']['prefix'] . $key;
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
@@ -133,14 +121,8 @@ class Cache {
 					self::init();
 				self::$cache->del($key);
 				break;
-			case 'apc':
-				apc_delete($key);
-				break;
 			case 'apcu':
 				apcu_delete($key);
-				break;
-			case 'xcache':
-				xcache_unset($key);
 				break;
 			case 'fs':
 				$key = str_replace('/', '::', $key);
@@ -151,20 +133,18 @@ class Cache {
 				unset(self::$cache[$key]);
 				break;
 		}
-		
+
 		if ($config['debug'])
 			$debug['cached'][] = $key . ' (deleted)';
 	}
 	public static function flush() {
 		global $config;
-		
+
 		switch ($config['cache']['enabled']) {
 			case 'memcached':
 				if (!self::$cache)
 					self::init();
 				return self::$cache->flush();
-			case 'apc':
-				return apc_clear_cache('user');
 			case 'apcu':
 				return apcu_clear_cache('user');
 			case 'php':
@@ -181,7 +161,7 @@ class Cache {
 					self::init();
 				return self::$cache->flushDB();
 		}
-		
+
 		return false;
 	}
 }
