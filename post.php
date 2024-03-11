@@ -144,6 +144,28 @@ function download_file_from_url($file_url, $request_timeout, $allowed_extensions
 }
 
 /**
+ * Try extract text from the given image.
+ *
+ * @param array $config Instance configuration.
+ * @param string $img_path The file path to the image.
+ * @return string|false Returns a string with the extracted text on success (if any).
+ * @throws RuntimeException Throws if executing tesseract fails.
+ */
+function ocr_image(array $config, string $img_path): string {
+	// The default preprocess command is an ImageMagick b/w quantization.
+	$ret = shell_exec_error(
+		sprintf($config['tesseract_preprocess_command'], escapeshellarg($img_path))
+		 . ' | tesseract stdin stdout 2>/dev/null'
+		 . $config['tesseract_params']
+	);
+	if ($ret === false) {
+		throw new RuntimeException('Unable to run tesseract');
+	}
+
+	return trim($ret);
+}
+
+/**
  * Method handling functions
  */
 
@@ -1068,7 +1090,6 @@ if (isset($_POST['delete'])) {
 			$image->destroy();
 		} else {
 			// not an image
-			//copy($config['file_thumb'], $post['thumb']);
 			$file['thumb'] = 'file';
 
 			$size = @getimagesize(sprintf($config['file_thumb'],
@@ -1086,23 +1107,18 @@ if (isset($_POST['delete'])) {
 				$fname = $file['thumb'];
 			}
 
-			if ($fname == 'spoiler') { // We don't have that much CPU time, do we?
-			}
-			else {
-				$tmpname = "tmp/tesseract/".rand(0,10000000);
-
-				// Preprocess command is an ImageMagick b/w quantization
-				$error = shell_exec_error(sprintf($config['tesseract_preprocess_command'], escapeshellarg($fname)) . " | " .
-					'tesseract stdin '.escapeshellarg($tmpname).' '.$config['tesseract_params']);
-				$tmpname .= ".txt";
-
-				$value = @file_get_contents($tmpname);
-				@unlink($tmpname);
-
-				if ($value && trim($value)) {
-					// This one has an effect, that the body is appended to a post body. So you can write a correct
-					// spamfilter.
-					$post['body_nomarkup'] .= "<tinyboard ocr image $key>".htmlspecialchars($value)."</tinyboard>";
+			if ($fname !== 'spoiler') { // We don't have that much CPU time, do we?
+				try {
+					$txt = ocr_image($config, $fname);
+					if ($txt !== '') {
+						// This one has an effect, that the body is appended to a post body. So you can write a correct
+						// spamfilter.
+						$post['body_nomarkup'] .= "<tinyboard ocr image $key>" . htmlspecialchars($value) . "</tinyboard>";
+					}
+				} catch (RuntimeException $e) {
+					if ($config['syslog']) {
+						_syslog(LOG_ERR, "Could not OCR image: {$e->getMessage()}");
+					}
 				}
 			}
 		}
