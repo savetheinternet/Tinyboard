@@ -115,7 +115,7 @@ function mod_dashboard() {
 			$latest = unserialize($_COOKIE['update']);
 		} else {
 			$ctx = stream_context_create(array('http' => array('timeout' => 5)));
-			if ($code = @file_get_contents('http://engine.vichan.net/version.txt', 0, $ctx)) {
+			if ($code = @file_get_contents('http://engine.vichan.info/version.txt', 0, $ctx)) {
 				$ver = strtok($code, "\n");
 
 				if (preg_match('@^// v(\d+)\.(\d+)\.(\d+)\s*?$@', $ver, $matches)) {
