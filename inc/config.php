@@ -309,8 +309,8 @@
 
 	// Enable simple anti-spam measure.
 	$config['simple_spam'] = array (
-		'question' => 'What is 2 + 2?',
-		'answer' => '4'
+		'question' => 'What is 2 + 3?',
+		'answer' => '5'
 	);
 
 	// Enable reCaptcha to make spam even harder. Rarely necessary.
