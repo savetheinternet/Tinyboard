@@ -310,10 +310,12 @@
 	// Enable simple anti-spam measure. Requires the end-user to answer a question before making a post.
 	//Works very well against uncustomized spam.
 	//Answers are case-insensitive.
+	/*
 	$config['simple_spam'] = array (
 		'question' => 'What\'s 2+3?',
 		'answer' => '5'
 	);
+ 	*/
 
 	// Enable reCaptcha to make spam even harder. Rarely necessary.
 	$config['recaptcha'] = false;
