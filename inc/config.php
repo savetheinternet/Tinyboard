@@ -307,9 +307,11 @@
 		'simple_spam'
 	);
 
-	// Enable simple anti-spam measure.
+	// Enable simple anti-spam measure. Requires the end-user to answer a question before making a post.
+	//Works very well against uncustomized spam.
+	//Answers are case-insensitive.
 	$config['simple_spam'] = array (
-		'question' => 'What is 2 + 3?',
+		'question' => 'What\'s 2+3?',
 		'answer' => '5'
 	);
 
