@@ -558,6 +558,11 @@ if (isset($_POST['delete'])) {
 
 
 	if (!$dropped_post) {
+		if (isset($config['simple_spam']) && $config['simple_spam'] && $post['op']) {
+			if (!isset($_POST['simple_spam']) || $config['simple_spam']['answer'] != $_POST['simple_spam']) {
+				error($config['error']['simple_spam']);
+			}
+		}
 
 		// Check if banned
 		checkBan($board['uri']);

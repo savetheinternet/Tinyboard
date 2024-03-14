@@ -215,6 +215,16 @@
 				{{ antibot.html() }}
 			</td>
 		</tr>{% endif %}
+		{% if config.simple_spam and not id %}<tr>
+			<th>
+				{{ config.simple_spam.prompt }}
+				{{ antibot.html() }}
+			</th>
+			<td>
+				<input type="text" name="simple_spam" value="" size="12" maxlength="18" autocomplete="off"> 
+				{{ antibot.html() }}
+			</td>
+		</tr>{% endif %}
 	</table>
 {{ antibot.html(true) }}
 <input type="hidden" name="hash" value="{{ antibot.hash() }}">
