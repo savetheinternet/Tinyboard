@@ -488,7 +488,7 @@ if (isset($_POST['delete'])) {
 	$reason = escape_markup_modifiers($_POST['reason']);
 	markup($reason);
 
-	if (strlen($reason) > 30) {
+	if (mb_strlen($reason) > $config['report_max_length']) {
 		error($config['error']['toolongreport']);
 	}
 
