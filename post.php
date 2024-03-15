@@ -406,7 +406,7 @@ if (isset($_POST['delete'])) {
 			if (isset($_POST['file'])) {
 				// Delete just the file
 				deleteFile($id);
-				modLog("User at $ip deleted file from his own post #$id");
+				modLog("User at $ip deleted file from their own post #$id");
 			} else {
 				// Delete entire post
 				deletePost($id);
