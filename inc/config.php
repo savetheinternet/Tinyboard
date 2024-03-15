@@ -699,6 +699,9 @@
 	// How many ban appeals can be made for a single ban?
 	$config['ban_appeals_max'] = 1;
 
+	// Maximum character length of appeal.
+	$config['ban_appeal_max_chars'] = 250;
+
 	// Show moderator name on ban page.
 	$config['show_modname'] = false;
 
@@ -1184,6 +1187,11 @@
 	$config['error']['noreport']		= _('You didn\'t select anything to report.');
 	$config['error']['toolongreport']	= _('The reason was too long.');
 	$config['error']['toomanyreports']	= _('You can\'t report that many posts at once.');
+	$config['error']['noban']			= _('That ban doesn\'t exist or is not for you.');
+	$config['error']['tooshortban']		= _('You cannot appeal a ban of this length.');
+	$config['error']['toolongappeal']	= _('The appeal was too long.');
+	$config['error']['toomanyappeals']	= _('You cannot appeal this ban again.');
+	$config['error']['pendingappeal']	= _('There is already a pending appeal for this ban.');
 	$config['error']['invalidpassword']	= _('Wrong password…');
 	$config['error']['invalidimg']		= _('Invalid image.');
 	$config['error']['phpfileserror']	= _('Upload failure (file #%index%): Error code %code%. Refer to <a href="http://php.net/manual/en/features.file-upload.errors.php">http://php.net/manual/en/features.file-upload.errors.php</a>; post discarded.');

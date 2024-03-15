@@ -135,7 +135,7 @@
 			{% endif %}
 			<form class="ban-appeal" action="{{ config.file_post }}" method="post">
 				<input type="hidden" name="ban_id" value="{{ ban.id }}">
-				<textarea name="appeal" rows="4" cols="40"></textarea>
+				<textarea name="appeal" rows="4" cols="40" maxlength="{{ config.ban_appeal_max_chars }}"></textarea>
 				<input type="submit" value="Submit">
 			</form>
 		{% endif %}
