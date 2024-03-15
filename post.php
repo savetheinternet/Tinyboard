@@ -402,14 +402,15 @@ if (isset($_POST['delete'])) {
 				error(sprintf($config['error']['delete_too_soon'], until($post['time'] + $config['delete_time'])));
 			}
 
+			$ip = $_SERVER['REMOTE_ADDR'];
 			if (isset($_POST['file'])) {
 				// Delete just the file
 				deleteFile($id);
-				modLog("User deleted file from their own post #$id");
+				modLog("User at $ip deleted file from his own post #$id");
 			} else {
 				// Delete entire post
 				deletePost($id);
-				modLog("User deleted their own post #$id");
+				modLog("User at $ip deleted their own post #$id");
 			}
 
 			_syslog(LOG_INFO, 'Deleted post: ' .
