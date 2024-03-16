@@ -308,14 +308,12 @@
 	);
 
 	// Enable simple anti-spam measure. Requires the end-user to answer a question before making a post.
-	//Works very well against uncustomized spam.
-	//Answers are case-insensitive.
-	/*
-	$config['simple_spam'] = array (
-		'question' => 'What\'s 2+3?',
-		'answer' => '5'
-	);
- 	*/
+	// Works very well against uncustomized spam. Answers are case-insensitive.
+	// $config['simple_spam'] = array (
+	//	'question' => 'What\'s 2+3?',
+	//	'answer' => '5'
+	//);
+	$config['simple_spam'] = false;
 
 	// Enable reCaptcha to make spam even harder. Rarely necessary.
 	$config['recaptcha'] = false;
@@ -1175,7 +1173,7 @@
 	$config['error']['flood']		= _('Flood detected; Post discarded.');
 	$config['error']['too_many_threads']	= _('The hourly thread limit has been reached. Please post in an existing thread.');
 	$config['error']['spam']		= _('Your request looks automated; Post discarded.');
-	$config['error']['simple_spam']        = _('You must answer the question to make a new thread. See the last field.');
+	$config['error']['simple_spam']		= _('You must answer the question to make a new thread. See the last field.');
 	$config['error']['unoriginal']		= _('Unoriginal content!');
 	$config['error']['muted']		= _('Unoriginal content! You have been muted for %d seconds.');
 	$config['error']['youaremuted']		= _('You are muted! Expires in %d seconds.');
