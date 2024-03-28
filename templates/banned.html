@@ -29,8 +29,8 @@
 		</p>
 	{% endif %}
 	<p>
-		{% trans %}Your ban was filed on{% endtrans %} 
-			<strong>{{ ban.created|date(config.ban_date) }}</strong> 
+		{% trans %}Your ban was filed on{% endtrans %}
+			<strong>{{ ban.created|date(config.ban_date) }}</strong>
 			{% if config.show_modname %}
 				{% if ban.username %}
 					{% trans %}by{% endtrans %} <strong> {{ ban.username }} </strong>
@@ -38,11 +38,11 @@
 					{% trans %}by{% endtrans %} <em> 'system' </em>
 				{% endif %}
 			{% endif %}
-			{% trans %}and{% endtrans %} <span id="expires">	
+			{% trans %}and{% endtrans %} <span id="expires">
 		{% if ban.expires and time() >= ban.expires %}
 			{% trans %} has since expired. Refresh the page to continue.{%  endtrans %}
 		{% elseif ban.expires %}
-			{% trans %}expires{% endtrans %} <span id="countdown">{{ ban.expires|until }}</span> {% trans %}from now, which is on{% endtrans %} 
+			{% trans %}expires{% endtrans %} <span id="countdown">{{ ban.expires|until }}</span> {% trans %}from now, which is on{% endtrans %}
 			<strong>
 				{{ ban.expires|date(config.ban_date) }}
 			</strong>
@@ -74,7 +74,7 @@
 					}
 				}
 				var countdown = document.getElementById("countdown");
-				
+
 				updateExpiresTime();
 				var int = setInterval(updateExpiresTime, 1000);
 			</script>
@@ -84,30 +84,31 @@
 		</span>
 	</p>
 	<p>{% trans %}Your IP address is{% endtrans %} <strong>{{ ban.ip }}</strong>.</p>
+	<p>{% trans %}Your ban ID is{% endtrans %} <strong>{{ ban.id }}</strong>.</p>
 
 	{% if config.ban_page_extra %}
 		<p>{{ config.ban_page_extra }}</p>
 	{% endif %}
-	
+
 	{% if post and config.ban_show_post %}
 		<hr>
 		<p>{% trans %}You were banned for the following post on{% endtrans %} {{ board.url }}:</p>
 		{{ post }}
 		<br>
 	{% endif %}
-	
+
 	{% if config.ban_appeals and (not ban.expires or ban.expires - ban.created > config.ban_appeals_min_length )%}
 		<hr>
 		{% if pending_appeal %}
 			<p>
-				{% trans %}You submitted an appeal for this ban on{% endtrans %} 
+				{% trans %}You submitted an appeal for this ban on{% endtrans %}
 				<strong>{{ pending_appeal|date(config.ban_date) }}</strong>. {% trans %}It is still pending{% endtrans %}.
 			</p>
 		{% elseif denied_appeals|length >= config.ban_appeals_max %}
 			{% if denied_appeals|length == 1 %}
 				<p>
-					{% trans %}You appealed this ban on{% endtrans %} 
-					<strong>{{ denied_appeals[0]|date(config.ban_date) }}</strong> 
+					{% trans %}You appealed this ban on{% endtrans %}
+					<strong>{{ denied_appeals[0]|date(config.ban_date) }}</strong>
 					{% trans %}and it was denied. You may not appeal this ban again.{% endtrans %}
 				</p>
 			{% else %}
@@ -117,15 +118,15 @@
 			{% if denied_appeals|length %}
 				{% if denied_appeals|length == 1 %}
 					<p>
-						{% trans %}You appealed this ban on{% endtrans %} 
-						<strong>{{ denied_appeals[0]|date(config.ban_date) }}</strong> 
+						{% trans %}You appealed this ban on{% endtrans %}
+						<strong>{{ denied_appeals[0]|date(config.ban_date) }}</strong>
 						{% trans %}and it was denied.{% endtrans %}
 					</p>
 					<p>{% trans %}You may appeal this ban again. Please enter your reasoning below.{% endtrans %}</p>
 				{% else %}
 					<p>
-						{% trans %}You last appealed this ban on{% endtrans %} 
-						<strong>{{ denied_appeals[denied_appeals|length - 1]|date(config.ban_date) }}</strong> 
+						{% trans %}You last appealed this ban on{% endtrans %}
+						<strong>{{ denied_appeals[denied_appeals|length - 1]|date(config.ban_date) }}</strong>
 						{% trans %}and it was denied.{% endtrans %}
 					</p>
 					<p>{% trans %}You may appeal this ban again. Please enter your reasoning below.{% endtrans %}</p>
